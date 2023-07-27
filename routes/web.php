@@ -19,7 +19,7 @@ use App\Http\Controllers\TeamController;
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::get('/dashBoard', function () {
+Route::get('/dashboard', function () {
     return view('DashBoard');
 });
 

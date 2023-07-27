@@ -6,6 +6,135 @@
 
     <div class="content-body">
         <div class="container-fluid">
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mt-4" >
+                                    <form class="col-md-4 p-0 pr-2" action="{{ url('searchcontactpersonAdm') }}" method="get">
+                                        <div class="input-group">
+                                            <input type="text" name="search3" class="form-control"
+                                                placeholder="Search by Contact Person">
+                                            <button type="submit" class="btn btn-primary searchbtn">
+                                                <i class="mdi mdi-file-find menu-icon text-white"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                    <form class="col-md-4" action="{{ url('searchcompanyAdm') }}" method="get">
+                                        <div class="input-group">
+                                            <input type="text" name="search" class="form-control"
+                                                placeholder="Search by Company Name">
+                                            <button type="submit" class="btn btn-primary searchbtn">
+                                                <i class="mdi mdi-file-find menu-icon text-white"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                    <form class="col-md-4" action="{{ url('searchcontactAdm') }}" method="get">
+                                        <div class="input-group">
+                                            <input type="text" name="search1" class="form-control" placeholder="Search by mobile">
+                                            <button type="submit" class="btn btn-primary searchbtn">
+                                                <i class="mdi mdi-file-find menu-icon text-white"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <br>
+
+                                <!-- Search Form -->
+                                <form action="{{ url('searchAdm') }}" method="get" >
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Date From</label>
+                                            <input type="date" name="from" class="form-control" value="{{ $from ?? '' }}">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label">Date To</label>
+                                            <input type="date" name="to" class="form-control" value="{{ $to ?? '' }}">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label">Proposal Type</label>
+                                            <select name="type" class="form-control">
+                                                <option value="">Select</option>
+                                                <option value="">All</option>
+                                                @php($Enquiry=\App\Models\EnquiryType::get())
+                                                @foreach($Enquiry as $Enquirys)
+                                                <option value="{{ $Enquirys->id }}"
+                                                   >
+                                                    {{ $Enquirys->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Enquiry Status</label>
+                                            <select name="status" class="form-control">
+                                                <option value="">Select</option>
+                                                <option value="">All</option>
+                                                @php($status=\App\Models\Followup_remark::get())
+                                                @foreach($status as $statuss)
+                                                <option value="{{ $statuss->id }}">{{ $statuss->remark }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label">Employee</label>
+                                            <select name="employee" class="form-control">
+                                                <option value="">Select</option>
+                                                <option value="">All</option>
+                                                @php($user = \App\Models\User::where('is_active', 1)->get())
+                                                @foreach ($user as $users)
+                                                <option value="{{ $users->id }}"
+                                                    >
+                                                    {{ $users->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label">FollowUp Date</label>
+                                            <input type="date" name="follow" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" >
+                                        <button class="btn btn-primary btn-block" type="submit" >Search</button>
+
+                                    </div>
+                                </form>
+                                <br>
+                                <!-- Additional Search Forms -->
+
+                                <!-- Import and Download Sample File -->
+                                <form action="{{ url('importExcel') }}" class="mt-4 align-items-center" method="post"
+                                    enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="file" name="file"  class="form-control"/>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button class="btn btn-primary" style="margin-top: -3px;">Import File</button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a href="{!! url('/AdminEndAsstes/excel_sample.xlsx') !!}" download><button class="btn btn-primary">Download Sample File</button></a>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Include Bootstrap JS -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
             <div class="col-lg-12">
                 <div class="card" >
@@ -217,6 +346,8 @@
                         </table>
                     </div>
                 </div>
+                {{ $Details->withQueryString()->links('pagination::bootstrap-4') }}
+
                 <div class="col-3"></div>
             </div>
         </div>
