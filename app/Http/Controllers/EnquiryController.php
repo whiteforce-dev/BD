@@ -22,8 +22,8 @@ class EnquiryController extends Controller
         $enquiries1 = null;
 
         if ($user->type === 'Admin') {
-            $enquiries = $enquiries->where('status_id', '!=', '15')->orderBy("id", "desc");
-            $enquiries1 = $enquiries->where('status_id', '!=', '15')->orderBy("id", "desc")->count();
+            $enquiries = $enquiries->orderBy("id", "desc");
+            $enquiries1 = $enquiries->orderBy("id", "desc")->count();
         } elseif ($user->type === 'Manager') {
             $enquiries = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
                 $query->where('created_by', $user->id);
@@ -32,8 +32,8 @@ class EnquiryController extends Controller
                 $query->where('created_by', $user->id);
             })->count();
         } elseif ($user->type === 'Staff') {
-            $enquiries = $enquiries->where('created_by', $user->id)->where('status_id', '!=', '15')->orderBy("id", "desc");
-            $enquiries1 = $enquiries->where('created_by', $user->id)->where('status_id', '!=', '15')->orderBy("id", "desc")->count();
+            $enquiries = $enquiries->where('created_by', $user->id)->orderBy("id", "desc");
+            $enquiries1 = $enquiries->where('created_by', $user->id)->orderBy("id", "desc")->count();
         }
         if ($enquiries1 === null) {
             $enquiries1 = 0;
@@ -129,6 +129,35 @@ class EnquiryController extends Controller
         return redirect('enquiry-list');
 
 
+    }
+
+    function Hot() {
+        $user = Auth::user();
+        $enquiries = Enquiry::query();
+        $enquiries1 = null;
+
+        if ($user->type === 'Admin') {
+            $enquiries = $enquiries->where('status_id', '10')->orderBy("id", "desc");
+            $enquiries1 = $enquiries->where('status_id', '10')->count();
+        } elseif ($user->type === 'Manager') {
+            $enquiries = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+                $query->where('created_by', $user->id)->where('status_id', '10');
+            });
+            $enquiries1 = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+                $query->where('created_by', $user->id)->where('status_id', '10');
+            })->count();
+        } elseif ($user->type === 'Staff') {
+            $enquiries = $enquiries->where('status_id', '10')->where('created_by', $user->id)->orderBy("id", "desc");
+            $enquiries1 = $enquiries->where('status_id', '10')->orderBy("id", "desc")->count();
+        }
+
+        if ($enquiries1 === null) {
+            $enquiries1 = 0;
+        }
+
+        $enquiries = $enquiries->paginate(25);
+
+        return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1 ]);
     }
 
 
