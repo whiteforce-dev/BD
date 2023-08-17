@@ -17,4 +17,11 @@ class Remark extends Model
     {
         return $this->belongsTo(User::class,'created_by');
     }
+
+    public function managerRemark()
+    {
+        return $this->belongsTo(ManagerRemark::class, 'created_by');
+    }
+
+
 }

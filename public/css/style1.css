@@ -1,0 +1,28 @@
+
+/* Example: Setting primary color for links */
+a {
+    color: #4885ED; /* Hexadecimal code for blue */
+  }
+
+  /* Example: Setting primary color for buttons */
+  .btn-primary {
+    background-color: #4885ED  !important;
+    color: #fff; /* Text color for the button */
+  }
+/* Example: Setting primary color for a header with class 'header' */
+
+  .bg-primary
+{
+    background-color: #4885ED  !important;
+}
+
+.chart-primary
+{
+    color: #4885ED !important;
+}
+
+.sidebar-right .sidebar-right-trigger{
+
+
+
+}

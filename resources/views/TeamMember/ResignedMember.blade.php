@@ -1,418 +1,219 @@
-@extends('Master.master')
+@extends('Master.Master')
 @section('content')
+    <style>
 
+        @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,600");
 
-<style>
-    HTML CSSResult Skip Results Iframe
-  EDIT ON
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+        * {
+            box-sizing: border-box;
+        }
 
-  *{
-      box-sizing: border-box;
-      padding: 0;
-      margin: 0;
-  }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background: #F9F9F9;
+            flex-direction: column;
+        }
 
-  body{
-      width: 100%;
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #b8dae3;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-  }
-  a{
-      text-decoration: none;
-  }
+        /* color map */
+        /* Note: CSS doesn't support maps, so we'll use custom CSS variables for colors instead. */
+        :root {
+            --prime-color: #3b70fc;
+            --dark-color: #3c3c3c;
+            --grey-color: #dddfe6;
+            --white-color: #f9f9f9;
+        }
 
+        .container {
+            margin: auto;
+            font-family: "Poppins", Arial, san-serif;
+            line-height: 1.4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
 
-  .h1-text{
-      font-size: 1.3rem;
-      margin: 40px 0;
-      color: #2c2c2c;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  }
+        /* styles */
+        .card {
+            background: #fff url("https://storage.googleapis.com/chydlx/codepen/minimalist-profile-card/card-bg.jpg") top -10% center no-repeat;
+            background-size: contain;
+            border-radius: 10px;
+            box-shadow: 0 .5rem .5rem -.25rem rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 30px 60px;
+        }
 
-  .h1-text i{
-      background-color: #509bfc;
-      color: #fff;
-      width: 40px;
-      height: 40px;
-      box-shadow: 2px 5px 30px rgba(80, 123, 252, 0.4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1rem;
-      margin: 0 20px;
-  }
+        .card img {
+            background-color: var(--grey-color);
+            height: 120px;
+            width: 120px;
+            border-radius: 50%;
+            margin: auto auto 15px;
+            display: block;
+        }
 
-   .container{
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-  }
+        .card h1 {
+            font-size: 22px;
+            margin: 10px auto 0;
+            letter-spacing: 1px;
+        }
 
+        .card h2 {
+            margin: auto;
+            color: rgba(var(--dark-color), 0.85);
+            font-weight: 300;
+            font-size: 14px;
+        }
 
-  .box{
-      position: relative;
-      min-width: 250px;
-      background-color: #fff;
-      box-shadow: 2px 3px 30px rgba(0,0,0,0.05);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      margin: 20px;
-      position: relative;
-      border-radius: 10px;
-  }
+        .card .button {
+            display: block;
+            text-decoration: none;
+            background: var(--prime-color);
+            color: var(--white-color);
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: 700;
+            min-width: 200px;
+            transition: 0.2s;
+        }
 
+        .card .button span {
+            font-size: 20px;
+            line-height: 1;
+            vertical-align: top;
+        }
 
-  .top-bar{
-      width: 50%;
-      height: 4px;
-      background: #CB0C9F;
-      position: absolute;
-      top: 0px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 0px 0px 10px 10px;
-  }
+        .card .button:hover {
+            background: rgba(var(--prime-color), 0.93);
+        }
+    </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
 
-  .top{
-      display: flex;
-      justify-content: space-between;
-      align-items:center ;
-      width: 100%;
-  }
+        .content-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
 
-  .fa-check-circle{
-      color: #17b667;
-  }
+        }
 
-  /* creating heart */
-   .heart{
-      color: rgba(155,155,155);
-  }
-  .heart::before{
-      content: '\f004';
-      font-family: fontawesome;
-      line-height: 30px;
-      cursor: pointer;
-      z-index: 1;
-      transition: all 0.3s;
-  }
-  .box .heart-btn:checked ~ .heart::before{
-      color:#e41934
-  }
-  .heart-btn{
-      position: absolute;
-      top: 25px;
-      right: 20px;
-      padding: 1rem;
-      display: none;
-  }
+        .container-fluid {
+            width: 100%;
+            max-width: 1200px;
+            /* Adjust the max width as needed */
+            padding: 20px;
+        }
 
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            /* Add some gap between cards */
+            justify-content: center;
+        }
 
-  .content img{
-      width: 90px;
-      height: 90px;
-      border-radius:5px;
-      overflow: hidden;
-      object-fit: cover;
-      object-position: top;
-  }
-  .content{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-  }
-  .content strong{
-      font-weight: 500;
-      color: #141414;
-      margin-top: 10px;
-  }
-  .content p{
-      font-size: 0.9rem;
-      color: #7a7a7a;
-      margin: 4px 0px 10px 0px;
-      cursor: pointer;
-      line-height: 0.7
-  }
-  .content p:hover{
-      text-decoration: underline;
-  }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 270px;
+            /* Set the desired width for each card */
+            padding: 20px;
+        }
 
-  .btn{
-      margin-top: 5px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-  }
-  .btn a i{
-      margin-right: 9px;
-  }
-  .btn a{
-      border-radius: 20px;
-      color: #8b8b8b;
-      padding: 8px 20px;
-      font-size: 0.9rem;
-  }
-  .btn a:hover{
-      color: #fff;
-      box-shadow: 2px 5px 15px rgba(80,123,252,0.05);
-      background-color: #c608b0;
-      transition: all ease 0.5s;
-  }
+        .avatar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 100px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 0 auto 20px;
+        }
 
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
 
+        }
 
-  <style>
+        .name {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
 
+        .email,
+        .mobile {
+            margin: 5px 0;
+            font-size: 16px;
+            text-align: center;
+        }
+    </style>
 
+    <div class="content-body">
+        <div class="container-fluid">
 
-           svg {
-          width: 20px;
-      }
-      /* p{
-          margin: 20px 0 20px 0;
-      } */
-      .sm {
-          position: absolute;
-      }
-
-  th {
-          font-size: 13px;
-
-      }
-      .table thead th {
-
-
-      color: #ffffff;
-
-  }
-
-      .bt1 {
-          margin-bottom: 4px;
-      }
-
-      .dropdown .dropdown-menu .dropdown-item {
-          font-size: 0.88rem;
-          padding: .40rem 0.3rem;
-          width: 20px;
-      }
-
-      .center {
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
-          width: 50%;
-          margin-top: 2%;
-      }
-
-      .cd {
-          background: linear-gradient(to right, #00b4db, #0083b0);
-      }
-
-      .cd:hover {
-          margin-top: -10px;
-          -webkit-transition: margin-top 0.2s ease-out;
-
-
-      }
-
-      .dropdown .dropdown-toggle:after {
-          color: rgb(47, 57, 241)
-      }
-      .text-white {
-      color: rgb(23, 22, 22) !important;
-  }
-  h4{
-  color:black;
-      }
-   .bg-primary {
-
-      background-color: #cddff3 !important;}
-  .text-white {
-      color: #fff !important;
-  }
-  .card[class*="bg-"] .card-header {
-      border-bottom-color: rgb(250, 241, 241);
-  }
-  hr {
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      border: 0;
-      border-top: 1px solid rgb(255 255 255);
-  }
-
-  .dropdown-item{
-    font-size: 0.77rem;
-    padding: .40rem -9.5rem;
-  }
-  </style>
-
-
-<div>
-    <div class="alert alert-secondary mx-4" role="alert" style="margin-top:50px">
-        <span class="text-white">
-            <strong style="margin-left:400px"><i class="fa fa-users" aria-hidden="true"></i>  Resigned Members</strong>
-
-        </span>
-    </div>
-
-    @if(Auth::user()->type==1)
-<div class="container-fluid mt--7">
-
-    <!-- Table -->
-    <div class="row">
-        <div class="col">
-            <div class="card" data-aos="fade-up">
-                <div class="col-xl-12" style="float: right">
-
-
-
-                    <hr>
-                    @if (session('success'))
-                    <div class="m-3  alert alert-success alert-dismissible fade show" id="alert-success"
-                        role="alert">
-                        <span class="alert-text text-white">
-                            {{ session('success') }}</span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                            <i class="fa fa-close" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                @endif
-                    <div class="row">
-                    @foreach($Details as $index=>$obj)
-
-                         <div class="col-sm-4">
-                          <div class="box">
-                            <div class="top-bar"></div>
-                              <div class="top">
-                                <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                <input type="checkbox" class="heart-btn" id="heart-btn-1">
-                                <label class="heart" for="heart-btn-1"></label>
-                              </div>
-
-
-                            <div class="content">
-                              @if(!file_exists($obj->image))
-                                    <img class="person-img" style="height:85px"
-                                        src="{{ url('assets\images\user\no img.png')}}" alt="">
-                                    @else
-
-                                    <img class="person-img" style="height:85px"
-                                        src="{{url($obj->image)}}" alt="">
-                                    @endif
-                              <strong>{{$obj->name}}</strong>
-                              <p>{{$obj->email}}</p>
-                              <p>{{$obj->mobile}}</p>
+            @if (Auth::user()->type == 'Admin')
+                <div class="card-container">
+                    @foreach ($Details as $index => $obj)
+                    @if ($obj->is_active == 0)
+                        <div class="card">
+                            <div class="avatar">
+                                @if (!file_exists($obj->image))
+                                    <img class="rounded-full" src="{{ url('assets\images\user\no img.png') }}" alt="">
+                                @else
+                                    <img class="rounded-full" src="{{ url($obj->image) }}" alt="">
+                                @endif
                             </div>
-                            <div class="btn">
-                                <a href="#"><i class="fa fa-eye" aria-hidden="true"></i>View</a>
-                                <a href="{{ url('/deleteEmp', $obj->id) }}"><i class="fa fa-trash" aria-hidden="true"></i>Delete</a>
+                            <h3 class="name">{{ $obj->name }}</h3>
+                            <p class="email">{{ $obj->email }}</p>
+                            <p class="mobile">{{ $obj->mobile }}</p>
 
+                            <p class="card-text" style="color: red">Resigned/Left</p>
+                        </div>
+                        @endif
+                    @endforeach
+                  
+            @else(Auth::user()->type == 'Manager')
+                <div class="card-container">
+                    @foreach ($Details as $index => $obj)
+                    @if ($obj->is_active == 1)
+                        <div class="card">
+                            <div class="avatar">
+                                @if (!file_exists($obj->image))
+                                    <img class="rounded-full" src="{{ url('assets\images\user\no img.png') }}" alt="">
+                                @else
+                                    <img class="rounded-full" src="{{ url($obj->image) }}" alt="">
+                                @endif
                             </div>
-                          </div>
+                            <h3 class="name">{{ $obj->name }}</h3>
+                            <p class="email">{{ $obj->email }}</p>
+                            <p class="mobile">{{ $obj->mobile }}</p>
 
+                            <p class="card-text" style="color: red">Resigned/Left</p>
 
-                         </div>
-
-
+                        </div>
+                     @endif
                     @endforeach
 
                 </div>
-                <div >{{$Details->links()}}
-                </div>
-
-                </div>
-
-
-            </div>
+            @endif
 
 
         </div>
     </div>
-</div>
-@else(auth::user()->type == 5)
-
-<div class="container-fluid mt--7">
-
-  <!-- Table -->
-  <div class="row">
-      <div class="col">
-          <div class="card" data-aos="fade-up">
-              <div class="col-xl-12" style="float: right">
-                  <hr>
-
-                  <div class="row">
-                  @foreach($Details as $index=>$obj)
-
-                      <div class="col-sm-4">
-                        <div class="box">
-
-                          <div class="top-bar"></div>
-                          <div class="top">
-                            <i class="fa fa-check-circle" aria-hidden="true"></i>
-                            <input type="checkbox" class="heart-btn" id="heart-btn-1">
-                            <label class="heart" for="heart-btn-1"></label>
-                          </div>
-
-                          <div class="content">
-                            @if(!file_exists($obj->image))
-                                  <img class="person-img" style="height:85px"
-                                      src="{{ url('assets\images\user\no img.png')}}" alt="">
-                                  @else
-
-                                  <img class="person-img" style="height:85px"
-                                      src="{{url($obj->image)}}" alt="">
-                                  @endif
-                            <strong>{{$obj->name}}</strong>
-                            <p>{{$obj->email}}</p>
-                            <p>{{$obj->mobile}}</p>
-                            <p class="card-text" style="color: red">Resigned/Left</p>
-                          </div>
-                          <div class="btn">
-                            <a href="{{ url('/deleteEmp', $obj->id) }}"><i class="fa fa-trash" aria-hidden="true"></i>Delete</a>
-                            <a href="#"><i class="fa fa-eye" aria-hidden="true"></i>View</a>
-                          </div>
-                        </div>
-
-
-                      </div>
-
-
-
-                  @endforeach
-
-              </div>
-              <div >{{$Details->links()}}
-              </div>
-
-              </div>
-
-
-          </div>
-
-
-      </div>
-  </div>
-</div>
-
-
-<!-- Dark table -->
-@endif
-</div>
-
 @endsection

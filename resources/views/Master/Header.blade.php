@@ -13,16 +13,20 @@
 	<meta name="format-detection" content="telephone=no">
 
 	<!-- PAGE TITLE HERE -->
-	<title>Ventic : Ticketing Admin Template</title>
-
+    <title>White-Force</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url('whiteforce_logo1.png') }}">
 	<!-- FAVICONS ICON -->
-	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+
 
 	<link rel="stylesheet" href="{{ url('vendor/chartist/css/chartist.min.css') }}">
 	<link href="{{ url('vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 	<link href="{{ url('vendor/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
 	<!-- Style css -->
     <link href="{{ url('css/style.css') }}" rel="stylesheet">
+    <link href="{{ url('css/style1.css') }}" rel="stylesheet">
+
+
 
 </head>
 <body>
@@ -30,7 +34,7 @@
     <!--*******************
         Preloader start
     ********************-->
-    <div id="preloader">
+    {{--  <div id="preloader">
         <div class="loader">
             <div class="loader--dot"></div>
             <div class="loader--dot"></div>
@@ -48,5 +52,5 @@
     <!--**********************************
         Main wrapper start
     ***********************************-->
-    <div id="main-wrapper">
+    <div id="main-wrapper">  --}}
 

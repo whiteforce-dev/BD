@@ -13,7 +13,7 @@ Chart.helpers.drawRoundedTopRectangle = function(ctx, x, y, width, height, radiu
   ctx.lineTo(x + width, y + height);
   // bottom left corner
   ctx.lineTo(x, y + height);
-  // top left	
+  // top left
   ctx.lineTo(x, y + radius);
   ctx.quadraticCurveTo(x, y, x + radius, y);
   ctx.closePath();
@@ -46,16 +46,16 @@ Chart.elements.RoundedTopRectangle = Chart.elements.Rectangle.extend({
       borderSkipped = vm.borderSkipped || 'left';
     }
 
-    
+
 
     // calculate the bar width and roundess
     var barWidth = Math.abs(left - right);
     var roundness = this._chart.config.options.barRoundness || 0.5;
     var radius = barWidth * roundness * 0.5;
-    
+
     // keep track of the original top of the bar
     var prevTop = top;
-    
+
     // move the top down so there is room to draw the rounded top
     top = prevTop + radius;
     var barRadius = top - prevTop;
@@ -87,18 +87,18 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 
 (function($) {
     /* "use strict" */
-	
+
  var dzChartlist = function(){
-	
-	var screenWidth = $(window).width();	
+
+	var screenWidth = $(window).width();
 	var widgetChart1 = function(){
 		var options = {
 		  series: [
 			{
 				name: 'Net Profit',
 				data: [100,200, 100, 300, 200, 400, 200, 300,100, 300,200,300],
-				//radius: 12,	
-			}, 				
+				//radius: 12,
+			},
 		],
 			chart: {
 			type: 'line',
@@ -112,10 +112,10 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 			sparkline: {
 				enabled: true
 			}
-			
+
 		},
-		
-		colors:['#0E8A74'],
+
+		colors:['#4885ED '],
 		dataLabels: {
 		  enabled: false,
 		},
@@ -127,9 +127,9 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 		  show: true,
 		  width: 6,
 		  curve:'smooth',
-		  colors:['#0E8A74'],
+		  colors:['#4885ED'],
 		},
-		
+
 		grid: {
 			show:false,
 			borderColor: '#eee',
@@ -214,17 +214,17 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 
 		var chartBar1 = new ApexCharts(document.querySelector("#widgetChart1"), options);
 		chartBar1.render();
-	 
+
 	}
-	
+
 	var widgetChart2 = function(){
 		var options = {
 		  series: [
 			{
 				name: 'Net Profit',
 				data: [100,200, 100, 300, 200, 400, 200, 300,100, 300,200,300],
-				//radius: 12,	
-			}, 				
+				//radius: 12,
+			},
 		],
 			chart: {
 			type: 'line',
@@ -238,9 +238,9 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 			sparkline: {
 				enabled: true
 			}
-			
+
 		},
-		
+
 		colors:['#FB3E7A'],
 		dataLabels: {
 		  enabled: false,
@@ -255,7 +255,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 		  curve:'smooth',
 		  colors:['#FB3E7A'],
 		},
-		
+
 		grid: {
 			show:false,
 			borderColor: '#eee',
@@ -340,14 +340,14 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 
 		var chartBar1 = new ApexCharts(document.querySelector("#widgetChart2"), options);
 		chartBar1.render();
-	 
+
 	}
 	var chartBar = function(){
 		if(jQuery('#widgetChart3').length > 0 ){
-	
+
 			const widgetChart3 = document.getElementById("widgetChart3").getContext('2d');
 			//generate gradient
-			
+
 
 			// widgetChart1.attr('height', '100');
 
@@ -362,38 +362,38 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 							data: [15, 40, 55, 40, 25, 35, 40, 50, 85, 95],
 							borderColor: '#FE634E',
 							borderWidth: "0",
-							backgroundColor: '#FE634E', 
+							backgroundColor: '#FE634E',
 							hoverBackgroundColor: '#FE634E'
 						}
 					]
 				},
 				options: {
 					legend: false,
-					responsive: true, 
+					responsive: true,
 					barRoundness: 1,
-					maintainAspectRatio: false,  
+					maintainAspectRatio: false,
 					scales: {
 						yAxes: [{
-							display: false, 
+							display: false,
 							ticks: {
-								beginAtZero: true, 
-								display: false, 
-								max: 100, 
-								min: 0, 
+								beginAtZero: true,
+								display: false,
+								max: 100,
+								min: 0,
 								stepSize: 10
-							}, 
+							},
 							gridLines: {
-								display: false, 
+								display: false,
 								drawBorder: false
 							}
 						}],
 						xAxes: [{
-							display: false, 
-							barPercentage: 0.4, 
+							display: false,
+							barPercentage: 0.4,
 							gridLines: {
-								display: false, 
+								display: false,
 								drawBorder: false
-							}, 
+							},
 							ticks: {
 								display: false
 							}
@@ -403,8 +403,8 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 			});
 
 		}
-		
-		
+
+
 	}
 	var donutChart1 = function(){
 		$("span.donut1").peity("donut", {
@@ -412,7 +412,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 			height: "90"
 		});
 	}
-		
+
 	var donutChart2 = function(){
 		var options = {
           series: [45, 25, 30],
@@ -421,7 +421,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 		  height:210,
         },
 		  legend:{
-			show:false  
+			show:false
 		  },
 		  plotOptions: {
 			 pie: {
@@ -431,7 +431,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 				}
 			 },
 		  },
-		  
+
 		  states: {
 				normal: {
 					filter: {
@@ -452,9 +452,9 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 					}
 				},
 			},
-		  
+
 		  stroke:{
-			width:'10'  
+			width:'10'
 		  },
 		  dataLabels: {
 			  formatter(val, opts) {
@@ -469,7 +469,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
                 colors: ["#fff"],
               }
 			},
-		  colors:['#0E8A74','#FB3E7A','#C8C8C8'],
+		  colors:['#4885ED','#FB3E7A','#C8C8C8'],
         responsive: [{
           breakpoint: 1600,
           options: {
@@ -477,7 +477,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
               height: 200
             },
           }
-        }] 
+        }]
         };
 
         var chart = new ApexCharts(document.querySelector("#donutChart2"), options);
@@ -491,7 +491,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 		  height:210,
         },
 		  legend:{
-			show:false  
+			show:false
 		  },
 		  plotOptions: {
 			 pie: {
@@ -501,7 +501,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 				}
 			 },
 		  },
-		  
+
 		  states: {
 				normal: {
 					filter: {
@@ -522,9 +522,9 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 					}
 				},
 			},
-		  
+
 		  stroke:{
-			width:'10'  
+			width:'10'
 		  },
 		  dataLabels: {
 			  formatter(val, opts) {
@@ -547,7 +547,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
               height: 200
             },
           }
-        }] 
+        }]
         };
 
         var chart = new ApexCharts(document.querySelector("#donutChart3"), options);
@@ -561,7 +561,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 		  height:210,
         },
 		  legend:{
-			show:false  
+			show:false
 		  },
 		  plotOptions: {
 			 pie: {
@@ -571,7 +571,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 				}
 			 },
 		  },
-		  
+
 		  states: {
 				normal: {
 					filter: {
@@ -592,9 +592,9 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 					}
 				},
 			},
-		  
+
 		  stroke:{
-			width:'10'  
+			width:'10'
 		  },
 		  dataLabels: {
 			  formatter(val, opts) {
@@ -617,7 +617,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
               height: 200
             },
           }
-        }] 
+        }]
         };
 
         var chart = new ApexCharts(document.querySelector("#donutChart4"), options);
@@ -629,8 +629,8 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 			{
 				name: 'Net Profit',
 				data: [100,200, 100, 300, 200, 400, 200, 300,100],
-				//radius: 12,	
-			}, 				
+				//radius: 12,
+			},
 		],
 			chart: {
 			type: 'line',
@@ -639,8 +639,8 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 				show: false,
 			},
 		},
-		
-		colors:['#0E8A74'],
+
+		colors:['#4585ED'],
 		dataLabels: {
 		  enabled: false,
 		},
@@ -652,9 +652,9 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 		  show: true,
 		  width: 6,
 		  curve:'smooth',
-		  colors:['#0E8A74'],
+		  colors:['#4585ED'],
 		},
-		
+
 		grid: {
 			show:true,
 			borderColor: '#C8C8C8',
@@ -701,8 +701,8 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 				style: {
 					fontSize: '14px',
 					colors:'#a4a7ab',
-				}	
-			
+				}
+
 			},
 			crosshairs: {
 				show: false,
@@ -760,7 +760,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 
 		var chartBar1 = new ApexCharts(document.querySelector("#salesChart"), options);
 		chartBar1.render();
-	 
+
 	}
 	var salesChart1 = function(){
 		var options = {
@@ -768,8 +768,8 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 			{
 				name: 'Net Profit',
 				data: [100, 300, 200, 400, 100, 300, 100, 200, 100],
-				//radius: 12,	
-			}, 				
+				//radius: 12,
+			},
 		],
 			chart: {
 			type: 'line',
@@ -778,7 +778,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 				show: false,
 			},
 		},
-		
+
 		colors:['#0E8A74'],
 		dataLabels: {
 		  enabled: false,
@@ -793,7 +793,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 		  curve:'smooth',
 		  colors:['#0E8A74'],
 		},
-		
+
 		grid: {
 			show:true,
 			borderColor: '#C8C8C8',
@@ -896,7 +896,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 
 		var chartBar1 = new ApexCharts(document.querySelector("#salesChart1"), options);
 		chartBar1.render();
-	 
+
 	}
 	var salesChart2 = function(){
 		var options = {
@@ -904,8 +904,8 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 			{
 				name: 'Net Profit',
 				data: [200, 300, 400, 200, 300, 100, 300, 200, 100],
-				//radius: 12,	
-			}, 				
+				//radius: 12,
+			},
 		],
 			chart: {
 			type: 'line',
@@ -914,7 +914,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 				show: false,
 			},
 		},
-		
+
 		colors:['#0E8A74'],
 		dataLabels: {
 		  enabled: false,
@@ -929,7 +929,7 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 		  curve:'smooth',
 		  colors:['#0E8A74'],
 		},
-		
+
 		grid: {
 			show:true,
 			borderColor: '#C8C8C8',
@@ -1032,16 +1032,16 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 
 		var chartBar1 = new ApexCharts(document.querySelector("#salesChart2"), options);
 		chartBar1.render();
-	 
+
 	}
-	
- 
+
+
 	/* Function ============ */
 		return {
 			init:function(){
 			},
-			
-			
+
+
 			load:function(){
 				widgetChart1();
 				widgetChart2();
@@ -1053,24 +1053,24 @@ Chart.controllers.roundedBar = Chart.controllers.bar.extend({
 				salesChart();
 				salesChart1();
 				salesChart2();
-					
+
 			},
-			
+
 			resize:function(){
 			}
 		}
-	
+
 	}();
 
-	
-		
+
+
 	jQuery(window).on('load',function(){
 		setTimeout(function(){
 			dzChartlist.load();
-		}, 1000); 
-		
+		}, 1000);
+
 	});
 
-     
+
 
 })(jQuery);

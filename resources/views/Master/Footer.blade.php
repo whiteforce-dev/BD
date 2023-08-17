@@ -6,6 +6,14 @@
 <!--**********************************
     Scripts
 ***********************************-->
+<script src="https://kit.fontawesome.com/66f2518709.js" crossorigin="anonymous"></script>
+<!-- Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-XXXXXXX" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include Bootstrap CSS and JS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- Required vendors -->
 <script src="{{ url('vendor/global/global.min.js') }}"></script>
 <script src="{{ url('vendor/chart.js/Chart.bundle.min.js') }}"></script>

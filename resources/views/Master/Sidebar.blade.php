@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-xxxxxxxxxxxxxxxxxxxx" crossorigin="anonymous" />
 <!--**********************************
     Nav header start
 ***********************************-->
@@ -34,20 +35,30 @@
         <ul class="metismenu" id="menu">
 
             <li><a href="/dashboard" class="ai-icon" aria-expanded="false">
-                <i class="flaticon-013-checkmark"></i>
+                <i class="mdi mdi-view-dashboard"></i>
                 <span class="nav-text">DashBoard</span>
               </a>
             </li>
 
-            <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-                <i class="flaticon-013-checkmark"></i>
+            <li><a href="{{ url('todayFollowups') }}" class="ai-icon" aria-expanded="false">
+                <i class="mdi mdi-calendar-today"></i>
                 <span class="nav-text">Today Follow-Up</span>
+              </a>
+            </li>
+            <li><a href="{{ url('missingFollowups') }}" class="ai-icon" aria-expanded="false">
+                <i class="mdi mdi-calendar-today"></i>
+                <span class="nav-text">Missing Follow-Up</span>
+              </a>
+            </li>
+            <li><a href="{{ url('totalFollowups') }}" class="ai-icon" aria-expanded="false">
+                <i class="mdi mdi-calendar-today"></i>
+                <span class="nav-text">Total Follow-Up</span>
               </a>
             </li>
 
             @if(Auth::user()->type == 'Admin' || Auth::user()->type == 'Manager' )
                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-050-info"></i>
+                    <i class="fa fa-users"></i>
                         <span class="nav-text">Team</span>
                     </a>
                     <ul aria-expanded="false">
@@ -60,80 +71,64 @@
             @endif
 
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-041-graph"></i>
+                    <i class="bi bi-person-lines-fill"></i>
                     <span class="nav-text">Enquiry</span>
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ url('add-enquiry') }}">Add New Enquiry</a></li>
                     <li><a href="{{ url('enquiry-list') }}">Enquiry List</a></li>
                     @if( Auth::user()->type == 'Manager' )
-                    <li><a href="{{ url('manager-enquiry-list') }}">Team Member Enquiry</a></li>
+                    <li><a href="{{ url('manager-enquiry-list') }}">Manager Enquiry</a></li>
                     @endif
-                </ul>
-            </li>
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-086-star"></i>
-                    <span class="nav-text">Hot</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="ui-accordion.html">Accordion</a></li>
-                    <li><a href="ui-alert.html">Alert</a></li>
-                    <li><a href="ui-badge.html">Badge</a></li>
-                    <li><a href="ui-button.html">Button</a></li>
-                    <li><a href="ui-modal.html">Modal</a></li>
-                    <li><a href="ui-button-group.html">Button Group</a></li>
-                    <li><a href="ui-list-group.html">List Group</a></li>
+                    <li><a href="{{ url('hot-list') }}">Hot List</a></li>
+                    @if( Auth::user()->type == 'Manager' )
+                    <li><a href="{{ url('team-hot-list') }}">Team Hot List</a></li>
+                    @endif
 
-                    <li><a href="ui-card.html">Cards</a></li>
-                    <li><a href="ui-carousel.html">Carousel</a></li>
-                    <li><a href="ui-dropdown.html">Dropdown</a></li>
-                    <li><a href="ui-popover.html">Popover</a></li>
-                    <li><a href="ui-progressbar.html">Progressbar</a></li>
-                    <li><a href="ui-tab.html">Tab</a></li>
-                    <li><a href="ui-typography.html">Typography</a></li>
-                    <li><a href="ui-pagination.html">Pagination</a></li>
-                    <li><a href="ui-grid.html">Grid</a></li>
+
 
                 </ul>
             </li>
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-045-heart"></i>
-                    <span class="nav-text">User Target</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="uc-select2.html">Select 2</a></li>
-                    <li><a href="uc-nestable.html">Nestedable</a></li>
-                    <li><a href="uc-noui-slider.html">Noui Slider</a></li>
-                    <li><a href="uc-sweetalert.html">Sweet Alert</a></li>
-                    <li><a href="uc-toastr.html">Toastr</a></li>
-                    <li><a href="map-jqvmap.html">Jqv Map</a></li>
-                    <li><a href="uc-lightgallery.html">Light Gallery</a></li>
-                </ul>
-            </li>
+
             <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-                    <i class="flaticon-013-checkmark"></i>
+                <i class="bi bi-file-earmark-break-fill"></i>
                     <span class="nav-text">Break</span>
                 </a>
             </li>
+            <li><a href="{{ url('hold-list') }}" class="ai-icon" aria-expanded="false">
+                <i class="bi bi-file-earmark-break-fill"></i>
+                    <span class="nav-text">Hold</span>
+                </a>
+            </li>
+
+            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                <i class="bi bi-bullseye"></i>
+                <span class="nav-text">User Target</span>
+            </a>
+            <ul aria-expanded="false">
+                <li><a href="uc-select2.html">Select 2</a></li>
+
+            </ul>
+        </li>
             <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-                <i class="flaticon-013-checkmark"></i>
+                <i class="bi bi-gear-fill"></i>
                 <span class="nav-text">Proposal Setting</span>
                 </a>
             </li>
             <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-                <i class="flaticon-013-checkmark"></i>
+                <i class="bi bi-envelope"></i>
                 <span class="nav-text">Email</span>
               </a>
             </li>
 
-            <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-                <i class="flaticon-013-checkmark"></i>
+            <li><a href="{{ url('addHoliday') }}" class="ai-icon" aria-expanded="false">
+                <i class="bi bi-calendar2-check-fill"></i>
                 <span class="nav-text">Holidays</span>
               </a>
             </li>
 
             <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-                <i class="flaticon-013-checkmark"></i>
+                <i class="bi bi-card-list"></i>
                 <span class="nav-text">Reports</span>
               </a>
             </li>
@@ -145,3 +140,14 @@
 <!--**********************************
     Sidebar end
 ***********************************-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="path/to/perfect-scrollbar.min.js"></script>
+
+<!-- Initialize PerfectScrollbar for .deznav-scroll elements -->
+<script>
+    jQuery(document).ready(function() {
+        jQuery(".deznav-scroll").each(function() {
+            new PerfectScrollbar(this);
+        });
+    });
+</script>

@@ -1,226 +1,325 @@
+
 @extends('Master.master')
 @section('title', 'Enquiries')
-
 @section('content')
+    <style>
+        .right-Modal {
+            background: rgb(98 98 98 / 59%);
+        }
+
+        .modal.left .modal-dialog,
+        .modal.right .modal-dialog {
+            position: fixed;
+            margin: auto;
+            width: 642px;
+            max-width: 642px;
+            height: 100%;
+            -webkit-transform: translate3d(0%, 0, 0);
+            -ms-transform: translate3d(0%, 0, 0);
+            -o-transform: translate3d(0%, 0, 0);
+            transform: translate3d(0%, 0, 0);
+        }
+
+        .modal.left .modal-content,
+        .modal.right .modal-content {
+            height: 100%;
+            overflow-y: auto;
+        }
 
 
+        /*Left*/
+        .modal.left.fade .modal-dialog {
+            left: -320px;
+            -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+            -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+            -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+            transition: opacity 0.3s linear, left 0.3s ease-out;
+        }
+
+        .modal.left.fade.in .modal-dialog {
+            left: 0;
+        }
+
+        /*Right*/
+        .modal.right.fade .modal-dialog {
+            right: 0;
+            -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+            -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+            -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+            transition: opacity 0.3s linear, right 0.3s ease-out;
+        }
+
+        .modal.right.fade.in .modal-dialog {
+            right: 0;
+        }
+
+        .between {
+            justify-content: space-between;
+        }
+
+        /* ----- MODAL STYLE ----- */
+        .modal-content {
+            border-radius: 0;
+            border: none;
+        }
+
+        .candidate_Information {
+            width: 55%;
+        }
+
+        .position_Information {
+            width: 100%;
+        }
+
+        .custom-modal-header {
+            border-bottom-color: #EEEEEE;
+            background-color: #F2F7FA;
+            height: 114px;
+        }
+
+        .custom-modal-header .candidate_img {
+            width: 80px;
+            height: 80px;
+            background: #f2f7fa;
+            border-radius: 50%;
+        }
+
+        .custom-modal-header .candidate_img img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 50%;
+        }
+
+        .custom-btn {
+            padding: 4px 18px;
+            font-size: 12px;
+        }
+
+        .custom-modal-body {
+            padding: 0;
+        }
+
+        .custom-nav-modal {
+            padding: 0.8rem 1.4rem !important;
+            color: #858585;
+        }
+
+        .custom-tab-content {
+            padding: 22px;
+        }
+
+        .custom-card {
+            border: 1px solid #d2d2d2;
+        }
+
+        .card-header h6 {
+            color: #555555;
+        }
+
+        .candidate_mobile h6,
+        .candidate_sourcedPosition h6,
+        .candidate_qualification h6,
+        .candidate_email h6,
+        .candidate_prefLocation h6,
+        .candidate_pincode h6 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #3c3c3c;
+        }
+
+        .candidate_mobile p,
+        .candidate_sourcedPosition p,
+        .candidate_qualification p,
+        .candidate_email p,
+        .candidate_prefLocation p,
+        .candidate_pincode p {
+            font-size: 12px;
+            font-weight: 400;
+            color: #353434;
+        }
+    </style>
+    @php
+        $type = $type ?? 0;
+        $employee = $employee ?? 0;
+        $follow = $follow ?? 0;
+        $status = $status ?? 0;
+    @endphp
+
+    <link rel="stylesheet" href="{{ url('EnquiryCards/cards.css') }}">
     <div class="content-body">
         <div class="container-fluid">
+            <div class="container mt-5"
+                style="padding-left: 0px !important;
+                /* width: 0px; */
+                padding-right: 0px !important;">
+                <div class="row justify-content-center">
+                    <div class="col-md-12"style="margin-top: -50px">
+                        <div class="card">
+                            <a href="{{ url('enquiry-list') }}" class="btn btn-dark " style="margin-top: -30px">
+                                <i class="fas fa-redo-alt"></i>
+                            </a>
+                            <div class="card-body">
+                                <!-- Search Form -->
+                                <form id="searchForm" action="{{ url('searchEnquiry') }}" method="get">
 
-            <div class="col-lg-12">
-                <div class="card" >
-                    <div class="card-header">
-                        <h4 class="card-title">Total Enquiry - {{ $Details1 }} </h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive" style="height: 380px">
-                            <table class="table table-bordered table-responsive-sm" >
-                                <thead >
-                                    <tr>
-                                        <th scope="col">Sn. No</th>
-                                        <th scope="col">Enquiry Date</th>
-                                        <th scope="col">Company Name</th>
-                                        <th scope="col">Lead Days</th>
-                                        <th scope="col">Company Type</th>
-                                        <th scope="col">Vertical</th>
-                                        <th scope="col">Contact Person</th>
-                                        <th scope="col">Designation</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Mobile</th>
-                                        <th scope="col">DOB</th>
-                                        <th scope="col">Location</th>
-                                        <th scope="col">Proposal Type</th>
-                                        <th scope="col">Current Status</th>
-                                        <th scope="col">Next Follow Up Date</th>
-                                        <th scope="col">Latest Remark</th>
-                                        <th scope="col">Manager Remark</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($Details as $index => $obj)
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="email" value="{{ $obj->email }}"
-                                                class="checkBoxClass"
-                                                value="{{ $obj->id }}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            {{ ($Details->currentpage() - 1) * $Details->perpage() + $index + 1 }}
-                                        </td>
-                                        <td>
-                                            {{ \Carbon\Carbon::parse($obj->created_at)->format('d-m-Y') }}
-                                            {{ $obj->time }}
-                                        </td>
-                                        <td>
-                                            {{ isset($obj->company_name) ? $obj->company_name : 'N/A' }}<br>
-                                            <small>Created by:{{ $obj->GetCreatedby->name }}</small>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            $year = date('Y');
-                                            $birth = \Carbon\carbon::parse($obj->created_at)->format('Y-m-d');
-                                            $today = \Carbon\carbon::now()->format('d-m');
-                                            $date1 = date_create($today . '-' . $year);
-                                            $date2 = date_create($birth . '-' . $year);
-                                            $diff = date_diff($date1, $date2);
-                                            $diffrence_one = $diff->format('%a');
-                                            ?>
-                                            @if ($diffrence_one <= 30)
-                                                <label class="btn btn-success">
-                                                    <?php echo $diffrence_one = $diff->format('%a'); ?>
-                                                </label>
-                                            @elseif($diffrence_one > 30 && $diffrence_one <= 60)
-                                                <label class="btn btn-warning">
-                                                    <?php echo $diffrence_one = $diff->format('%a'); ?>
-                                                </label>
-                                            @else
-                                                <label class="btn btn-danger">
-                                                    <?php echo $diffrence_one = $diff->format('%a'); ?>
-                                                </label>
-                                            @endif
-                                        </td>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Contact Person</label>
+                                            <input type="text" name="searchByContactPerson" class="form-control"
+                                                placeholder="Search by Contact Person">
+                                        </div>
 
-                                        <td>{{ isset($obj->company_type) ? $obj->company_type : 'N/A' }}</td>
-                                        {{-- <td>{{ $obj->budget }}</td> --}}
-                                        <td>{{ $obj->vertical }}</td>
-                                        <td>{{ $obj->contact_person }}</td>
-                                        <td>{{ $obj->desig }}</td>
-                                        <td>{{ $obj->email }}</td>
-                                        <td>{{ $obj->contact }}</td>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Contact Name</label>
+                                            <input type="text" name="searchByCompanyName" class="form-control"
+                                                placeholder="Search by Company Name">
+                                        </div>
 
-                                        @if ($obj->dob != '')
-                                            <td>{{ \Carbon\Carbon::parse($obj->dob)->format('d-m-Y') }}</td>
-                                        @else
-                                            <td>N/A</td>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Contact Number</label>
+                                            <input type="text" name="searchByMobile" class="form-control"
+                                                placeholder="Search by mobile">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Date From</label>
+                                            <input type="date" name="from" class="form-control"
+                                                value="{{ $from ?? '' }}">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label">Date To</label>
+                                            <input type="date" name="to" class="form-control"
+                                                value="{{ $to ?? '' }}">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label">Proposal Type</label>
+                                            <select name="type" class="form-control">
+                                                <option value="">Select</option>
+                                                <option value="">All</option>
+
+                                                @php
+                                                    $Enquiry = \App\Models\EnquiryType::get();
+                                                @endphp
+                                                @foreach ($Enquiry as $Enquirys)
+                                                    <option value="{{ $Enquirys->id }}"
+                                                        {{ $type == $Enquirys->id ? 'selected' : '' }}>
+                                                        {{ $Enquirys->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Enquiry Status</label>
+                                            <select name="status" class="form-control">
+                                                <option value="">Select</option>
+                                                <option value="">All</option>
+
+                                                @php
+                                                    $status = \App\Models\Followup_remark::get();
+                                                @endphp
+                                                @foreach ($status as $statuss)
+                                                    <option value="{{ $statuss->id }}">{{ $statuss->remark }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @if (Auth::user()->type == 'Admin' || Auth::user()->type == 'Manager')
+                                            <div class="col-md-4">
+                                                <label class="form-label">Employee</label>
+                                                <select name="employee" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option value="">All</option>
+
+                                                    @php
+                                                        $user = \App\Models\User::where('is_active', 1)->get();
+                                                    @endphp
+                                                    @foreach ($user as $users)
+                                                        <option value="{{ $users->id }}"
+                                                            {{ $employee == $users->id ? 'selected' : '' }}>
+                                                            {{ $users->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         @endif
-                                        <td>{{ $obj->location }}</td>
+                                        <div class="col-md-4">
+                                            <label class="form-label">FollowUp Date</label>
+                                            <input type="date" name="follow" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="margin-left: 240px;">
+                                        <button class="btn btn-primary btn-block" type="submit">Search</button>
 
-                                        <td>{{ isset($obj->GetEnquiryType->name) ? $obj->GetEnquiryType->name : 'N/A' }}
-                                        </td>
-                                        <?php
-                                        $rowStatus = $obj->GetStatus->remark ?? '-';
-                                        ?>
-
-                                        @if (isset($obj->GetStatus->remark))
-                                            @if ($rowStatus == 'Hot')
-                                                <td><label class="">Hot</label></td>
-                                            @elseif($rowStatus == 'Cold')
-                                                <td><label class="">Cold</label></td>
-                                            @elseif($rowStatus == 'Process')
-                                                <td><label class="">Process</label></td>
-                                            @elseif($rowStatus == 'Break')
-                                                <td><label class="">Break</label></td>
-                                            @elseif($rowStatus == 'Hold')
-                                                <td><label class="">Hold </label></td>
-                                            @elseif($rowStatus == 'Positive')
-                                                <td><label class="">Positive </label></td>
-                                            @endif
-                                        @else
-                                            <td>-</td>
-                                        @endif
-
-
-                                        @if ($obj->next_follow_date != '')
-                                            @if ($rowStatus == 'Hot')
-                                                <td> <label class="badge badge-warning">
-                                                        {{ \Carbon\Carbon::parse($obj->next_follow_date)->format('d-m-Y') }}
-                                                </td>
-                                            @else
-                                                <td> {{ \Carbon\Carbon::parse($obj->next_follow_date)->format('d-m-Y') }}
-                                                </td>
-                                            @endif
-                                        @else
-                                            <td>N/A
-                                            </td>
-                                        @endif
-                                        {{-- <td>{{ isset($obj->remark) ? $obj->remark : 'N/A' }}</td>
-                                <td>{{ $obj->manager_remark ?? '-' }}</td> --}}
-
-                                        <td style="white-space: normal !important; vertical-align: middle !important;">
-                                            <ul>
-                                                <li>
-                                                    <p
-                                                        style="width: 120px !important; word-break: break-word;margin-top:0px;">
-                                                        {{ isset($obj->remark) ? $obj->remark : 'N/A' }}</p>
-                                                </li>
-                                                <small>Created at :</small><small>
-                                                    {{ \carbon\carbon::parse($obj->updated_at)->format('d-m-Y') }}</small>
-                                            </ul>
-                                        </td>
-
-
-                                        <?php
-
-                                        $remarks = \App\Models\ManagerRemark::where(['enquiry_id' => $obj->id])
-                                            ->orderBy('id', 'desc')
-                                            ->first();
-
-                                        ?>
-                                        <td style=" word-wrap: break-word;">
-
-                                            <ul>
-                                                {{-- @foreach ($remarks as $remark) --}}
-                                                <li
-                                                    style="white-space: normal !important; vertical-align: text-top !important;">
-                                                    <p
-                                                        style="width: 120px !important; word-break: break-word;margin-top:0px;">
-                                                        {{ $remarks->remark ?? '-' }}
-                                                </li>
-
-
-                                                <small>Created at
-                                                    :</small><small>{{ \Carbon\Carbon::parse($remarks->created_at ?? '')->format('d-m-Y') }}</small>
-                                                {{-- @endforeach   --}}
-                                            </ul>
-                                        </td>
-                                        <td>
-                                            <span class="nav-item dropdown btn btn-outline-info ">
-                                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-body"
-                                                    href="#" role="button" data-bs-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false" v-pre="">
-                                                    More
-                                                </a>
-
-                                                <div class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="navbarDropdown">
-                                                    <a class="dropdown-item" href="">
-                                                        Add follow up
-                                                    </a>
-
-                                                    <a class="dropdown-item" href="">
-                                                        View follow up
-                                                    </a>
-
-                                                    <a class="dropdown-item" href="">
-                                                        View manager remark
-                                                    </a>
-
-                                                    <a class="dropdown-item"
-                                                        href="{{ url('/editEnquiry', $obj->id) }}">
-                                                        Edit
-                                                    </a>
-
-                                                    <a class="dropdown-item"
-                                                        href="{{ url('deleteEnquiry', $obj->id) }}">
-                                                        Delete
-                                                    </a>
-
-
-                                                </div>
-                                            </span>
-
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-
-                            </tbody>
-                        </table>
+                                    </div>
+                                </form>
+                                <br>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-3"></div>
+            </div>
+            <div id="searchResults">
+                @include('Enquiry.searchingResultEnquiry')
             </div>
         </div>
-
-
     </div>
+    <script src="https://kit.fontawesome.com/66f2518709.js" crossorigin="anonymous"></script>
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-XXXXXXX" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Bootstrap CSS and JS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var employeeRemark = document.querySelector(".employee-remark");
+            employeeRemark.addEventListener("mouseenter", function(event) {
+                var fullRemark = event.target.getAttribute("title");
+                event.target.innerText = fullRemark || 'N/A';
+            });
+            employeeRemark.addEventListener("mouseleave", function(event) {
+                var truncatedRemark = (event.target.innerText.length > 40) ? event.target.innerText
+                    .substring(0, 40) : event.target.innerText;
+                event.target.innerText = truncatedRemark + (event.target.innerText.length > 40 ? '...' :
+                    '');
+            });
+        });
+
+        $(document).ready(function() {
+            $("#showModalBtn").click(function() {
+                $("#myModal2").modal("show");
+            });
+        });
+    </script>
+
+    //remarks
+
+    <script>
+        $(document).ready(function() {
+            $('#searchForm').submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    type: 'GET',
+                    url: $(this).attr('action'),
+                    data: formData,
+                    success: function(response) {
+                        $('#searchResults').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+
 @endsection
+
