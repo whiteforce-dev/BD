@@ -48,7 +48,7 @@
                     @foreach ($user as $obj=> $users  )
 
                         <div class="col-xl-4 ">
-                            <div class="card overflow-hidden" style="border:  2px solid #d2d4dE; height: calc(100% - 39px); box-shadow: 0px 0px 10px #95a2ba;">
+                            <div class="card overflow-hidden" style="    border: 1px solid #e9dcd7; height: calc(100% - 39px); transform: scaleY(1);">
                                 <div class="card-body">
                                     <div class="form-check custom-checkbox mx-2">
                                         <input  style="border: 2px solid #d2d4DE;" type="checkbox" class="form-check-input" name="selected_users[]" value="{{$users->id}}">

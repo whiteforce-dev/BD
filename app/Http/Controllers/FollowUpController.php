@@ -84,7 +84,7 @@ class FollowUpController extends Controller
         return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1 ]);
     }
 
-    public function missingFollowups()
+    public function missedFollowups()
     {
         $user = Auth::user();
         $enquiries = Enquiry::query();

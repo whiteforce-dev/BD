@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\FollowUpController;
+use App\Http\Controllers\HBDController;
 use App\Http\Controllers\RemarksController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -82,14 +83,19 @@ Route::get('addFollowUp', [FollowUpController::class, 'addFollowUp']);
 Route::post('storeFollowUp', [FollowUpController::class, 'storeFollowUp']);
 Route::get('todayFollowups', [FollowUpController::class, 'todayFollowups']);
 Route::get('totalFollowups', [FollowUpController::class, 'totalFollowups']);
-Route::get('missingFollowups', [FollowUpController::class, 'missingFollowups']);
+Route::get('missedFollowups', [FollowUpController::class, 'missedFollowups']);
 
 
 //Holidays
 Route::get('holidays', [HolidayController::class, 'holidays']);
 Route::post('storeHolidays', [HolidayController::class, 'storeHolidays']);
 Route::get('addHoliday', [HolidayController::class, 'addHoliday']);
-Route::delete('deleteHoliday/{id}', [HolidayController::class, 'deleteHoliday']);
+Route::get('editHoliday/{id}', [HolidayController::class, 'editHoliday']);
+Route::post('updateHoliday/{id}', [HolidayController::class, 'updateHoliday']);
+Route::get('deleteHoliday/{id}', [HolidayController::class, 'deleteHoliday']);
+
+//Hbd Reports
+Route::get('viewHbdReport', [HBDController::class, 'viewHbdReport']);
 
 Auth::routes();
 

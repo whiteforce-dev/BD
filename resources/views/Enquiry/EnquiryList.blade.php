@@ -170,7 +170,7 @@
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label class="form-label">Contact Name</label>
+                                            <label class="form-label">Company Name</label>
                                             <input type="text" name="searchByCompanyName" class="form-control"
                                                 placeholder="Search by Company Name">
                                         </div>

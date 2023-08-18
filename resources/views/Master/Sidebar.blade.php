@@ -45,9 +45,9 @@
                 <span class="nav-text">Today Follow-Up</span>
               </a>
             </li>
-            <li><a href="{{ url('missingFollowups') }}" class="ai-icon" aria-expanded="false">
+            <li><a href="{{ url('missedFollowups') }}" class="ai-icon" aria-expanded="false">
                 <i class="mdi mdi-calendar-today"></i>
-                <span class="nav-text">Missing Follow-Up</span>
+                <span class="nav-text">Missed Follow-Up</span>
               </a>
             </li>
             <li><a href="{{ url('totalFollowups') }}" class="ai-icon" aria-expanded="false">
@@ -121,7 +121,7 @@
               </a>
             </li>
 
-            <li><a href="{{ url('addHoliday') }}" class="ai-icon" aria-expanded="false">
+            <li><a href="{{ url('holidays') }}" class="ai-icon" aria-expanded="false">
                 <i class="bi bi-calendar2-check-fill"></i>
                 <span class="nav-text">Holidays</span>
               </a>
