@@ -39,22 +39,17 @@
                 <span class="nav-text">DashBoard</span>
               </a>
             </li>
-
-            <li><a href="{{ url('todayFollowups') }}" class="ai-icon" aria-expanded="false">
-                <i class="mdi mdi-calendar-today"></i>
-                <span class="nav-text">Today Follow-Up</span>
-              </a>
+            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                <i class="fa fa-users"></i>
+                    <span class="nav-text">Follow-Up</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ url('/todayFollowups') }}">Today Follow-Up</a></li>
+                    <li><a href="{{ url('/missedFollowups') }}">Missed Follow-Up</a></li>
+                    <li><a href="{{ url('/totalFollowups') }}">Total Follow-Up</a></li>
+                </ul>
             </li>
-            <li><a href="{{ url('missedFollowups') }}" class="ai-icon" aria-expanded="false">
-                <i class="mdi mdi-calendar-today"></i>
-                <span class="nav-text">Missed Follow-Up</span>
-              </a>
-            </li>
-            <li><a href="{{ url('totalFollowups') }}" class="ai-icon" aria-expanded="false">
-                <i class="mdi mdi-calendar-today"></i>
-                <span class="nav-text">Total Follow-Up</span>
-              </a>
-            </li>
+           
 
             @if(Auth::user()->type == 'Admin' || Auth::user()->type == 'Manager' )
                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -84,23 +79,10 @@
                     @if( Auth::user()->type == 'Manager' )
                     <li><a href="{{ url('team-hot-list') }}">Team Hot List</a></li>
                     @endif
-
-
-
+                    <li><a href="{{ url('team-hot-list') }}">Break</a></li>
+                    <li><a href="{{ url('hold-list') }}">Hold</a></li>
                 </ul>
             </li>
-
-            <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-                <i class="bi bi-file-earmark-break-fill"></i>
-                    <span class="nav-text">Break</span>
-                </a>
-            </li>
-            <li><a href="{{ url('hold-list') }}" class="ai-icon" aria-expanded="false">
-                <i class="bi bi-file-earmark-break-fill"></i>
-                    <span class="nav-text">Hold</span>
-                </a>
-            </li>
-
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                 <i class="bi bi-bullseye"></i>
                 <span class="nav-text">User Target</span>
@@ -110,28 +92,21 @@
 
             </ul>
         </li>
-            <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-                <i class="bi bi-gear-fill"></i>
-                <span class="nav-text">Proposal Setting</span>
-                </a>
-            </li>
-            <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-                <i class="bi bi-envelope"></i>
-                <span class="nav-text">Email</span>
-              </a>
-            </li>
-
-            <li><a href="{{ url('holidays') }}" class="ai-icon" aria-expanded="false">
-                <i class="bi bi-calendar2-check-fill"></i>
-                <span class="nav-text">Holidays</span>
-              </a>
-            </li>
-
-            <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
+        <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
                 <i class="bi bi-card-list"></i>
                 <span class="nav-text">Reports</span>
               </a>
-            </li>
+        </li>
+        <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+            <i class="fa fa-users"></i>
+                <span class="nav-text">Settings</span>
+            </a>
+            <ul aria-expanded="false">
+                <li><a href="#">Proposal Setting</a></li>
+                <li><a href="#">Email</a></li>
+                <li><a href="{{ url('/holidays') }}">Holidays</a></li>
+            </ul>
+        </li>
 
         </ul>
 

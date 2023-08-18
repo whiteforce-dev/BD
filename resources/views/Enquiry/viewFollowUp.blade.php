@@ -51,28 +51,44 @@
                     <div class="card-body contacts_body p-0 dz-scroll  " id="DZ_W_Contacts_Body">
                         <ul class="contacts">
                             @php
-                            $remark = \App\Models\Remark::where(['enquiry_id' => $obj->id])->orderBy('id','asc')->get();
+                            $remark = \App\Models\Remark::where(['enquiry_id' => $obj->id])->get()->toArray();
+                            $managerremark = \App\Models\ManagerRemark::where(['enquiry_id' => $obj->id])->get()->toArray();
+                            $all_remarks = array_merge($remark,$managerremark);
+                            usort($all_remarks, function ($a, $b) {
+                                return $a['created_at'] <=> $b['created_at'];
+                            });
                             @endphp
-                            @foreach ( $remark as $index=>$remarks )
+                            @foreach ( $all_remarks as $index=>$remarks )
+                            @php
+                            if(!empty($remarks['created_by'])){
+                                $user_data = \App\Models\User::where('id',$remarks['created_by'])->select('image','name')->first();
+                            }
+                            @endphp
                             <li class="active dz-chat-user">
                                 <div class="d-flex bd-highlight">
                                     <div class="img_cont">
+                                        @if(!empty($user_data))
+                                        <img src="{{ $user_data->image ?? '-' }}" class="rounded-circle user_img"
+                                            alt="" />
+                                        @else
                                         <img src="{{ $obj->GetCreatedby->image ?? '-' }}" class="rounded-circle user_img"
                                             alt="" />
+                                        @endif
                                         <span class="online_icon"></span>
                                     </div>
                                     <div class="user_info" style="max-width: none;  ">
-                                        <span>{{$obj->GetCreatedby->name ??'-'}} -{{ $remarks->GetStatus->remark ??'-'}}</span>
-                                        <p style="text-align: justify; hyphens: auto;">{{ trim($remarks->remark) }}</p>
+                                        <span>{{!empty($user_data) ? $user_data->name : $obj->GetCreatedby->name}} -{{ $remarks->GetStatus->remark ??'-'}}</span>
+                                        <p style="text-align: justify; hyphens: auto;">{{ trim($remarks['remark']) }}</p>
 
 
                                         <div style=" margin-top: 5px; margin-left: 90px;">
                                             <span style="font-size: 13px;">Posted On</span>
-                                            <p>{{\Carbon\Carbon::parse($remarks->created_at)->format('d-m-Y H:i:s')}}
+                                            <p>{{\Carbon\Carbon::parse($remarks['created_at'])->format('d-m-Y H:i:s')}}
                                             </p>
+                                            @if(!empty($remarks['date']))
                                             <span style="font-size: 12px;  margin-top: 5px;">Next Follow Up</span>
-                                        <p>{{\Carbon\Carbon::parse($remarks->date)->format('d-m-Y')}} {{$remarks->time}}
-                                        </p>
+                                            <p>{{\Carbon\Carbon::parse($remarks['date'])->format('d-m-Y')}} {{$remarks['time']}}</p>
+                                            @endif
                                         </div>
 
                                     </div>
