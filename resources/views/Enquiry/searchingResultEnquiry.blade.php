@@ -98,18 +98,18 @@ padding-right: 0px !important;">
                                     <a href="javascript:void(0)" data-toggle="modal"
                                         data-target="#myModal2{{ $obj->id }}">View Details</a>
 
-                                    <a href="javascript:void(0)" data-toggle="modal"
+                                    <!-- <a href="javascript:void(0)" data-toggle="modal"
                                         data-target="#addMngrRemark{{ $obj->id }}"> Add Manager
-                                        Remark</a>
+                                        Remark</a> -->
                                     <a class="nav-link bell bell-link" href="javascript:void(0);" data-toggle="tab"
-                                        data-target="#viewMRemarks{{ $obj->id }}"> View Manager Remark</a>
+                                        data-target="#viewMRemarks{{ $obj->id }}"> View Remarks</a>
 
-                                    <a href="javascript:void(0)" data-toggle="modal"
+                                    <!-- <a href="javascript:void(0)" data-toggle="modal"
                                         data-target="#addfollowup{{ $obj->id }}"><i
-                                            class="mdi  mdi-plus menu-icon text-primary"></i>Add Follow-Up</a>
+                                            class="mdi  mdi-plus menu-icon text-primary"></i>Add Follow-Up</a> -->
 
-                                        <a class="nav-link bell bell-link" href="javascript:void(0);" data-toggle="tab"
-                                        data-target="#viewFollowUp{{ $obj->id }}"> View Follow-Up </a>
+                                        <!-- <a class="nav-link bell bell-link" href="javascript:void(0);" data-toggle="tab"
+                                        data-target="#viewFollowUp{{ $obj->id }}"> View Follow-Up </a> -->
                                     <a href="{{ url('edit-enquiry', $obj->id) }}">Edit</a>
                                     <a href="{{ url('delete-enquiry', $obj->id) }}">Delete</a>
                                 </div>
