@@ -46,7 +46,7 @@ class TeamController extends Controller
 
     function viewTeam(){
         // $Details=User::whereNotIn('id', [Auth::user()->id])->where('created_by',[Auth::user()->id])->orderBy("is_active","desc")->paginate('9');
-        $Details = User::paginate(15);
+        $Details = User::where('created_by', Auth::user()->id)->paginate(15);
         return view('TeamMember.TeamMemberList', compact('Details'));
     }
 

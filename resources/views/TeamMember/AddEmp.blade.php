@@ -124,10 +124,5 @@
                 });
             });
         </script>
-
-
-
-
-
         <!-- form body -->
     @endsection

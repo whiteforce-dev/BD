@@ -64,19 +64,19 @@ class User extends Authenticatable
 
     public function payrolltargets()
     {
-        return $this->hasMany(Target::class,'user_id')->where('type','payroll')->latest();
+        return $this->hasMany(Target::class,'user_id')->where('type','7')->latest();
     }
     public function temptargets()
     {
-        return $this->hasMany(Target::class,'user_id')->where('type','temp')->latest();
+        return $this->hasMany(Target::class,'user_id')->where('type','5')->latest();
     }
     public function fmstargets()
     {
-        return $this->hasMany(Target::class,'user_id')->where('type','fms')->latest();
+        return $this->hasMany(Target::class,'user_id')->where('type','6')->latest();
     }
     public function recruitmenttargets()
     {
-        return $this->hasMany(Target::class,'user_id')->where('type','Recruitment Proposal')->latest();
+        return $this->hasMany(Target::class,'user_id')->where('type','4')->latest();
     }
     public function teamtargets()
     {

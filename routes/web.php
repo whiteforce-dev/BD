@@ -108,6 +108,7 @@ Route::get('assignTarget', [TargetController::class, 'assignTarget']);
 Route::get('assignMonthlyTarget/{manager}', [TargetController::class, 'assignMonthlyTarget']);
 Route::post('storeMonthlyTarget',[TargetController::class, 'storeMonthlyTarget']);
 Route::get('viewMonthlyTarget', [TargetController::class, 'viewMonthlyTarget']);
+Route::get('get-table/{id}', [TargetController::class, 'getTable']);
 
 Auth::routes();
 

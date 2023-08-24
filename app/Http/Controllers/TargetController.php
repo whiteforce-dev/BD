@@ -29,11 +29,13 @@ class TargetController extends Controller
    }
 
    public function assignMonthlyTarget($manager){
-
     $user = User::where('created_by', $manager)->where(['is_active'=> 1])->get();
     return view('target.assignMonthlyTarget', compact('user'));
    }
    public function storeMonthlyTarget(Request $request) {
+    $request->validate([
+        'target_type' => 'required',
+    ]);
     $team_member_targets = $request->except('_token', 'target_type'); // Get all input except CSRF token and target_type
 
     foreach ($team_member_targets as $team_id => $target) {
@@ -57,8 +59,40 @@ class TargetController extends Controller
 
 
 public function viewMonthlyTarget(){
+    // if (Auth::user()->id === 'Admin') {
+    //     $user = User::where(['is_active'=> 1]);
 
-    $user = User::where('created_by',)->where(['is_active'=> 1])->get();
-    return view('target.viewMonthlyTarget');
-}
+    // } elseif (Auth::user()->id === 'Manager') {
+    //         $user = User::where('created_by', Auth::user()->id)->where(['is_active'=> 1]);
+
+    // } elseif (Auth::user()->id === 'Staff') {
+    //     $user = User::where('created_by', Auth::user()->id)->where(['is_active'=> 1]);
+    // }
+
+    // $user = $user->get();
+    $user = User::where(['is_active'=> 1])->get();
+    return view('target.viewMonthlyTarget', compact('user'));
+   }
+
+   public function getTable($id,Request $request){
+    $manager_id=$id;
+     if ($request->table_id == 4) {
+        $user = User::where('created_by', $manager_id)->where(['is_active'=> 1])->get();
+        return view('target.pages.recruitment',compact('user'));
+     }
+     if ($request->table_id == 5) {
+        $user = User::where('created_by', $manager_id)->where(['is_active'=> 1])->get();
+        return view('target.pages.temp',compact('user'));
+     }
+     if ($request->table_id == 6) {
+        $user = User::where('created_by', $manager_id)->where(['is_active'=> 1])->get();
+        return view('target.pages.fms',compact('user'));
+     }
+     if ($request->table_id == 7) {
+        $user = User::where('created_by', $manager_id)->where(['is_active'=> 1])->get();
+        return view('target.pages.payroll',compact('user'));
+     }
+
+
+   }
 }

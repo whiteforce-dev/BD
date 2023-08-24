@@ -83,16 +83,22 @@
                     <li><a href="{{ url('hold-list') }}">Hold</a></li>
                 </ul>
             </li>
-            <li>
-                <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+            @if(Auth::user()->type == 'Admin')
+                <li>
+                    <a href="{{ url('assignTarget') }}" class="ai-icon" aria-expanded="false">
                     <i class="bi bi-bullseye"></i>
                     <span class="nav-text">User Target</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="uc-select2.html">Select 2</a></li>
+                    </a>
+                </li>
+                @else
+                <li>
+                    <a href="{{ url('viewMonthlyTarget') }}" class="ai-icon" aria-expanded="false">
+                    <i class="bi bi-bullseye"></i>
+                    <span class="nav-text">User Target</span>
+                    </a>
+                </li>
+           @endif
 
-                </ul>
-            </li>
         <li>
             <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                 <i class="bi bi-card-list"></i>
