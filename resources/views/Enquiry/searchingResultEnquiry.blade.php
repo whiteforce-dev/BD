@@ -24,6 +24,11 @@
                             <p class="mb-1 fs-12 "></p>
                             <h3 class="mb-0 font-w600 fs-22">Total Enquiries - {{ $Details1 }}</h3>
                         </div>
+                        <a id="searchingForm" class="searchbtn btn float-right"
+                        style="padding: 10px 14px !important; margin-top: -22px; cursor: pointer;"
+                        onclick="toggleSearchForm()">
+                        <i style="font-size: 45px;" class="mdi mdi-file-find menu-icon text-black"></i>
+                        </a>
                     </div>
 
                 </div>
@@ -389,7 +394,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- @include('Enquiry.viewManagerRemarks') -->
+                @include('Enquiry.viewManagerRemarks')
                 @include('Enquiry.AddManagerRemarks ')
                 @include('Enquiry.AddFollowup')
                 @include('Enquiry.viewFollowUp')

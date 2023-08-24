@@ -4,6 +4,7 @@ use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\FollowUpController;
 use App\Http\Controllers\HBDController;
 use App\Http\Controllers\RemarksController;
+use App\Http\Controllers\TargetController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
@@ -96,6 +97,17 @@ Route::get('deleteHoliday/{id}', [HolidayController::class, 'deleteHoliday']);
 
 //Hbd Reports
 Route::get('viewHbdReport', [HBDController::class, 'viewHbdReport']);
+Route::get('searchHbd', [HBDController::class, 'searchHbd']);
+Route::get('pendingBirthdays', [HBDController::class, 'pendingBirthdays']);
+Route::get('pendingBirthdaysList/{id}', [HBDController::class, 'pendingBirthdaysList'])->name('pendingBirthdaysList');
+Route::get('searchPendingHbdCount', [HBDController::class, 'searchPendingHbdCount']);
+
+
+// Monthly Target
+Route::get('assignTarget', [TargetController::class, 'assignTarget']);
+Route::get('assignMonthlyTarget/{manager}', [TargetController::class, 'assignMonthlyTarget']);
+Route::post('storeMonthlyTarget',[TargetController::class, 'storeMonthlyTarget']);
+Route::get('viewMonthlyTarget', [TargetController::class, 'viewMonthlyTarget']);
 
 Auth::routes();
 

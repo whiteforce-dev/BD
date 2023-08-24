@@ -41,4 +41,45 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public  function GetDepartment()
+    {
+        return $this->belongsTo(Department::class,'depertment');
+    }
+
+    public  function GetDesignation()
+    {
+        return $this->belongsTo(Desigination::class,'designation');
+    }
+
+    public  function GetCategory()
+    {
+        return $this->belongsTo(Category::class,'category');
+    }
+
+    public  function GetUser()
+    {
+        return $this->belongsTo(User::class,'created_by');
+    }
+
+    public function payrolltargets()
+    {
+        return $this->hasMany(Target::class,'user_id')->where('type','payroll')->latest();
+    }
+    public function temptargets()
+    {
+        return $this->hasMany(Target::class,'user_id')->where('type','temp')->latest();
+    }
+    public function fmstargets()
+    {
+        return $this->hasMany(Target::class,'user_id')->where('type','fms')->latest();
+    }
+    public function recruitmenttargets()
+    {
+        return $this->hasMany(Target::class,'user_id')->where('type','Recruitment Proposal')->latest();
+    }
+    public function teamtargets()
+    {
+        return $this->hasMany(TeamTarget::class,'user_id')->latest();
+    }
 }

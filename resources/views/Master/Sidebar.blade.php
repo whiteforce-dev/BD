@@ -49,7 +49,7 @@
                     <li><a href="{{ url('/totalFollowups') }}">Total Follow-Up</a></li>
                 </ul>
             </li>
-           
+
 
             @if(Auth::user()->type == 'Admin' || Auth::user()->type == 'Manager' )
                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -83,19 +83,26 @@
                     <li><a href="{{ url('hold-list') }}">Hold</a></li>
                 </ul>
             </li>
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                <i class="bi bi-bullseye"></i>
-                <span class="nav-text">User Target</span>
-            </a>
-            <ul aria-expanded="false">
-                <li><a href="uc-select2.html">Select 2</a></li>
+            <li>
+                <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <i class="bi bi-bullseye"></i>
+                    <span class="nav-text">User Target</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="uc-select2.html">Select 2</a></li>
 
-            </ul>
-        </li>
-        <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
+                </ul>
+            </li>
+        <li>
+            <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                 <i class="bi bi-card-list"></i>
                 <span class="nav-text">Reports</span>
-              </a>
+            </a>
+            <ul aria-expanded="false">
+                <li><a href="{{ url('viewHbdReport') }}">HBD Report</a></li>
+                <li><a href="{{ url('pendingBirthdays') }}">PendingHbdReport</a></li>
+
+            </ul>
         </li>
         <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
             <i class="fa fa-users"></i>
