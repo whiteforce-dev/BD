@@ -5,6 +5,10 @@
     .review-table tbody tr td:nth-child(2) {
         width: 8%;
     }
+
+    form-control:focus{
+        box-shadow: none !important;
+    }
 </style>
 
     <div class="content-body">
@@ -12,7 +16,7 @@
             <div class="col-lg-12" >
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Target Assign</h4>
+                        <h4 class="card-title" style="font-size: 1.2rem;">Target Assign</h4>
                     </div>
                     <div class="card-body">
                         <form action="{{ url('storeMonthlyTarget') }}" method="POST">
@@ -21,15 +25,16 @@
                                 <div class="card m-0 ">
                                     <div class="card-body py-3 py-md-2">
                                         <div class="d-sm-flex  d-block align-items-center">
-                                            <div class="d-flex mb-sm-0 mb-3 me-auto align-items-center">
+                                            <div class="d-flex mb-sm-0 mb-3 me-auto align-items-center" style="width: 100%;">
                                                 <div class="media-body">
                                                     <p class="mb-1 fs-12 "></p>
                                                     <div class="row">
-                                                        <div class="col-6">
-                                                            <h5 class="mb-0 font-w600 fs-10">Select Target Type </h5>
+                                                        <div class="col-6" style="display: flex; align-items:center;">
+                                                            <h5 class="mb-0 font-w600 fs-10" style="font-size: 0.95rem; font-weight:500 ">Select Target Type </h5>
                                                         </div>
                                                         <div class="col-6" >
-                                                            <select style="border: 2px solid rgb(37, 36, 36);     font-size: 18px;" name="target_type" class="form-control " id="targetTypeSelect" required onchange="getTable(this.value)" required>
+                                                            <select style="border: 1px solid rgb(204 214 232);
+                                                            font-size: 0.95rem;  box-shadow: none !important;" name="target_type" class="form-control " id="targetTypeSelect" required onchange="getTable(this.value)" required>
                                                                 <option value=""><h5>Select</h5></option>
                                                                 <option value="4">Recruitment</option>
                                                                <option value="5">Temp</option>
@@ -79,9 +84,11 @@
                             </div>
                         @endforeach  --}}
 
-                        <button type="submit" class="btn btn-outline-primary btn-lg btn-block" id="assignButton">Assign Target</button>
+                        <button type="submit" class="btn btn-outline-primary btn-lg btn-block" id="assignButton" style="font-size: 0.9rem !important; font-weight:500;width: 96% !important;
+                        margin: 0 auto;">Assign Target</button>
                         </form>
-                        <button  class="btn btn-outline-primary btn-lg btn-block" id="alreadyAssignButton" style="display: none;">This Month Target is Already Assign</button>
+                        <button  class="btn btn-outline-primary btn-lg btn-block" id="alreadyAssignButton" style="display: none; font-size: 0.9rem !important; font-weight:500;width: 96% !important;
+                        margin: 0 auto;">This Month Target is Already Assign</button>
                     </div>
                 </div>
             </div>

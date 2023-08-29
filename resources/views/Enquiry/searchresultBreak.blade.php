@@ -40,10 +40,10 @@
                     <div class="first-head">
                         <div class="logo">
                             @if ($obj->image)
-                                <img src="{{ $obj->image }}" alt="" width="90%">
+                                <img src="{{ url( $obj->image) }}" alt="" width="90%">
                             @else
-                                <img src="{{ url('logo2.png') }}" alt="" width="70%" ">
-                @endif
+                                <img src="{{ url('logo.png') }}" alt="" width="70%" ">
+                           @endif
 
                                 <!-- <img src="{{ url('logo.png') }}" alt="" width="100" style="border-radius: 50%;"> -->
                         </div>
@@ -103,19 +103,22 @@
                                     Details</a>
 
                                     <a href="javascript:void(0)" data-toggle="modal" data-target="#alloteClient{{ $obj->id }}">Allot to Manager</a>
-                                    
+
+                                    <a href="javascript:void(0)" data-toggle="modal"
+                                    data-target="#addAgreement{{ $obj->id }}"><i
+                                    class="mdi  mdi-plus menu-icon text-primary"></i>Add Agreement/Pdf</a>
+
+                                    <a href="javascript:void(0)" data-toggle="modal"
+                                    data-target="#addFeedback{{ $obj->id }}"><i
+                                        class="mdi  mdi-plus menu-icon text-primary"></i>Feedback</a>
+
                                 {{--  <!-- <a class="nav-link bell bell-link" href="javascript:void(0);" data-toggle="tab"
                                             data-target="#viewMRemarks{{ $obj->id }}"> View Manager Remark</a> -->  --}}
 
-                                <a href="javascript:void(0)" data-toggle="modal"
-                                    data-target="#addfollowup{{ $obj->id }}"><i
-                                        class="mdi  mdi-plus menu-icon text-primary"></i>Add Agreement/Pdf</a>
-
-                                <a class="nav-link bell bell-link" href="javascript:void(0);" data-toggle="tab"
-                                    data-target="#viewFollowUp{{ $obj->id }}">Feedback</a>
-
-                                <a href="{{ url('edit-enquiry', $obj->id) }}">Cancle Agreement</a>
-                                <a href="{{ url('delete-enquiry', $obj->id) }}">Delete</a>
+                             @if(Auth::user()->type == 'Admin')
+                             <a href="{{ url('cancel-agreement', $obj->id) }}">Cancle Agreement</a>
+                             <a href="{{ url('deleteEnquiry', $obj->id) }}">Delete</a>
+                             @endif
                             </div>
                         </div>
                         <!-- <div class="btn">
@@ -394,8 +397,8 @@
                 </div>
             </div>
             @include('Enquiry.clientAllote.alloteClient')
-            @include('Enquiry.AddManagerRemarks ')
-            @include('Enquiry.AddFollowup')
+            @include('Enquiry.feedback.feedback')
+            @include('Enquiry.agreement.addAgreement')
             @include('Enquiry.viewFollowUp')
         @endforeach
    {{ $Details->appends(request()->except('page'))->links('pagination::bootstrap-4') }}

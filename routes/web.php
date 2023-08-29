@@ -78,6 +78,15 @@ Route::get('allot-client-modal', [EnquiryController::class, 'allotClientModal'])
 Route::get('getUserList/{type}',[EnquiryController::class, 'getUserList']);
 Route::post('allot-client', [EnquiryController::class, 'allotClient']);
 
+//add Feedback
+Route::post('storeFeedback', [EnquiryController::class, 'storeFeedback']);
+
+//add agreement
+Route::post('storeAgreement', [EnquiryController::class, 'storeAgreement']);
+Route::get('cancel-agreement/{id}', [EnquiryController::class, 'cancelAgreement']);
+Route::get('/deleteEnquiry/{id}', [EnquiryController::class, 'deleteEnquiry_1']);
+
+
 //Excel Controller
 
 Route::post('importExcel',[ExcelController::class, 'EnquiryImport']);

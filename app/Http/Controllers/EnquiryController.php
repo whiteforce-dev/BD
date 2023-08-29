@@ -703,6 +703,7 @@ class EnquiryController extends Controller
     }
 
     function allotClient(Request $request){
+       return ($request->enquiry_id);
         if(!empty($request->enquiry_id)){
             $enquiry = Enquiry::find($request->enquiry_id);
             $enquiry->allote_date = date('Y-m-d');
@@ -764,4 +765,92 @@ class EnquiryController extends Controller
 
     }
 
+    //feedback
+   public function storeFeedback(Request $request)
+    {
+        $id = $request->input('id');
+        $obj = Enquiry::find($id);
+        $obj->feedback = $request->input('feedback');
+        $obj->save();
+        return redirect()->back()->with('success', ' Add Sucessfully ');
+    }
+
+
+    public function storeAgreement(Request $request){
+
+
+        $id = $request->input('id');
+        $obj = Enquiry::find($id);
+        $obj->aggrement = $request->input('aggrement');
+
+        $file = $request->file('pdf_upload');
+        if ($request->file('pdf_upload') != '') {
+            $ISSave = UtilitesTools::ProccedToSaveImage($request->file('pdf_upload'), "pdf/");
+            if ($ISSave['success'] == true) {
+                $obj->pdf_upload = $ISSave['data'];
+            }
+        }
+        if ($request->file('invoice') != '') {
+            $ISSave = UtilitesTools::ProccedToSaveImage($request->file('invoice'), "invoice/");
+            if ($ISSave['success'] == true) {
+                $obj->invoice = $ISSave['data'];
+            }
+        }
+        $obj->save();
+        return redirect()->back()->with('success', ' Add Sucessfully ');
+
+    }
+
+    function cancelAgreement($id)
+    {
+        $enq = Enquiry::find($id);
+        $enq->aggrement = 'no';
+        $enq->save();
+        return back();
+    }
+
+    public function deleteEnquiry_1($id)
+    {
+        $enquiry = Enquiry::where('id', $id)->first();
+        $time = strtotime($enquiry->break_date);
+        $month = date("m", $time);
+        $year = date("Y", $time);
+
+        $dateFrom = date("$year-$month-01");
+        $dateTo = date("$year-$month-t");
+        if (Auth::user()->type != 'Admin') {
+            if ($enquiry->enquiry_type_id == '7') {
+                $lastTargetRecord = Target::where(['user_id' => Auth::user()->id, 'type' => '7'])->whereBetween('date', [$dateFrom, $dateTo])->orderBy('id', 'desc')->first();
+                if($lastTargetRecord){
+                $lastTargetRecord->complete = $lastTargetRecord->complete - 1;
+                $lastTargetRecord->remaining = $lastTargetRecord->remaining + 1;
+                $lastTargetRecord->save();
+            }}
+            if ($enquiry->enquiry_type_id == '5') {
+                $lastTargetRecord = Target::where(['type' => '5', 'user_id' => Auth::user()->id])->whereBetween('date', [$dateFrom, $dateTo])->orderBy('id', 'desc')->first();
+                if($lastTargetRecord){
+                $lastTargetRecord->complete = $lastTargetRecord->complete - 1;
+                $lastTargetRecord->remaining = $lastTargetRecord->remaining + 1;
+                $lastTargetRecord->save();
+            }}
+            if ($enquiry->enquiry_type_id == '6') {
+                $lastTargetRecord = Target::where(['type' => '6', 'user_id' => Auth::user()->id])->whereBetween('date', [$dateFrom, $dateTo])->orderBy('id', 'desc')->first();
+                if($lastTargetRecord){
+                $lastTargetRecord->complete = $lastTargetRecord->complete - 1;
+                $lastTargetRecord->remaining = $lastTargetRecord->remaining + 1;
+                $lastTargetRecord->save();
+                }
+            }
+            if ($enquiry->enquiry_type_id == '4') {
+                $lastTargetRecord = Target::where(['type' => '4', 'user_id' => Auth::user()->id])->whereBetween('date', [$dateFrom, $dateTo])->orderBy('id', 'desc')->first();
+                if($lastTargetRecord){
+                $lastTargetRecord->complete = $lastTargetRecord->complete - 1;
+                $lastTargetRecord->remaining = $lastTargetRecord->remaining + 1;
+                $lastTargetRecord->save();
+            }}
+        }
+        
+        $enquiry = Enquiry::find($id);
+        return $enquiry->delete();
+    }
 }
