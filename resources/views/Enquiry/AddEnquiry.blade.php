@@ -197,19 +197,6 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label class="form-label" for="validationCustom05">Designation
-                                                <span class="text-danger">*</span>
-                                            </label>
-
-                                                <input type="text" class="form-control" placeholder="Enter Designation" name="desig"
-                                               id="validationCustom05" required>
-                                                <div class="invalid-feedback">
-                                                    Please enter a Designation.
-                                                </div>
-
-                                        </div>
-
-                                        <div class="mb-3">
                                             <label class="form-label" for="validationCustom13">Company Type
                                                 <span class="text-danger">*</span>
                                             </label>
@@ -225,18 +212,42 @@
                                                 </div>
                                         </div>
 
-                                        <div class="mb-3">
-                                            <label class="form-label" for="validationCustom11">Next Follow Date
+                                        <div id="select">
+                                            <div class="mb-3" >
+                                                <label class="form-label" for="validationCustom11">Next Follow Date
+                                                    <span class="text-danger">*</span>
+                                                </label>
+
+                                                    <input type="date" class="form-control" placeholder="Select Next-Follow-Date " name="next_follow_date"
+                                                    id="validationCustom11"  >
+                                                    <div class="invalid-feedback">
+                                                        Please enter Next Follow Date.
+                                                    </div>
+
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label" for="validationCustom12">Next Follow Time <span
+                                                        class="text-danger">*</span>
+                                                </label>
+
+                                                    <input type="time" class="form-control" placeholder="Select Next-Follow-Time " name="next_follow_time"
+                                                    id="validationCustom12" >
+                                                    <div class="invalid-feedback">
+                                                        Please enter Next Follow Time.
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3" id="break" style="display:none">
+                                            <label class="form-label" for="validationCustom11">Break Date
                                                 <span class="text-danger">*</span>
                                             </label>
-
-                                                <input type="date" class="form-control" placeholder="Select Next-Follow-Date " name="next_follow_date"
-                                                id="validationCustom11"  required>
+                                            <input type="date" class="form-control" name="break_date" >
                                                 <div class="invalid-feedback">
-                                                    Please enter Next Follow Date.
+                                                    Please enter Break Date.
                                                 </div>
-
                                         </div>
+
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="mb-3">
@@ -308,6 +319,19 @@
                                         </div>
 
                                         <div class="mb-3">
+                                            <label class="form-label" for="validationCustom05">Designation
+                                                <span class="text-danger">*</span>
+                                            </label>
+
+                                                <input type="text" class="form-control" placeholder="Enter Designation" name="desig"
+                                               id="validationCustom05" required>
+                                                <div class="invalid-feedback">
+                                                    Please enter a Designation.
+                                                </div>
+
+                                        </div>
+
+                                        <div class="mb-3">
                                             <label class="form-label" for="validationCustom06">DOB
                                                 <span class="text-danger">*</span>
                                             </label>
@@ -320,18 +344,7 @@
 
                                         </div>
 
-                                        <div class="mb-3">
-                                            <label class="form-label" for="validationCustom12">Next Follow Time <span
-                                                    class="text-danger">*</span>
-                                            </label>
 
-                                                <input type="time" class="form-control" placeholder="Select Next-Follow-Time " name="next_follow_time"
-                                                id="validationCustom12" required>
-                                                <div class="invalid-feedback">
-                                                    Please enter Next Follow Time.
-                                                </div>
-
-                                        </div>
                                     </div>
                                 </div>
 
@@ -408,5 +421,29 @@
           }, false)
         })
     })()
+</script>
+
+<script>
+        $('select').on('change', function() {
+            var status = this.value;
+        // alert(status);
+    if(status=="15")
+        $("#select").hide();
+        else
+        $("#select").show();
+    });
+
+        $('select').on('change', function() {
+            var status = this.value;
+        // alert(status);
+    if(status=="15")
+
+        $("#break").show();// hide multiple sections
+
+        else
+
+        $("#break").hide();
+
+    });
 </script>
 @endsection

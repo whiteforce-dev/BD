@@ -45,4 +45,18 @@ function uploadImageWithBase64($fileName, $path = '')
     return $name;
 }
 
-
+function getTargetTypeName($targetTypeId) {
+    switch ($targetTypeId) {
+        case 4:
+            return 'Recruitment';
+        case 5:
+            return 'Temp';
+        case 6:
+            return 'Fms';
+        case 7:
+            return 'Payroll';
+        // Add more cases for other target types if needed
+        default:
+            return 'Unknown';
+    }
+}

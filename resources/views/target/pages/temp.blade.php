@@ -39,22 +39,22 @@
             </td>
             <td>
                 @if ($Temp)
-                <span class="badge badge-warning">{{ $Temp->target }}</span>
+                <span class="badge badge-warning light">{{ $Temp->target }}</span>
                 @else
-                    <span class="badge badge-warning">0</span>
+                    <span class="badge badge-warning light">0</span>
                 @endif
             <td>
                 @if ($Temp)
-                    <span class="badge badge-success">{{ $Temp->complete }}</span>
+                    <span class="badge badge-success light">{{ $Temp->complete }}</span>
                 @else
-                    <span class="badge badge-success">0</span>
+                    <span class="badge badge-success light">0</span>
                 @endif
             </td>
             <td>
                  @if ($Temp)
-                    <span class="badge badge-danger">{{ $Temp->remaining }}</span>
+                    <span class="badge badge-danger light">{{ $Temp->remaining }}</span>
                 @else
-                    <span class="badge badge-danger">0</span>
+                    <span class="badge badge-danger light">0</span>
                 @endif
             </td>
               <td>

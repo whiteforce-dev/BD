@@ -19,18 +19,42 @@ class TargetController extends Controller
       if (Auth::user()->type == 'Admin') {
          $user = User::where(['type' => 'Manager' ,'is_active'=> 1])->get();
          return view('target.assignTargetPage', compact('user', 'targettype', 'userlist'));
-      } elseif (Auth::user()->type == 'Manager') {
-         $user = User::where(['type' => 'Manager' ,'is_active'=> 1])->get();
-         return view('target.assignTargetPage', compact('user'));
-      } elseif (Auth::user()->type == 'Staff') {
-         $user = User::where('id', Auth::user()->id)->get();
-         return view('target.assignTargetPage', compact('user'));
       }
+    //   elseif (Auth::user()->type == 'Manager') {
+    //      $user = User::where(['type' => 'Manager' ,'is_active'=> 1])->get();
+    //      return view('target.assignTargetPage', compact('user'));
+    //   } elseif (Auth::user()->type == 'Staff') {
+    //      $user = User::where('id', Auth::user()->id)->get();
+    //      return view('target.assignTargetPage', compact('user'));
+    //   }
    }
 
    public function assignMonthlyTarget($manager){
-    $user = User::where('created_by', $manager)->where(['is_active'=> 1])->get();
-    return view('target.assignMonthlyTarget', compact('user'));
+    $user = User::where('created_by', $manager)->where(['is_active' => 1])->get();
+    $targetTypes = [4, 5, 6, 7]; // Replace with your actual target type IDs
+    $buttonShowStatus = [];
+
+    foreach ($user as $singleUser) {
+        foreach ($targetTypes as $targetType) {
+            $lastInsertedRecord = Target::where(['type' => $targetType, 'user_id' => $singleUser->id])
+                ->orderBy('id', 'desc')
+                ->first();
+            $showButton = true;
+
+            if ($lastInsertedRecord) {
+                $lastInsertedDate = Carbon::parse($lastInsertedRecord->created_at);
+                $currentDate = Carbon::now();
+
+                if ($lastInsertedDate->year == $currentDate->year && $lastInsertedDate->month == $currentDate->month) {
+                    $showButton = false;
+                }
+            }
+
+            $buttonShowStatus[$targetType] = $showButton;
+        }
+    }
+
+    return view('target.assignMonthlyTarget', compact('user', 'targetTypes', 'buttonShowStatus'));
    }
    public function storeMonthlyTarget(Request $request) {
     $request->validate([
@@ -50,7 +74,7 @@ class TargetController extends Controller
             $target_record->complete = 0;
             $target_record->remaining = $target_record->target;
             $target_record->type = $request->input('target_type');
-            $target_record->date = now(); // Use Laravel's Carbon instance for current date and time
+            $target_record->date = now();
             $target_record->save();
         }
     }
@@ -75,6 +99,7 @@ public function viewMonthlyTarget(){
    }
 
    public function getTable($id,Request $request){
+
     $manager_id=$id;
      if ($request->table_id == 4) {
         $user = User::where('created_by', $manager_id)->where(['is_active'=> 1])->get();
@@ -92,7 +117,6 @@ public function viewMonthlyTarget(){
         $user = User::where('created_by', $manager_id)->where(['is_active'=> 1])->get();
         return view('target.pages.payroll',compact('user'));
      }
-
 
    }
 }

@@ -50,30 +50,91 @@ class EnquiryController extends Controller
         $search3 = $request->get('searchByContactPerson')?? 0;
 
         $detail = Enquiry::whereBetween('created_at',  array($from . ' 00:00:00', $to . ' 23:59:59'));
-        if ($type != 0) {
-            $detail =   $detail->where('enquiry_type_id', '=', $type);
+
+            if (Auth::user()->type === 'Admin') {
+
+            if ($type != 0) {
+                $detail =   $detail->where('enquiry_type_id', '=', $type);
+            }
+            if ($status != 0) {
+                $detail =   $detail->where('status_id', '=', $status);
+            }
+            if ($employee != 0) {
+                $detail =   $detail->where('created_by', '=', $employee);
+            }
+            if ($follow != 0) {
+                $detail =   $detail->where('next_follow_date', '=', $follow);
+            }
+            if ($search1 != 0) {
+                $detail =   $detail->where('contact', 'like', '%' . $search1 . '%');
+            }
+            if ($search != 0) {
+                $detail =   $detail->where('company_name', 'like', '%' . $search . '%');
+            }
+            if ($search3 != 0) {
+                $detail =   $detail->where('contact_person', 'like', '%' . $search3 . '%');
+            }
+        }elseif(Auth::user()->type === 'Manager') {
+
+            $user = Auth::user();
+            $detail = $detail->whereHas('GetCreatedby', function ($query) use ($user) {
+                $query->where('created_by', $user->id);
+            });
+
+            if ($type != 0) {
+                $detail =   $detail->where('enquiry_type_id', '=', $type);
+            }
+            if ($status != 0) {
+                $detail =   $detail->where('status_id', '=', $status);
+            }
+            if ($employee != 0) {
+                $detail =   $detail->where('created_by', '=', $employee);
+            }
+            if ($follow != 0) {
+                $detail =   $detail->where('next_follow_date', '=', $follow);
+            }
+            if ($search1 != 0) {
+                $detail =   $detail->where('contact', 'like', '%' . $search1 . '%');
+            }
+            if ($search != 0) {
+                $detail =   $detail->where('company_name', 'like', '%' . $search . '%');
+            }
+            if ($search3 != 0) {
+                $detail =   $detail->where('contact_person', 'like', '%' . $search3 . '%');
+            }
+
         }
-        if ($status != 0) {
-            $detail =   $detail->where('status_id', '=', $status);
-        }
-        if ($employee != 0) {
-            $detail =   $detail->where('created_by', '=', $employee);
-        }
-        if ($follow != 0) {
-            $detail =   $detail->where('next_follow_date', '=', $follow);
-        }
-        if ($search1 != 0) {
-            $detail =   $detail->where('contact', 'like', '%' . $search1 . '%');
-        }
-        if ($search != 0) {
-            $detail =   $detail->where('company_name', 'like', '%' . $search . '%');
-        }
-        if ($search3 != 0) {
-            $detail =   $detail->where('contact_person', 'like', '%' . $search3 . '%');
-        }
-        $detail2 = $detail->get();
-        $detail = $detail->paginate(25);
-        $detail1 = $detail2->count();
+        else {
+
+            $detail = $detail->where('created_by', Auth::user()->id);
+
+            if ($type != 0) {
+                $detail =   $detail->where('enquiry_type_id', '=', $type);
+            }
+            if ($status != 0) {
+                $detail =   $detail->where('status_id', '=', $status);
+            }
+            if ($employee != 0) {
+                $detail =   $detail->where('created_by', '=', $employee);
+            }
+            if ($follow != 0) {
+                $detail =   $detail->where('next_follow_date', '=', $follow);
+            }
+            if ($search1 != 0) {
+                $detail =   $detail->where('contact', 'like', '%' . $search1 . '%');
+            }
+            if ($search != 0) {
+                $detail =   $detail->where('company_name', 'like', '%' . $search . '%');
+            }
+            if ($search3 != 0) {
+                $detail =   $detail->where('contact_person', 'like', '%' . $search3 . '%');
+            }
+
+         }
+            $detail2 = $detail->get();
+            $detail = $detail->orderBy("id", "desc")->paginate(25);
+            $detail1 = $detail2->count();
+
         if ($request->ajax()) {
             return view('Enquiry.searchingResultEnquiry')->with(['Details' => $detail, 'Details1' => $detail1]);
         }
@@ -90,7 +151,6 @@ class EnquiryController extends Controller
             'searchByCompanyName' => $search,
             'searchByContactPerson' => $search3,
         ]);
-
         return view('Enquiry.EnquiryList')->with([
             'Details' => $detail,
             'Details1' => $detail1,
@@ -171,6 +231,44 @@ class EnquiryController extends Controller
                     $enquiry->image = $filepath;
                 }
                 $enquiry->save();
+
+                //target
+
+        if ($enquiry->status_id == '15') {
+            if ($enquiry->enquiry_type_id == '7') {
+                $lastTargetRecord = Target::where('user_id', Auth::user()->id)->where(['type' => '7'])->latest()->first();
+                if($lastTargetRecord){
+                    $lastTargetRecord->complete = $lastTargetRecord->complete + 1;
+                    $lastTargetRecord->save();
+                    $lastTargetRecord->remaining = $lastTargetRecord->remaining - 1;
+                    $lastTargetRecord->save();
+                }
+            }
+            if ($enquiry->enquiry_type_id == '5') {
+                $lastTargetRecord = Target::where('user_id', Auth::user()->id)->where(['type' => '5'])->latest()->first();
+                if($lastTargetRecord){
+                $lastTargetRecord->complete = $lastTargetRecord->complete + 1;
+                $lastTargetRecord->save();
+                $lastTargetRecord->remaining = $lastTargetRecord->remaining - 1;
+                $lastTargetRecord->save();
+            }}
+            if ($enquiry->enquiry_type_id == '6') {
+                $lastTargetRecord = Target::where('user_id', Auth::user()->id)->where(['type' => '6'])->latest()->first();
+                if( $lastTargetRecord){
+                $lastTargetRecord->complete = $lastTargetRecord->complete + 1;
+                $lastTargetRecord->save();
+                $lastTargetRecord->remaining = $lastTargetRecord->remaining - 1;
+                $lastTargetRecord->save();
+            }}
+            if ($enquiry->enquiry_type_id == '4') {
+                $lastTargetRecord = Target::where('user_id', Auth::user()->id)->where(['type' => '4'])->latest()->first();
+                if( $lastTargetRecord){
+                $lastTargetRecord->complete = $lastTargetRecord->complete + 1;
+                $lastTargetRecord->save();
+                $lastTargetRecord->remaining = $lastTargetRecord->remaining - 1;
+                $lastTargetRecord->save();
+            }}
+        }
 
                 return redirect('enquiry-list');
 
@@ -254,6 +352,44 @@ class EnquiryController extends Controller
                 $enquiry->image = $filepath;
             }
             $enquiry->save();
+
+             //target
+
+        if ($enquiry->status_id == '15') {
+            if ($enquiry->enquiry_type_id == '7') {
+                $lastTargetRecord = Target::where('user_id', Auth::user()->id)->where(['type' => '7'])->latest()->first();
+                if($lastTargetRecord){
+                    $lastTargetRecord->complete = $lastTargetRecord->complete + 1;
+                    $lastTargetRecord->save();
+                    $lastTargetRecord->remaining = $lastTargetRecord->remaining - 1;
+                    $lastTargetRecord->save();
+                }
+            }
+            if ($enquiry->enquiry_type_id == '5') {
+                $lastTargetRecord = Target::where('user_id', Auth::user()->id)->where(['type' => '5'])->latest()->first();
+                if($lastTargetRecord){
+                $lastTargetRecord->complete = $lastTargetRecord->complete + 1;
+                $lastTargetRecord->save();
+                $lastTargetRecord->remaining = $lastTargetRecord->remaining - 1;
+                $lastTargetRecord->save();
+            }}
+            if ($enquiry->enquiry_type_id == '6') {
+                $lastTargetRecord = Target::where('user_id', Auth::user()->id)->where(['type' => '6'])->latest()->first();
+                if( $lastTargetRecord){
+                $lastTargetRecord->complete = $lastTargetRecord->complete + 1;
+                $lastTargetRecord->save();
+                $lastTargetRecord->remaining = $lastTargetRecord->remaining - 1;
+                $lastTargetRecord->save();
+            }}
+            if ($enquiry->enquiry_type_id == '4') {
+                $lastTargetRecord = Target::where('user_id', Auth::user()->id)->where(['type' => '4'])->latest()->first();
+                if( $lastTargetRecord){
+                $lastTargetRecord->complete = $lastTargetRecord->complete + 1;
+                $lastTargetRecord->save();
+                $lastTargetRecord->remaining = $lastTargetRecord->remaining - 1;
+                $lastTargetRecord->save();
+            }}
+        }
             return redirect('enquiry-list');
 
 
@@ -290,6 +426,12 @@ class EnquiryController extends Controller
         }
 
         $enquiries = $enquiries->paginate(25);
+        foreach ($enquiries as $enquiry) {
+            if (!empty($enquiry->image)) {
+                $disk = Storage::disk('s3');
+                $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
+            }
+        }
 
         return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1 ]);
     }
@@ -320,6 +462,12 @@ class EnquiryController extends Controller
         }
 
         $enquiries = $enquiries->paginate(25);
+        foreach ($enquiries as $enquiry) {
+            if (!empty($enquiry->image)) {
+                $disk = Storage::disk('s3');
+                $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
+            }
+        }
 
         return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1 ]);
 
@@ -362,5 +510,258 @@ class EnquiryController extends Controller
         return view('Enquiry.EnquiryList')->with(['Details' => $Details]);
     }
 
+    //Break list
+    public function breakList(){
+
+        $user = Auth::user();
+        $enquiries = Enquiry::query();
+        $enquiries1 = null;
+        if ($user->type === 'Admin') {
+            $enquiries = $enquiries->where('status_id', '15')->orderBy("id", "desc");
+            $enquiries1 = $enquiries->where('status_id', '15')->orderBy("id", "desc")->count();
+        } elseif ($user->type === 'Manager') {
+            $enquiries = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+                $query->where('created_by', $user->id)->where('status_id', '15')->orderBy("id","desc");
+            });
+            $enquiries1 = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+                $query->where('created_by', $user->id)->where('status_id', '15')->orderBy("id","desc");
+            })->count();
+        } elseif ($user->type === 'Staff') {
+            $enquiries = $enquiries->where('created_by', $user->id)->where('status_id', '15')->orderBy("id", "desc");
+            $enquiries1 = $enquiries->where('created_by', $user->id)->where('status_id', '15')->orderBy("id", "desc")->count();
+        }
+        if ($enquiries1 === null) {
+            $enquiries1 = 0;
+        }
+        $enquiries = $enquiries->paginate(10);
+        foreach ($enquiries as $enquiry) {
+            if (!empty($enquiry->image)) {
+                $disk = Storage::disk('s3');
+                $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
+            }
+        }
+        return view('Enquiry.breakEnquiry')->with(['Details' => $enquiries, 'Details1' => $enquiries1 ]);
+
+    }
+
+    public function searchBreakEnquiry(Request $request){
+
+        $from = $request->get('from') == "" ? carbon::parse(date('2020-01-01'))->format('Y-m-d') : $request->get('from');
+        $to = $request->get('to') == "" ? carbon::parse(carbon::now())->format('Y-m-d') : $request->get('to');
+        $type = $request->get('type') ?? 0;
+        $status = $request->get('status') ?? 0;
+        $employee = $request->get('employee') ?? 0;
+        $follow = $request->get('follow') ?? 0;
+        $search1 = $request->get('searchByMobile')?? 0;
+        $search = $request->get('searchByCompanyName')?? 0;
+        $search3 = $request->get('searchByContactPerson')?? 0;
+
+        $detail = Enquiry::whereBetween('created_at',  array($from . ' 00:00:00', $to . ' 23:59:59'))->where('status_id', '15');
+
+            if (Auth::user()->type === 'Admin') {
+
+            if ($type != 0) {
+                $detail =   $detail->where('enquiry_type_id', '=', $type);
+            }
+            if ($status != 0) {
+                $detail =   $detail->where('status_id', '=', $status);
+            }
+            if ($employee != 0) {
+                $detail =   $detail->where('created_by', '=', $employee);
+            }
+            if ($follow != 0) {
+                $detail =   $detail->where('next_follow_date', '=', $follow);
+            }
+            if ($search1 != 0) {
+                $detail =   $detail->where('contact', 'like', '%' . $search1 . '%');
+            }
+            if ($search != 0) {
+                $detail =   $detail->where('company_name', 'like', '%' . $search . '%');
+            }
+            if ($search3 != 0) {
+                $detail =   $detail->where('contact_person', 'like', '%' . $search3 . '%');
+            }
+        }elseif(Auth::user()->type === 'Manager') {
+
+            $user = Auth::user();
+            $detail = $detail->whereHas('GetCreatedby', function ($query) use ($user) {
+                $query->where('created_by', $user->id);
+            });
+
+            if ($type != 0) {
+                $detail =   $detail->where('enquiry_type_id', '=', $type);
+            }
+            if ($status != 0) {
+                $detail =   $detail->where('status_id', '=', $status);
+            }
+            if ($employee != 0) {
+                $detail =   $detail->where('created_by', '=', $employee);
+            }
+            if ($follow != 0) {
+                $detail =   $detail->where('next_follow_date', '=', $follow);
+            }
+            if ($search1 != 0) {
+                $detail =   $detail->where('contact', 'like', '%' . $search1 . '%');
+            }
+            if ($search != 0) {
+                $detail =   $detail->where('company_name', 'like', '%' . $search . '%');
+            }
+            if ($search3 != 0) {
+                $detail =   $detail->where('contact_person', 'like', '%' . $search3 . '%');
+            }
+
+        }
+        else {
+
+            $detail = $detail->where('created_by', Auth::user()->id);
+
+            if ($type != 0) {
+                $detail =   $detail->where('enquiry_type_id', '=', $type);
+            }
+            if ($status != 0) {
+                $detail =   $detail->where('status_id', '=', $status);
+            }
+            if ($employee != 0) {
+                $detail =   $detail->where('created_by', '=', $employee);
+            }
+            if ($follow != 0) {
+                $detail =   $detail->where('next_follow_date', '=', $follow);
+            }
+            if ($search1 != 0) {
+                $detail =   $detail->where('contact', 'like', '%' . $search1 . '%');
+            }
+            if ($search != 0) {
+                $detail =   $detail->where('company_name', 'like', '%' . $search . '%');
+            }
+            if ($search3 != 0) {
+                $detail =   $detail->where('contact_person', 'like', '%' . $search3 . '%');
+            }
+
+         }
+            $detail2 = $detail->get();
+            $detail = $detail->orderBy("id", "desc")->paginate(25);
+            $detail1 = $detail2->count();
+
+        if ($request->ajax()) {
+            return view('Enquiry.searchresultBreak')->with(['Details' => $detail, 'Details1' => $detail1]);
+        }
+
+        // Append the query parameters to the pagination links
+        $detail->appends([
+            'from' => $from,
+            'to' => $to,
+            'type' => $type,
+            'status' => $status,
+            'employee' => $employee,
+            'follow' => $follow,
+            'searchByMobile' => $search1,
+            'searchByCompanyName' => $search,
+            'searchByContactPerson' => $search3,
+        ]);
+        return view('Enquiry.EnquiryList')->with([
+            'Details' => $detail,
+            'Details1' => $detail1,
+            'from' => $from,
+            'to' => $to,
+            'type' => $type,
+            'status' => $status,
+            'employee' => $employee,
+            'follow' => $follow
+        ]);
+
+    }
+
+    //Allote Client to Manager
+
+    function allotClientModal(Request $request){
+        
+        if(!empty($request->id)){
+            $enquiry = Enquiry::find($request->id);
+            return view('Enquiry.clientAllote.alloteClient',compact('enquiry'));
+        } else {
+            return view('Enquiry.clientAllote.alloteClient');
+        }
+    }
+
+    function getUserList($type){
+        $base_url = "https://white-force.com/plus/api/getUserList";
+        $data['type'] = $type;
+        $html = "";
+        if(!empty($type)){
+            $userlist = file_get_contents($base_url."/".$type);
+            $userlist = json_decode($userlist);
+            $userslist = $userlist->data;
+            foreach ($userslist as $role => $users) {
+                $html .= '<optgroup label="' . $role . '">';
+                foreach ($users as $id => $user) {
+                    $html .= '<option value="' . $id . '">' . $user . '</option>';
+                }
+                $html .= '</optgroup>';
+            }
+        }
+        return $html;
+    }
+
+    function allotClient(Request $request){
+        if(!empty($request->enquiry_id)){
+            $enquiry = Enquiry::find($request->enquiry_id);
+            $enquiry->allote_date = date('Y-m-d');
+            $enquiry->company_sub_type = $request->company_type;
+            $enquiry->alloted_software_type = $request->alloted_software_type;
+            $enquiry->no_req = $request->no_of_requirement;
+            $enquiry->percentage = $request->percentage;
+            $enquiry->client_website = $request->company_website;
+            $enquiry->clientabt = $request->about_company;
+
+            $file = $request->file('company_logo');
+            if (!empty($file)) {
+                $company_logo = base64_encode(file_get_contents($file));
+            }
+            $enquiry->save();
+
+            $alloted = CompanyAllotment::where('enquiry_id',$request->enquiry_id)->delete();
+
+            $allotment = new CompanyAllotment();
+            $allotment->enquiry_id = $request->enquiry_id;
+            $allotment->alloted_by = Auth::user()->id;
+            $allotment->alloted_to = $request->alloted_to;
+            $allotment->alloted_software_type = $request->alloted_software_type;
+            $allotment->save();
+
+            try {
+                $url = 'https://white-force.com/plus/api/allot-client-to-manager';
+                $data = [
+                    'enquiry_id' => $enquiry->id,
+                    'client_name' => $enquiry->company_name,
+                    'type' => $enquiry->vertical,
+                    'alloted_by' => Auth::user()->name,
+                    'percentage' => $enquiry->percentage,
+                    'clientImage' => $company_logo,
+                    'aboutClient' => $enquiry->clientabt,
+                    'website' => $enquiry->client_website,
+                    'alloted_date' => $enquiry->allote_date,
+                    'no_req' => $enquiry->no_req,
+                    'address_address' => $enquiry->address_address,
+                    'sub_type' => $enquiry->company_sub_type,
+                    'alloted_software_type' => $request->alloted_software_type,
+                    'alloted_to'=> $request->alloted_to,
+                    'email'=>$enquiry->email
+                ];
+                $curl = curl_init($url);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_POST, true);
+                curl_setopt($curl, CURLOPT_POSTFIELDS,  json_encode($data));
+                $response = curl_exec($curl);
+                //print_r($response);
+                curl_close($curl);
+                return redirect()->back()->with('success', 'Client Alloted Successfuly');
+            } catch (Exception $e) {
+                return redirect()->back()->with('Error', 'Something Went Wrong');
+            }
+        }
+
+
+
+    }
 
 }

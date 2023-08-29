@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Enquiry;
 use App\Models\Remark;
+use App\Models\Target;
 use Auth;
 use Illuminate\Http\Request;
 use Storage;
@@ -35,6 +36,44 @@ class FollowUpController extends Controller
         $obj1->remark = $obj->remark;
         $obj1->break_date = $request->input('break_date');
         $obj1->save();
+
+        //target
+
+        if ($obj1->status_id == '15') {
+            if ($obj1->enquiry_type_id == '7') {
+                $lastTargetRecord = Target::where('user_id', Auth::user()->id)->where(['type' => '7'])->latest()->first();
+                if($lastTargetRecord){
+                    $lastTargetRecord->complete = $lastTargetRecord->complete + 1;
+                    $lastTargetRecord->save();
+                    $lastTargetRecord->remaining = $lastTargetRecord->remaining - 1;
+                    $lastTargetRecord->save();
+                }
+            }
+            if ($obj1->enquiry_type_id == '5') {
+                $lastTargetRecord = Target::where('user_id', Auth::user()->id)->where(['type' => '5'])->latest()->first();
+                if($lastTargetRecord){
+                $lastTargetRecord->complete = $lastTargetRecord->complete + 1;
+                $lastTargetRecord->save();
+                $lastTargetRecord->remaining = $lastTargetRecord->remaining - 1;
+                $lastTargetRecord->save();
+            }}
+            if ($obj1->enquiry_type_id == '6') {
+                $lastTargetRecord = Target::where('user_id', Auth::user()->id)->where(['type' => '6'])->latest()->first();
+                if( $lastTargetRecord){
+                $lastTargetRecord->complete = $lastTargetRecord->complete + 1;
+                $lastTargetRecord->save();
+                $lastTargetRecord->remaining = $lastTargetRecord->remaining - 1;
+                $lastTargetRecord->save();
+            }}
+            if ($obj1->enquiry_type_id == '4') {
+                $lastTargetRecord = Target::where('user_id', Auth::user()->id)->where(['type' => '4'])->latest()->first();
+                if( $lastTargetRecord){
+                $lastTargetRecord->complete = $lastTargetRecord->complete + 1;
+                $lastTargetRecord->save();
+                $lastTargetRecord->remaining = $lastTargetRecord->remaining - 1;
+                $lastTargetRecord->save();
+            }}
+        }
         return redirect()->back()->with('success', ' Added Sucessfully');
     }
     public function todayFollowups()

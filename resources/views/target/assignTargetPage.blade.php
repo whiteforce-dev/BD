@@ -27,7 +27,42 @@
                 </div>
             </div>
             <br>
-            <div class="col-xl-12">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Manager List</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-responsive-md">
+                                <thead>
+                                    <tr>
+                                        <th><strong>Sr. NO.</strong></th>
+                                        <th><strong>Image</strong></th>
+                                        <th><strong>Manager Name</strong></th>
+                                        <th><strong>Action</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($user as $index => $mngr)
+                                        <tr>
+                                            <td><strong>{{  $index + 1 }}</strong></td>
+                                            <td><div class="d-flex align-items-center"><img src="{{ $mngr->image }}" class="rounded-lg me-2" width="24" style="    width: 50px;
+                                                border: 2px dotted #c6d0d5;" alt=""/></div></td>
+                                            <td><div class="d-flex align-items-center"> <span class="w-space-no">{{ ucwords($mngr->name) }}</span></div></td>
+                                            <td> <div class="d-flex">
+                                                <a href="{{ url('assignMonthlyTarget',$mngr->id) }}" class="btn btn-primary btn-rounded text-white btn-sm px-4">Assign Monthly Target</a>
+
+                                            </div></td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{--  <div class="col-xl-12">
                 <div class="tab-content">
                     <div id="navpills-1" class="tab-pane fade show active">
                         <div class="table-responsive rounded table-hover fs-14">
@@ -68,7 +103,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div>  --}}
         </div>
     </div>
 @endsection

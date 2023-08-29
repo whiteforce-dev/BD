@@ -38,22 +38,22 @@
                 @endif
             </td>
             <td> @if ($FMS)
-                <span class="badge badge-warning">{{ $FMS->target }}</span>
+                <span class="badge badge-warning light">{{ $FMS->target }}</span>
                 @else
-                    <span class="badge badge-warning">0</span>
+                    <span class="badge badge-warning light">0</span>
                 @endif
             <td>
                 @if ($FMS)
-                    <span class="badge badge-success">{{ $FMS->complete }}</span>
+                    <span class="badge badge-success light">{{ $FMS->complete }}</span>
                 @else
-                    <span class="badge badge-success">0</span>
+                    <span class="badge badge-success light">0</span>
                 @endif
             </td>
             <td>
                  @if ($FMS)
-                    <span class="badge badge-danger">{{ $FMS->remaining }}</span>
+                    <span class="badge badge-danger light">{{ $FMS->remaining }}</span>
                 @else
-                    <span class="badge badge-danger">0</span>
+                    <span class="badge badge-danger light">0</span>
                 @endif
             </td>
               <td>

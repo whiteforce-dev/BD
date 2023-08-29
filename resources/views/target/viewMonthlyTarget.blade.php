@@ -99,77 +99,77 @@
                                                         </td>
                                                         <td>
                                                             @if ($Payroll)
-                                                                <span class="badge badge-warning ">{{ $Payroll->target }}</span>
+                                                                <span class="badge badge-warning light ">{{ $Payroll->target }}</span>
                                                             @else
-                                                                <span class="badge badge-warning">0</span>
+                                                                <span class="badge badge-warning light">0</span>
                                                             @endif
                                                             <hr>
                                                             @if ($Temp)
-                                                                <span class="badge badge-warning">{{ $Temp->target }}</span>
+                                                                <span class="badge badge-warning light">{{ $Temp->target }}</span>
                                                             @else
-                                                                <span class="badge badge-warning">0</span>
+                                                                <span class="badge badge-warning light">0</span>
                                                             @endif
                                                             <hr>
                                                             @if ($FMS)
-                                                                <span class="badge badge-warning">{{ $FMS->target }}</span>
+                                                                <span class="badge badge-warning light">{{ $FMS->target }}</span>
                                                             @else
-                                                                <span class="badge badge-warning">0</span>
+                                                                <span class="badge badge-warning light">0</span>
                                                             @endif
                                                             <hr>
                                                             @if ($recruitmentTarget)
-                                                                <span class="badge badge-warning">{{ $recruitmentTarget->target }}</span>
+                                                                <span class="badge badge-warning light">{{ $recruitmentTarget->target }}</span>
                                                             @else
-                                                                <span class="badge badge-warning">0</span>
+                                                                <span class="badge badge-warning light">0</span>
                                                             @endif
                                                         </td>
                                                         <td>
                                                             @if ($Payroll)
-                                                                <span class="badge badge-success ">{{ $Payroll->complete }}</span>
+                                                                <span class="badge badge-success light ">{{ $Payroll->complete }}</span>
                                                             @else
-                                                                <span class="badge badge-success">0</span>
+                                                                <span class="badge badge-success light">0</span>
                                                             @endif
                                                             <hr>
                                                             @if ($Temp)
-                                                                <span class="badge badge-success">{{ $Temp->complete }}</span>
+                                                                <span class="badge badge-success light">{{ $Temp->complete }}</span>
                                                             @else
-                                                                <span class="badge badge-success">0</span>
+                                                                <span class="badge badge-success light">0</span>
                                                             @endif
                                                             <hr>
                                                             @if ($FMS)
-                                                                <span class="badge badge-success">{{ $FMS->complete }}</span>
+                                                                <span class="badge badge-success light">{{ $FMS->complete }}</span>
                                                             @else
-                                                                <span class="badge badge-success">0</span>
+                                                                <span class="badge badge-success light">0</span>
                                                             @endif
                                                             <hr>
                                                             @if ($recruitmentTarget)
-                                                                <span class="badge badge-success">{{ $recruitmentTarget->complete }}</span>
+                                                                <span class="badge badge-success light">{{ $recruitmentTarget->complete }}</span>
                                                             @else
-                                                                <span class="badge badge-success">0</span>
+                                                                <span class="badge badge-success light">0</span>
                                                             @endif
                                                         </td>
                                                         <td>
                                                             @if ($Payroll)
-                                                                <span class="badge badge-danger">{{ $Payroll->remaining }}</span>
+                                                                <span class="badge badge-danger light">{{ $Payroll->remaining }}</span>
                                                             @else
-                                                                <span class="badge badge-danger">0</span>
+                                                                <span class="badge badge-danger light">0</span>
                                                             @endif
                                                             <hr>
                                                             @if ($Temp)
-                                                                <span class="badge badge-danger">{{ $Temp->remaining }}</span>
+                                                                <span class="badge badge-danger light">{{ $Temp->remaining }}</span>
                                                             @else
-                                                                <span class="badge badge-danger">0</span>
+                                                                <span class="badge badge-danger light">0</span>
                                                             @endif
                                                             <hr>
                                                             @if ($FMS)
-                                                                <span class="badge badge-danger">{{ $FMS->remaining }}</span>
+                                                                <span class="badge badge-danger light">{{ $FMS->remaining }}</span>
                                                             @else
-                                                                <span class="badge badge-danger">0</span>
+                                                                <span class="badge badge-danger light">0</span>
                                                             @endif
                                                             <hr>
                                                             @if ($recruitmentTarget)
-                                                                <span class="badge badge-danger">{{ $recruitmentTarget->remaining }}</span>
+                                                                <span class="badge badge-danger light">{{ $recruitmentTarget->remaining }}</span>
                                                             @else
-                                                                <span class="badge badge-danger">0</span>
+                                                                <span class="badge badge-danger light">0</span>
                                                             @endif
                                                         </td>
                                                     </tr>

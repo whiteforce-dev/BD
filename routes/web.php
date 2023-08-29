@@ -69,6 +69,15 @@ Route::get('hold-list', [EnquiryController::class, 'holdList']);
 Route::get('break-list', [EnquiryController::class, 'breakList']);
 Route::get('mngr-break-list', [EnquiryController::class, 'mngrBreakList']);
 
+//show break list
+Route::get('break-list', [EnquiryController::class, 'breakList']);
+Route::get('searchBreakEnquiry', [EnquiryController::class, 'searchBreakEnquiry']);
+
+//Allote Client to Manager
+Route::get('allot-client-modal', [EnquiryController::class, 'allotClientModal']);
+Route::get('getUserList/{type}',[EnquiryController::class, 'getUserList']);
+Route::post('allot-client', [EnquiryController::class, 'allotClient']);
+
 //Excel Controller
 
 Route::post('importExcel',[ExcelController::class, 'EnquiryImport']);
@@ -109,6 +118,8 @@ Route::get('assignMonthlyTarget/{manager}', [TargetController::class, 'assignMon
 Route::post('storeMonthlyTarget',[TargetController::class, 'storeMonthlyTarget']);
 Route::get('viewMonthlyTarget', [TargetController::class, 'viewMonthlyTarget']);
 Route::get('get-table/{id}', [TargetController::class, 'getTable']);
+
+
 
 Auth::routes();
 

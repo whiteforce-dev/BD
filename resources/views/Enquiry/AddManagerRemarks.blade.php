@@ -30,9 +30,7 @@
                                 </div>
                                 <div class="col-2">
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-
                                 </div>
-
                             </div>
                         </div>
                     </form>

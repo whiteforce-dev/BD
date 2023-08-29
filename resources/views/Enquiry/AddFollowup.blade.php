@@ -20,7 +20,7 @@
 
                             <div class="form-group ">
                                 <label>Status</label>
-                                <select name="status_id"  class="form-control">
+                                <select name="status_id"  class="form-control" data-enquiry-id="{{ $obj->id }}">
                                     <option value="">Select Status</option>
                                     @php($status=\App\Models\Followup_remark::get())
                                     @foreach($status as $statuss)
@@ -36,7 +36,7 @@
 
 
 
-                            <div class="row" id="select">
+                            <div class="row" id="select-{{$obj->id}}">
                                 <div class="form-group col-sm-6">
                                     <label>Next Follow Date</label>
                                     <input type="date" class="form-control" name="date" >
@@ -50,7 +50,7 @@
 
 
 
-                            <div class="row" id="break" style="display:none">
+                            <div class="row" id="break-{{$obj->id}}" style="display:none">
                                 <div class="form-group col-sm-6">
                                     <label>Break Date</label>
                                     <input type="date" class="form-control" name="break_date">
@@ -80,16 +80,46 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>
+    {{--  <script>
         $(document).ready(function() {
             $('select[name="status_id"]').on('change', function() {
                 var selectedStatus = $(this).val();
 
-                if (selectedStatus === "15") {
+                if (selectedStatus == "15") {
                     $("#select-status").hide();
                 } else {
                     $("#select-status").show();
                 }
             });
         });
+    </script>  --}}
+    <script>
+        $(document).ready(function() {
+            $('select[name="status_id"]').on('change', function() {
+                var selectedStatus = $(this).val();
+                var enquiryId = $(this).data('enquiry-id'); // Added data-enquiry-id attribute to the select element
+
+                if (selectedStatus == "15") {
+                    $("#select-status-" + enquiryId).hide();
+                } else {
+                    $("#select-status-" + enquiryId).show();
+                }
+            });
+        });
     </script>
+
+    <script>
+        $('select').on('change', function() {
+            var status = this.value;
+            var enquiryId = $(this).data('enquiry-id'); // Added data-enquiry-id attribute to the select element
+
+            if (status == "15") {
+                $("#select-" + enquiryId).hide();
+                $("#break-" + enquiryId).show();
+            } else {
+                $("#select-" + enquiryId).show();
+                $("#break-" + enquiryId).hide();
+            }
+        });
+    </script>
+

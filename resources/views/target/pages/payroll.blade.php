@@ -32,28 +32,28 @@
                 $Payroll = $users->payrolltargets()->first(); // Retrieve the first recruitment target
                 @endphp
                 @if ($Payroll)
-                    <span class="badge badge-primary light">{{ $Payroll->month_target }}</span>
+                    <span class="badge badge-primary light ">{{ $Payroll->month_target }}</span>
                 @else
-                    <span class="badge badge-primary light">0</span>
+                    <span class="badge badge-primary light ">0</span>
                 @endif
             </td>
             <td> @if ($Payroll)
-                <span class="badge badge-warning">{{ $Payroll->target }}</span>
+                <span class="badge badge-warning light">{{ $Payroll->target }}</span>
                 @else
-                    <span class="badge badge-warning">0</span>
+                    <span class="badge badge-warning light">0</span>
                 @endif
             <td>
                 @if ($Payroll)
-                    <span class="badge badge-success">{{ $Payroll->complete }}</span>
+                    <span class="badge badge-success light">{{ $Payroll->complete }}</span>
                 @else
-                    <span class="badge badge-success">0</span>
+                    <span class="badge badge-success light">0</span>
                 @endif
             </td>
             <td>
                  @if ($Payroll)
-                    <span class="badge badge-danger">{{ $Payroll->remaining }}</span>
+                    <span class="badge badge-danger light">{{ $Payroll->remaining }}</span>
                 @else
-                    <span class="badge badge-danger">0</span>
+                    <span class="badge badge-danger light">0</span>
                 @endif
             </td>
               <td>

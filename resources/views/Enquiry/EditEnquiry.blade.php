@@ -152,7 +152,8 @@
                                                     class="text-danger">*</span>
                                             </label>
 
-                                                <select name="status_id" class="form-control" onchange="addbreakdate(this.value);" required>
+                                                <select name="status_id" class="form-control"
+                                                data-enquiry-id="{{ $enquiry->id }}" required>
                                                     <option value="">Select Status</option>
                                                     @php
                                                     $status=\App\Models\Followup_remark::get()
@@ -171,25 +172,40 @@
                                                 </div>
 
                                         </div>
-                                        <div class="mb-3 ">
-                                            <label class="form-label" for="validationCustom11">Next Follow Date
+                                        <div id="select-{{$enquiry->id}}">
+                                            <div class="mb-3" >
+                                                <label class="form-label" for="validationCustom11">Next Follow Date
+                                                    <span class="text-danger">*</span>
+                                                </label>
+
+                                                    <input type="date" class="form-control" placeholder="Select Next-Follow-Date " name="next_follow_date"
+                                                    id="validationCustom11"  >
+                                                    <div class="invalid-feedback">
+                                                        Please enter Next Follow Date.
+                                                    </div>
+
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label" for="validationCustom12">Next Follow Time <span
+                                                        class="text-danger">*</span>
+                                                </label>
+
+                                                    <input type="time" class="form-control" placeholder="Select Next-Follow-Time " name="next_follow_time"
+                                                    id="validationCustom12" >
+                                                    <div class="invalid-feedback">
+                                                        Please enter Next Follow Time.
+                                                    </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3" id="break-{{$enquiry->id}}" style="display:none">
+                                            <label class="form-label" for="validationCustom11">Break Date
                                                 <span class="text-danger">*</span>
                                             </label>
-                                                <input type="date" class="form-control" placeholder="Enters Next Action " name="next_follow_date"
-                                                id="validationCustom11" value="{{ $enquiry->next_follow_date  }}"  required>
+                                            <input type="date" class="form-control" name="break_date" >
                                                 <div class="invalid-feedback">
-                                                    Please enter Next Follow Date.
-                                                </div>
-                                        </div>
-                                        <div class="mb-3 ">
-                                            <label class="form-label" for="validationCustom12">Next Follow Time <span
-                                                    class="text-danger">*</span>
-                                            </label>
-
-                                                <input type="time" class="form-control" placeholder="Enters Next Action " name="next_follow_time"
-                                                id="validationCustom12" value="{{ $enquiry->next_follow_time  }}" required>
-                                                <div class="invalid-feedback">
-                                                    Please enter Next Follow Time.
+                                                    Please enter Break Date.
                                                 </div>
                                         </div>
                                     </div>
@@ -264,3 +280,20 @@
 </div>
     <div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('select[name="status_id"]').on('change', function() {
+            var selectedStatus = $(this).val();
+            var enquiryId = $(this).data('enquiry-id');
+
+            if (selectedStatus == "15") {
+                $("#select-" + enquiryId).hide();
+                $("#break-" + enquiryId).show();
+            } else {
+                $("#select-" + enquiryId).show();
+                $("#break-" + enquiryId).hide();
+            }
+        });
+    });
+</script>

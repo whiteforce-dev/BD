@@ -79,7 +79,7 @@
                     @if( Auth::user()->type == 'Manager' )
                     <li><a href="{{ url('team-hot-list') }}">Team Hot List</a></li>
                     @endif
-                    <li><a href="{{ url('team-hot-list') }}">Break</a></li>
+                    <li><a href="{{ url('break-list') }}">Break</a></li>
                     <li><a href="{{ url('hold-list') }}">Hold</a></li>
                 </ul>
             </li>

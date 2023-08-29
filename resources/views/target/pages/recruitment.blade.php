@@ -38,22 +38,22 @@
                 @endif
             </td>
             <td> @if ($recruitmentTarget)
-                <span class="badge badge-warning">{{ $recruitmentTarget->target }}</span>
+                <span class="badge badge-warning light">{{ $recruitmentTarget->target }}</span>
                 @else
-                    <span class="badge badge-warning">0</span>
+                    <span class="badge badge-warning light">0</span>
                 @endif
             <td>
                 @if ($recruitmentTarget)
-                    <span class="badge badge-success">{{ $recruitmentTarget->complete }}</span>
+                    <span class="badge badge-success light">{{ $recruitmentTarget->complete }}</span>
                 @else
-                    <span class="badge badge-success">0</span>
+                    <span class="badge badge-success light">0</span>
                 @endif
             </td>
             <td>
                  @if ($recruitmentTarget)
-                    <span class="badge badge-danger">{{ $recruitmentTarget->remaining }}</span>
+                    <span class="badge badge-danger light">{{ $recruitmentTarget->remaining }}</span>
                 @else
-                    <span class="badge badge-danger">0</span>
+                    <span class="badge badge-danger light">0</span>
                 @endif
             </td>
               <td>

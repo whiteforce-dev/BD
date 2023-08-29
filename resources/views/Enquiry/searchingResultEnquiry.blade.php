@@ -44,12 +44,16 @@
                                 @if($obj->image)
                                     <img src="{{ $obj->image }}" alt="" width="90%">
                                     @else
-                                        <img src="{{ url('logo2.png') }}" alt=""  width="70%" ">
+                                        <img src="{{ url('logo.png') }}" alt=""  width="70%" ">
                                 @endif
 
                                 <!-- <img src="{{ url('logo.png') }}" alt="" width="100" style="border-radius: 50%;"> -->
+                            </div> <div class="form-check custom-checkbox" >
+                                <input  style="border: 2px solid #d2d4DE;" type="checkbox" class="form-check-input" name="" value="">
+                                <label class="form-check-label" for="checkAll"></label>
                             </div>
                             <div class="enquiry">
+
                                 <h3>{{ isset($obj->company_name) ? $obj->company_name : 'N/A' }}</h3>
                                 <div class="enq">
                                     {{--  <!-- <p class="date">Enquiry Date : 07/08/2023</p>
@@ -69,7 +73,6 @@
                                             <?php
                                             $rowStatus = $obj->GetStatus->remark ?? '-';
                                             ?>
-
                                             @if (isset($obj->GetStatus->remark))
                                                 @if ($rowStatus == 'Hot')
                                                     <td><label class="badge badge-danger">Hot</label></td>
@@ -88,13 +91,9 @@
                                                 <td>-</td>
                                             @endif</span>
                                     </p>
-
-
                                 </div>
-
                             </div>
-
-                            <div class="dropdown btn">
+                            <div class="dropdown btn" style="margin-top: 30px;">
                                 <button class="dropbtn"
                                     style="display: flex; align-items: center; justify-content: center; text-align: center; margin-top: -35px;">Action
                                     <i style="font-size: 1.2rem; margin-left: 5px; margin-top: -12px;"
@@ -400,3 +399,25 @@
                 @include('Enquiry.viewFollowUp')
     @endforeach
             {{ $Details->appends(request()->except('page'))->links('pagination::bootstrap-4') }}
+
+
+            <script>
+                function toggleSearchForm() {
+                    var searchFormContainer = document.getElementById("searchFormContainer");
+                    if (searchFormContainer.style.display === "none") {
+                        searchFormContainer.style.display = "block";
+                    } else {
+                        searchFormContainer.style.display = "none";
+                    }
+
+                    // Prevent the default behavior of the link
+                    event.stopPropagation();
+                }
+
+                // Close the search form if a click occurs outside of it
+                window.addEventListener("click", function(event) {
+                    if (!event.target.matches("#searchFormContainer") && !event.target.matches("#searchingForm")) {
+                        searchFormContainer.style.display = "";
+                    }
+                });
+            </script>
