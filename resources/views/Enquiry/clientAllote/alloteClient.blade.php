@@ -41,7 +41,7 @@
 
                                     <div class="form-group col-sm-6" >
                                         <label>Senior Manager/Manager</label>
-                                        <select name="alloted_to" multiple  class="form-control"  id="alloted_to" required>
+                                        <select name="alloted_to"   class="form-control"  id="alloted_to" required>
                                             <option>Select Senior Manager/Manager</option>
                                         </select>
                                     </div>
@@ -95,6 +95,15 @@
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<link href="{{ asset('path-to-select2/css/select2.min.css') }}" rel="stylesheet">
+<script src="{{ asset('path-to-select2/js/select2.min.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.select2').select2(); // Apply Select2 to elements with class 'select2'
+    });
+</script>
 
 <script>
     // $(".js-example-tokenizer").select2({
