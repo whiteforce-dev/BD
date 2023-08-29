@@ -674,7 +674,7 @@ class EnquiryController extends Controller
     //Allote Client to Manager
 
     function allotClientModal(Request $request){
-        
+
         if(!empty($request->id)){
             $enquiry = Enquiry::find($request->id);
             return view('Enquiry.clientAllote.alloteClient',compact('enquiry'));

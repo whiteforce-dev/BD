@@ -39,11 +39,16 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group col-sm-6" >
-                                        <label>Senior Manager/Manager</label>
-                                        <select name="alloted_to"   class="form-control"  id="alloted_to" required>
-                                            <option>Select Senior Manager/Manager</option>
-                                        </select>
+                                    <div class="form-group col-sm-6">
+                                        <div class="col-md- col-12 mb-2">
+                                            <label>Senior Manager/Manager</label>
+                                            <select   name="alloted_to[]" class="form-control manager" id="alloted_to{{ $obj->id }}" required multiple = "multiple" >
+                                                <option>Select Senior Manager/Manager</option>
+                                            </select>
+
+                                        </div>
+
+
                                     </div>
 
                                     <div class="form-group col-sm-6" >
@@ -93,19 +98,29 @@
     </div>
 @endif
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script> -->
+ <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<link href="{{ asset('path-to-select2/css/select2.min.css') }}" rel="stylesheet">
-<script src="{{ asset('path-to-select2/js/select2.min.js') }}"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css">
+    <script src="https://kit.fontawesome.com/aea6f081fa.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+    </script>
+    <script src="https://kit.fontawesome.com/aea6f081fa.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+	integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
+        integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
 <script>
-    $(document).ready(function() {
-        $('.select2').select2(); // Apply Select2 to elements with class 'select2'
+    $("#alloted_to{{ $obj->id }}").select2({
+        tags: true,
+        tokenSeparators: [','],
     });
-</script>
-
-<script>
     // $(".js-example-tokenizer").select2({
     //     tags: true,
     //     tokenSeparators: [',']
@@ -120,7 +135,7 @@
             type:'GET',
             url: '{{ url('getUserList') }}' + '/' + type,
             success:function(response){
-               $('#alloted_to').html(response);
+               $('.manager').html(response);
             }
         })
     }
