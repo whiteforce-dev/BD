@@ -14,7 +14,7 @@
                             @csrf
                             <div class="modal-body">
                                 <div class="row">
-                                    <input type="hidden" name="obj_id" value="{{ $obj->id }}">
+                                    <input type="hidden" name="enquiry_id" value="{{ $obj->id }}">
                                     <div class="form-group col-sm-6" >
                                         <label>Allot Date</label>
                                         <input type="date" name="allot_date" id="allot_date" value="{{ date('Y-m-d') }}" class="form-control" disabled>

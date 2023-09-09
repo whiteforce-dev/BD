@@ -6,30 +6,79 @@
     Chat box End
 ***********************************-->
 
-<div class="chatbox" id="viewFollowUp{{ $obj->id }}">
-    <div class="chatbox-close"></div>
+<div class="chatbox" id="viewFollowUp{{ $obj->id }}" style="width: 450px;">
+    <div class="chatbox-close"  style="right: 450px;"></div>
     <div class="custom-tab-1">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="tab" href="#chat">FollowUp</a>
+                <a class="nav-link active" data-bs-toggle="tab" href="#chat">Remarks</a>
             </li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade active show" id="chat" role="tabpanel">
                 <div class="card mb-sm-3 mb-md-0 contacts_card dz-chat-user-box">
                     <div class="card-header chat-list-header text-center">
-                        <a href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px"
-                                viewBox="0 0 24 24" version="1.1">
-                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <rect fill="#000000" x="4" y="11" width="16"
-                                        height="2" rx="1" />
-                                    <rect fill="#000000" opacity="0.3"
-                                        transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) "
-                                        x="4" y="11" width="16" height="2"
-                                        rx="1" />
-                                </g>
-                            </svg></a>
+                        @if(Auth::user()->type == 'Staff')
+                            <a href="javascript:void(0)" data-toggle="modal"
+                            data-target="#addfollowup{{ $obj->id }}"><svg xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px"
+                                    viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect fill="#000000" x="4" y="11" width="16"
+                                            height="2" rx="1" />
+                                        <rect fill="#000000" opacity="0.3"
+                                            transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) "
+                                            x="4" y="11" width="16" height="2"
+                                            rx="1" />
+                                    </g>
+                                </svg>
+                            </a>
+                        @endif
+                        @if(Auth::user()->type == 'Manager' && Auth::user()->id == $obj->created_by)
+                                <a href="javascript:void(0)" data-toggle="modal"
+                                  data-target="#addfollowup{{ $obj->id }}"><svg xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px"
+                                    viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect fill="#000000" x="4" y="11" width="16"
+                                            height="2" rx="1" />
+                                        <rect fill="#000000" opacity="0.3"
+                                            transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) "
+                                            x="4" y="11" width="16" height="2"
+                                            rx="1" />
+                                    </g>
+                                    </svg>
+                                </a>
+                            @else
+                            <a href="javascript:void(0)" data-toggle="modal"
+                                data-target="#addMngrRemark{{ $obj->id }}"><svg xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px"
+                                    viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect fill="#000000" x="4" y="11" width="16"
+                                            height="2" rx="1" />
+                                        <rect fill="#000000" opacity="0.3"
+                                            transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) "
+                                            x="4" y="11" width="16" height="2"
+                                            rx="1" />
+                                    </g>
+                                </svg>
+                            </a>
+                        @endif
+
+                                {{--  <a href="javascript:void(0)" data-toggle="modal"
+                                data-target="#addfollowup{{ $obj->id }}"><svg xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px"
+                                        viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect fill="#000000" x="4" y="11" width="16"
+                                                height="2" rx="1" />
+                                            <rect fill="#000000" opacity="0.3"
+                                                transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) "
+                                                x="4" y="11" width="16" height="2"
+                                                rx="1" />
+                                        </g>
+                                    </svg></a>  --}}
                         <div>
                             <h6 class="mb-1">FollowUp</h6>
                             <p class="mb-0">Show All</p>
@@ -68,22 +117,26 @@
                                 <div class="d-flex bd-highlight">
                                     <div class="img_cont">
                                         @if(!empty($user_data))
-                                        <img src="{{ $user_data->image ?? '-' }}" class="rounded-circle user_img"
+                                        <img style="    width: 50px;
+                                        height: 50px;
+                                        border: 1px solid black;" src="{{ $user_data->image ?? '-' }}" class="rounded-circle user_img"
                                             alt="" />
                                         @else
-                                        <img src="{{ $obj->GetCreatedby->image ?? '-' }}" class="rounded-circle user_img"
+                                        <img style="    width: 50px;
+                                        height: 50px;
+                                        border: 1px solid black; " src="{{ $obj->GetCreatedby->image ?? '-' }}" class="rounded-circle user_img"
                                             alt="" />
                                         @endif
                                         <span class="online_icon"></span>
                                     </div>
                                     <div class="user_info" style="max-width: none;  ">
-                                        <span>{{!empty($user_data) ? $user_data->name : $obj->GetCreatedby->name}} -{{ $remarks->GetStatus->remark ??'-'}}</span>
-                                        <p style="text-align: justify; hyphens: auto;">{{ trim($remarks['remark']) }}</p>
+                                        <span >{{!empty($user_data) ? $user_data->name : $obj->GetCreatedby->name ?? '-'}} -{{ $remarks->GetStatus->remark ??'-'}}</span>
+                                        <p style="text-align: justify; hyphens: auto; margin-left: 78px;">{{ trim($remarks['remark']) }}</p>
 
 
                                         <div style=" margin-top: 5px; margin-left: 90px;">
-                                            <span style="font-size: 13px;">Posted On</span>
-                                            <p>{{\Carbon\Carbon::parse($remarks['created_at'])->format('d-m-Y H:i:s')}}
+                                            <span style="font-size: 13px; margin-left: 78px;">Posted On</span>
+                                            <p style="margin-left: 78px;">{{\Carbon\Carbon::parse($remarks['created_at'])->format('d-m-Y H:i:s')}}
                                             </p>
                                             @if(!empty($remarks['date']))
                                             <span style="font-size: 12px;  margin-top: 5px;">Next Follow Up</span>

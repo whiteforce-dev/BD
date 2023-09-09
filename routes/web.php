@@ -1,9 +1,14 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EnquiryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FollowUpController;
 use App\Http\Controllers\HBDController;
+use App\Http\Controllers\ProposalTypeController;
 use App\Http\Controllers\RemarksController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TargetController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -128,10 +133,52 @@ Route::post('storeMonthlyTarget',[TargetController::class, 'storeMonthlyTarget']
 Route::get('viewMonthlyTarget', [TargetController::class, 'viewMonthlyTarget']);
 Route::get('get-table/{id}', [TargetController::class, 'getTable']);
 
+//Reports
+Route::get('dailyReports', [ReportController::class, 'dailyReports']);
 
+Route::get('ManagerPage', [ReportController::class, 'monthlyManagerPage']);
+Route::get('getMnagerTeam/{id}', [ReportController::class, 'getMnagerTeam']);
+Route::get('totalEnquiries/{id}', [ReportController::class, 'totalEnquiries']);
+Route::get('getTeamHot/{id}', [ReportController::class, 'getTeamHot']);
+Route::get('monthTillDate/{id}', [ReportController::class, 'monthTillDate']);
+Route::get('recAchieved/{id}', [ReportController::class, 'recAchieved']);
+Route::get('tempAchieved/{id}', [ReportController::class, 'tempAchieved']);
+Route::get('payAchieved/{id}', [ReportController::class, 'payAchieved']);
+Route::get('fmsAchieved/{id}', [ReportController::class, 'fmsAchieved']);
+Route::get('todayEnquiry/{id}', [ReportController::class, 'todayEnquiry']);
+
+Route::get('teamEnquiryReport', [ReportController::class, 'teamEnquiryReport']);
+Route::get('monthWiseReport', function () {
+    return view('reports.mngrMonthWiseReport');
+});
+Route::get('teamMonthWiseReport', function () {
+    return view('reports.teamMonthWiseReport');
+});
+Route::post('monthReport', [ReportController::class, 'monthReport']);
+Route::post('teamMonthReport', [ReportController::class, 'teamMonthReport']);
+
+//Email
+Route::get('addEmailTemplate', [EmailController::class, 'addEmailTemplate']);
+Route::post('storeEmailTemplate', [EmailController::class, 'storeEmailTemplate']);
+Route::get('viewEmailList', [EmailController::class, 'viewEmailList']);
+Route::get('editTemplate/{id}', [EmailController::class, 'editTemplate']);
+Route::post('updateTemplate/{id}', [EmailController::class, 'updateTemplate']);
+Route::get('deleteTemplate/{id}', [EmailController::class, 'deleteTemplate']);
+
+//Proposal Type
+Route::get('addEnquiryType', [ProposalTypeController::class, 'addEnquiryType']);
+Route::get('viewEnquiryType', [ProposalTypeController::class, 'viewEnquiryType']);
+Route::post('storeEnquiryType', [ProposalTypeController::class, 'storeEnquiryType']);
+Route::get('editEnquiryType/{id}', [ProposalTypeController::class, 'editEnquiryType']);
+Route::post('updateEnquiryType/{id}', [ProposalTypeController::class, 'updateEnquiryType']);
+Route::get('deleteEnquiryType/{id}', [ProposalTypeController::class, 'deleteEnquiryType']);
+
+
+Route::get('totalEnquiryCount', [DashboardController::class, 'totalEnquiryCount']);
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 
 

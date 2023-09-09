@@ -17,11 +17,7 @@
 
         </svg>
     </a>
-    <div class="nav-control">
-        <div class="hamburger">
-            <span class="line"></span><span class="line"></span><span class="line"></span>
-        </div>
-    </div>
+    
 </div>
 <!--**********************************
     Nav header end
@@ -105,9 +101,18 @@
                 <span class="nav-text">Reports</span>
             </a>
             <ul aria-expanded="false">
+                @if(Auth::user()->type == 'Admin')
+                <li><a href="{{ url('dailyReports') }}">Day Wise Report</a></li>
+                <li><a href="{{ url('ManagerPage') }}">Manager Enquiry</a></li>
+                @endif
+                @if(Auth::user()->type == 'Manager')
+                <li><a href="{{ url('dailyReports') }}">Day Wise Report</a></li>
+                <li><a href="{{ url('teamEnquiryReport') }}">Team Enquiry</a></li>
+                <li><a href="{{ url('monthWiseReport') }}">Month Wise</a></li>
+                <li><a href="{{ url('teamMonthWiseReport') }}">Team Month Wise</a></li>
+                @endif
                 <li><a href="{{ url('viewHbdReport') }}">HBD Report</a></li>
                 <li><a href="{{ url('pendingBirthdays') }}">PendingHbdReport</a></li>
-
             </ul>
         </li>
         <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -115,9 +120,11 @@
                 <span class="nav-text">Settings</span>
             </a>
             <ul aria-expanded="false">
-                <li><a href="#">Proposal Setting</a></li>
-                <li><a href="#">Email</a></li>
-                <li><a href="{{ url('/holidays') }}">Holidays</a></li>
+                <li><a href="{{ url('viewEmailList') }}">Email</a></li>
+                @if(Auth::user()->type == 'Admin')
+                    <li><a href="{{ url('viewEnquiryType') }}">Proposal Setting</a></li>
+                    <li><a href="{{ url('/holidays') }}">Holidays</a></li>
+                @endif
             </ul>
         </li>
 

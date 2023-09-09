@@ -67,7 +67,7 @@ class HBDController extends Controller
             $days = request('days');
 
             $users = User::where('id', Auth::user()->id)->where('is_active', 1)->get();
-            if(Auth::user()->designation ==2){
+            if(Auth::user()->type == 'Manager'){
 
             if($status!=null){
             $enquiries = Enquiry::whereRaw("DATE_FORMAT(dob, '%m%d') BETWEEN DATE_FORMAT(NOW(), '%m%d') AND DATE_FORMAT(DATE_ADD(NOW(), INTERVAL $days DAY), '%m%d')")->where(['status_id'=>$status,'created_by'=>Auth::user()->id])->get();

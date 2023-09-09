@@ -311,40 +311,34 @@
 
 
     <script>
-        function toggleSearchForm() {
-            var searchFormContainer = document.getElementById("searchFormContainer");
-            if (searchFormContainer.style.display === "none") {
+        var searchFormContainer = document.getElementById("searchFormContainer");
+
+        function toggleSearchForm(event) {
+            if (searchFormContainer.style.display === "none" || searchFormContainer.style.display === "") {
                 searchFormContainer.style.display = "block";
             } else {
                 searchFormContainer.style.display = "none";
             }
 
             // Prevent the default behavior of the link
+            event.preventDefault();
             event.stopPropagation();
         }
+
+        // Prevent the form from closing when clicking inside it
+        searchFormContainer.addEventListener("click", function(event) {
+            event.stopPropagation();
+        });
 
         // Close the search form if a click occurs outside of it
         window.addEventListener("click", function(event) {
             if (!event.target.matches("#searchFormContainer") && !event.target.matches("#searchingForm")) {
-                searchFormContainer.style.display = "";
+                searchFormContainer.style.display = "none";
             }
         });
     </script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-     function addEdit(url,id) {
-         // alert('hhfhf');
-          $.get(url,id, function (rs) {
-
-              $('#myModal').html(rs);
-              $('#myModal').modal();
 
 
-          });
-
-      }
- </script>
 @endsection
 

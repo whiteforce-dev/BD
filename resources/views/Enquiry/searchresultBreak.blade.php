@@ -24,7 +24,7 @@
                             </div>
                             <a id="searchingForm" class="searchbtn btn float-right"
                                 style="padding: 10px 14px !important; margin-top: -22px; cursor: pointer;"
-                                onclick="toggleSearchForm()">
+                                onclick="toggleSearchForm(event)">
                                 <i style="font-size: 45px;" class="mdi mdi-file-find menu-icon text-black"></i>
                             </a>
                         </div>
@@ -42,10 +42,8 @@
                             @if ($obj->image)
                                 <img src="{{ url( $obj->image) }}" alt="" width="90%">
                             @else
-                                <img src="{{ url('logo.png') }}" alt="" width="70%" ">
+                                <img src="{{ url('logo.png') }}" alt="" width="90%" ">
                            @endif
-
-                                <!-- <img src="{{ url('logo.png') }}" alt="" width="100" style="border-radius: 50%;"> -->
                         </div>
                         <div class="enquiry">
                             <h3>{{ isset($obj->company_name) ? $obj->company_name : 'N/A' }}</h3>
@@ -257,7 +255,7 @@
                         <div class="inner">
                             <div class="icon">
                                 <!-- <i class="fa-solid fa-square-plus"></i> -->
-                                <img src="{{ $obj->GetCreatedby->image ?? '-' }} " alt="">
+                                <img src="{{ url($obj->GetCreatedby->image ?? '-') }} " alt="">
                             </div>
                             <div class="sub-inner">
                                 <p class="font-b">Created By</p>

@@ -37,10 +37,10 @@
                             <table class="table table-responsive-md">
                                 <thead>
                                     <tr>
-                                        <th><strong>Sr. NO.</strong></th>
-                                        <th><strong>Image</strong></th>
-                                        <th><strong>Manager Name</strong></th>
-                                        <th><strong>Action</strong></th>
+                                        <th>Sr. NO.</th>
+                                        <th>Image</th>
+                                        <th>Manager Name</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>

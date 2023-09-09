@@ -1,8 +1,8 @@
 <table class="table table-responsive-md">
     <thead>
         <tr>
-            <th ><strong>Sr. NO.</strong></th>
-            <th><strong>NAME</strong></th>
+            <th scope="col">Sr. NO.</th>
+            <th scope="col">NAME</th>
             <th scope="col">Target</th>
             <th scope="col">Total Target</th>
             <th scope="col">Completed</th>

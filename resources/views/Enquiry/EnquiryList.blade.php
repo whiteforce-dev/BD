@@ -149,121 +149,121 @@
         <div class="container-fluid">
 
             <div id="searchFormContainer" style="display: none;">
+                <div class="container mt-5"
+                style="padding-left: 0px !important;
+                /* width: 0px; */
+                padding-right: 0px !important;">
+                <div class="row justify-content-center">
+                    <div class="col-md-12"style="margin-top: -50px">
+                        <div class="card">
+                            <a href="{{ url('enquiry-list') }}" class="btn btn-dark " style="margin-top: -30px">
+                                <i class="fas fa-redo-alt"></i>
+                            </a>
+                            <div class="card-body">
+                                <!-- Search Form -->
+                                <form id="searchForm" action="{{ url('searchEnquiry') }}" method="get">
 
-            </div>
-            <div class="container mt-5"
-            style="padding-left: 0px !important;
-            /* width: 0px; */
-            padding-right: 0px !important;">
-            <div class="row justify-content-center">
-                <div class="col-md-12"style="margin-top: -50px">
-                    <div class="card">
-                        <a href="{{ url('enquiry-list') }}" class="btn btn-dark " style="margin-top: -30px">
-                            <i class="fas fa-redo-alt"></i>
-                        </a>
-                        <div class="card-body">
-                            <!-- Search Form -->
-                            <form id="searchForm" action="{{ url('searchEnquiry') }}" method="get">
-
-                                <div class="row mb-3">
-                                    <div class="col-md-4">
-                                        <label class="form-label">Contact Person</label>
-                                        <input type="text" name="searchByContactPerson" class="form-control"
-                                            placeholder="Search by Contact Person">
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="form-label">Company Name</label>
-                                        <input type="text" name="searchByCompanyName" class="form-control"
-                                            placeholder="Search by Company Name">
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="form-label">Contact Number</label>
-                                        <input type="text" name="searchByMobile" class="form-control"
-                                            placeholder="Search by mobile">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-4">
-                                        <label class="form-label">Date From</label>
-                                        <input type="date" name="from" class="form-control"
-                                            value="{{ $from ?? '' }}">
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="form-label">Date To</label>
-                                        <input type="date" name="to" class="form-control"
-                                            value="{{ $to ?? '' }}">
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="form-label">Proposal Type</label>
-                                        <select name="type" class="form-control">
-                                            <option value="">Select</option>
-                                            <option value="">All</option>
-
-                                            @php
-                                                $Enquiry = \App\Models\EnquiryType::get();
-                                            @endphp
-                                            @foreach ($Enquiry as $Enquirys)
-                                                <option value="{{ $Enquirys->id }}"
-                                                    {{ $type == $Enquirys->id ? 'selected' : '' }}>
-                                                    {{ $Enquirys->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <div class="col-md-4">
-                                        <label class="form-label">Enquiry Status</label>
-                                        <select name="status" class="form-control">
-                                            <option value="">Select</option>
-                                            <option value="">All</option>
-
-                                            @php
-                                                $status = \App\Models\Followup_remark::get();
-                                            @endphp
-                                            @foreach ($status as $statuss)
-                                                <option value="{{ $statuss->id }}">{{ $statuss->remark }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    @if (Auth::user()->type == 'Admin' || Auth::user()->type == 'Manager')
+                                    <div class="row mb-3">
                                         <div class="col-md-4">
-                                            <label class="form-label">Employee</label>
-                                            <select name="employee" class="form-control">
+                                            <label class="form-label">Contact Person</label>
+                                            <input type="text" name="searchByContactPerson" class="form-control"
+                                                placeholder="Search by Contact Person">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label">Company Name</label>
+                                            <input type="text" name="searchByCompanyName" class="form-control"
+                                                placeholder="Search by Company Name">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label">Contact Number</label>
+                                            <input type="text" name="searchByMobile" class="form-control"
+                                                placeholder="Search by mobile">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Date From</label>
+                                            <input type="date" name="from" class="form-control"
+                                                value="{{ $from ?? '' }}">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label">Date To</label>
+                                            <input type="date" name="to" class="form-control"
+                                                value="{{ $to ?? '' }}">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label">Proposal Type</label>
+                                            <select name="type" class="form-control">
                                                 <option value="">Select</option>
                                                 <option value="">All</option>
 
                                                 @php
-                                                    $user = \App\Models\User::where('is_active', 1)->get();
+                                                    $Enquiry = \App\Models\EnquiryType::get();
                                                 @endphp
-                                                @foreach ($user as $users)
-                                                    <option value="{{ $users->id }}"
-                                                        {{ $employee == $users->id ? 'selected' : '' }}>
-                                                        {{ $users->name }}</option>
+                                                @foreach ($Enquiry as $Enquirys)
+                                                    <option value="{{ $Enquirys->id }}"
+                                                        {{ $type == $Enquirys->id ? 'selected' : '' }}>
+                                                        {{ $Enquirys->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                    @endif
-                                    <div class="col-md-4">
-                                        <label class="form-label">FollowUp Date</label>
-                                        <input type="date" name="follow" class="form-control" value="">
                                     </div>
-                                </div>
-                                <div class="col-md-6" style="margin-left: 240px;">
-                                    <button class="btn btn-primary btn-block" type="submit">Search</button>
 
-                                </div>
-                            </form>
-                            <br>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Enquiry Status</label>
+                                            <select name="status" class="form-control">
+                                                <option value="">Select</option>
+                                                <option value="">All</option>
+
+                                                @php
+                                                    $status = \App\Models\Followup_remark::get();
+                                                @endphp
+                                                @foreach ($status as $statuss)
+                                                    <option value="{{ $statuss->id }}">{{ $statuss->remark }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @if (Auth::user()->type == 'Admin' || Auth::user()->type == 'Manager')
+                                            <div class="col-md-4">
+                                                <label class="form-label">Employee</label>
+                                                <select name="employee" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option value="">All</option>
+
+                                                    @php
+                                                        $user = \App\Models\User::where('is_active', 1)->get();
+                                                    @endphp
+                                                    @foreach ($user as $users)
+                                                        <option value="{{ $users->id }}"
+                                                            {{ $employee == $users->id ? 'selected' : '' }}>
+                                                            {{ $users->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endif
+                                        <div class="col-md-4">
+                                            <label class="form-label">FollowUp Date</label>
+                                            <input type="date" name="follow" class="form-control" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="margin-left: 240px;">
+                                        <button class="btn btn-primary btn-block" type="submit">Search</button>
+
+                                    </div>
+                                </form>
+                                <br>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+          </div>
+            </div >
+
             <div id="searchResults">
                 @include('Enquiry.searchingResultEnquiry')
             </div>

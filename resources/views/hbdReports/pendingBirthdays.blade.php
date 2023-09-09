@@ -5,9 +5,9 @@
         <div class="container-fluid">
 
             <div class="container mt-5"
-            style="padding-left: 0px !important;
-            /* width: 0px; */
-            padding-right: 0px !important;">
+                style="padding-left: 0px !important;
+                /* width: 0px; */
+                padding-right: 0px !important;">
             <div class="row justify-content-center" style="margin-right: 0px; margin-left:0px;">
                 <div class="col-md-12"style="margin-top: -50px">
                     <div class="card" style="    height: 122px;">

@@ -1,7 +1,6 @@
 @extends('Master.master')
 @section('title', 'Enquiries')
 @section('content')
-<link rel="stylesheet" href="{{ url('EnquiryCards/cards.css') }}">
 <div class="content-body">
     <div class="container-fluid">
         <div class="container mt-5"
@@ -47,9 +46,31 @@
                 </div>
             </div>
        </div>
-       <div id="searchResultsContainer">
+       <div id="searchResults">
         @include('hbdReports.hbdReportBySearch')
        </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#searchingForm').submit(function(event) {
+            event.preventDefault();
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'GET',
+                url: $(this).attr('action'),
+                data: formData,
+                success: function(response) {
+                    $('#searchResults').html(response);
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
 @endsection

@@ -703,8 +703,8 @@ class EnquiryController extends Controller
     }
 
     function allotClient(Request $request){
-       return ($request->enquiry_id);
-        if(!empty($request->enquiry_id)){
+
+        if(!empty($request->enquiry_id)) {
             $enquiry = Enquiry::find($request->enquiry_id);
             $enquiry->allote_date = date('Y-m-d');
             $enquiry->company_sub_type = $request->company_type;
@@ -722,12 +722,14 @@ class EnquiryController extends Controller
 
             $alloted = CompanyAllotment::where('enquiry_id',$request->enquiry_id)->delete();
 
-            $allotment = new CompanyAllotment();
-            $allotment->enquiry_id = $request->enquiry_id;
-            $allotment->alloted_by = Auth::user()->id;
-            $allotment->alloted_to = $request->alloted_to;
-            $allotment->alloted_software_type = $request->alloted_software_type;
-            $allotment->save();
+            foreach($request->alloted_to as $alloted_to) {
+                $allotment = new CompanyAllotment();
+                $allotment->enquiry_id = $request->enquiry_id;
+                $allotment->alloted_by = Auth::user()->id;
+                $allotment->alloted_to = $alloted_to;
+                $allotment->alloted_software_type = $request->alloted_software_type;
+                $allotment->save();
+            }
 
             try {
                 $url = 'https://white-force.com/plus/api/allot-client-to-manager';
@@ -745,7 +747,7 @@ class EnquiryController extends Controller
                     'address_address' => $enquiry->address_address,
                     'sub_type' => $enquiry->company_sub_type,
                     'alloted_software_type' => $request->alloted_software_type,
-                    'alloted_to'=> $request->alloted_to,
+                    'alloted_to'=> json_encode($request->alloted_to),
                     'email'=>$enquiry->email
                 ];
                 $curl = curl_init($url);
@@ -849,8 +851,9 @@ class EnquiryController extends Controller
                 $lastTargetRecord->save();
             }}
         }
-        
+
         $enquiry = Enquiry::find($id);
         return $enquiry->delete();
     }
+
 }
