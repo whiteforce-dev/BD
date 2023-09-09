@@ -1,4 +1,22 @@
 <!DOCTYPE html>
+<div class="col-xl-3 col-xxl-3 col-sm-6 ">
+    <div class="card chart-bx">
+        <div class="card-body pt-sm-4 pt-3 d-flex align-items-center justify-content-between">
+            @php
+                $user = Auth::user()
+            @endphp
+            <div class="me-3">
+
+                <img style="background:black; height: 180px;width:198px; margin-top: -10px; margin-bottom:-7px; border-radius:5px; " src="{{ $user->image }}" alt="">
+                <div class="name">
+                    <h5>{{ $user->name }}</h5>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
