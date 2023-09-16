@@ -1,13 +1,17 @@
+<style>
+    thead, tbody, tfoot, tr, td, th {
+        border-style: none;
+   }
+</style>
 <div class="table-responsive">
-    @php
+    {{--  @php
     $user = \App\Models\User::where('created_by', Auth::user()->id)->where('is_active', 1)->get();
-    @endphp
+    @endphp  --}}
    </div>
 
    <div class="col-lg-12">
-       @foreach ($user as $obj => $users)
-               <div class="card">
-                   <div class="card-header">
+       @foreach ($user_list as $obj => $users)
+                   <div class="card-header" style="border: 1px solid #d1e0e2;">
                        <div class="d-flex align-items-center " align="center">
                            <img style="width: 57px;
                            height: 57px;
@@ -18,7 +22,6 @@
                        </div>
 
                    </div>
-                   <div class="card-body">
                        <div class="table-responsive">
                            <table class="table table-bordered verticle-middle table-responsive-sm">
                                <thead>
@@ -219,104 +222,102 @@
                                        <td>
                                            <p style="font-size: 0.9rem;">Approach</p>
 
-                                               <hr >
+                                               <hr style="height: 0.0px !important;">
                                                <p style="font-size: 0.9rem;"> Recuriment Acchived</p>
 
-                                               <hr>
+                                               <hr style="height: 0.0px !important;">
                                                <p style="font-size: 0.9rem;"> TempStaffing Acchived</p>
 
                                        </td>
                                        <td><label class="badge badge-primary light">{{ $jan }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 12px; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $janAch }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 15p; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $janAchT }}</label>
                                        </td>
 
                                        <td><label class="badge badge-primary light">{{ $feb }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 12px; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $febAch }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 15p; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $febAchT }}</label>
                                        </td>
 
                                        <td><label class="badge badge-primary light">{{ $mar }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 12px; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $marAch }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 15p; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $marAchT }}</label>
                                        </td>
 
                                        <td><label class="badge badge-primary light">{{ $apr }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 12px; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $aprAch }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 15p; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $aprAchT }}</label>
                                        </td>
 
                                        <td><label class="badge badge-primary light">{{ $may }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 12px; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $mayAch }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 15p; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $mayAchT }}</label>
                                        </td>
 
                                        <td><label class="badge badge-primary light">{{ $jun }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 12px; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $junAch }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 15p; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $junAchT }}</label>
                                        </td>
 
 
                                        <td><label class="badge badge-primary light">{{ $jul }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 12px; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $julAch }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 15p; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $julAchT }}</label>
                                        </td>
 
                                        <td><label class="badge badge-primary light">{{ $aug }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 12px; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $augAch }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 15p; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $augAchT }}</label>
                                        </td>
 
                                        <td><label class="badge badge-primary light">{{ $sep }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 12px; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $sepAch }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 15p; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $sepAchT }}</label>
                                        </td>
 
                                        <td><label class="badge badge-primary light">{{ $oct }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 12px; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $octAch }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 15p; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $octAchT }}</label>
                                        </td>
 
 
                                        <td><label class="badge badge-primary light">{{ $nov }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 12px; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $novAch }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 15p; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $novAchT }}</label>
                                        </td>
 
 
                                        <td><label class="badge badge-primary light">{{ $dec }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 12px; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $decAch }}</label>
-                                           <hr style="margin-top: 9px;">
+                                          <hr style=" margin-top: 15p; height: 0.0px !important;">
                                            <label class="badge badge-primary light">{{ $decAchT }}</label>
                                        </td>
                                    </tr>
                                </tbody>
                            </table>
                        </div>
-                   </div>
-               </div>
        @endforeach
    </div>

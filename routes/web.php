@@ -30,11 +30,10 @@ use App\Http\Controllers\HolidayController;
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::get('/dashboard', function () {
-    return view('DashBoard');
-});
+
 
 Auth::routes();
+Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -42,6 +41,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/add-employee', [TeamController::class, 'addEmp']);
 Route::post('/store-employee', [TeamController::class, 'storeEmp']);
 Route::get('/viewTeam', [TeamController::class, 'viewTeam']);
+Route::get('mngrPage', [TeamController::class, 'mngrPage']);
+Route::get('viewMember/{id}', [TeamController::class, 'viewMember']);
 Route::get('/viewResignMember', [TeamController::class, 'resignMember']);
 Route::get('/edit-employee/{id}', [TeamController::class, 'editEmp']);
 Route::post('/update-employee/{id}', [TeamController::class, 'updateEmp']);
@@ -54,11 +55,12 @@ Route::get('/resign-employee/{id}', [TeamController::class, 'resignEmp']);
 Route::get('add-enquiry', [EnquiryController::class, 'addEnquiry']);
 Route::post('store-enquiry', [EnquiryController::class, 'storeEnquiry']);
 Route::get('enquiry-list', [EnquiryController::class, 'enquiryList']);
-Route::get('manager-enquiry-list', [EnquiryController::class, 'managerEnquiry']);
+Route::get('team-enquiry-list', [EnquiryController::class, 'teamEnquiry']);
 Route::get('edit-enquiry/{id}', [EnquiryController::class, 'editEnquiry']);
 Route::post('update-enquiry/{id}', [EnquiryController::class, 'updateEnquiry']);
 Route::get('delete-enquiry/{id}', [EnquiryController::class, 'deleteEnquiry']);
 Route::get('searchEnquiry', [EnquiryController::class, 'searchEnquiry']);
+Route::get('todayEnquiries', [EnquiryController::class, 'todayEnquiries']);
 
 
 
@@ -77,6 +79,8 @@ Route::get('mngr-break-list', [EnquiryController::class, 'mngrBreakList']);
 //show break list
 Route::get('break-list', [EnquiryController::class, 'breakList']);
 Route::get('searchBreakEnquiry', [EnquiryController::class, 'searchBreakEnquiry']);
+Route::get('team-break-list', [EnquiryController::class, 'teamBreakList']);
+
 
 //Allote Client to Manager
 Route::get('allot-client-modal', [EnquiryController::class, 'allotClientModal']);
@@ -135,9 +139,12 @@ Route::get('get-table/{id}', [TargetController::class, 'getTable']);
 
 //Reports
 Route::get('dailyReports', [ReportController::class, 'dailyReports']);
+Route::get('dailyReportsSearch', [ReportController::class, 'dailyReportsSearch']);
 
 Route::get('ManagerPage', [ReportController::class, 'monthlyManagerPage']);
 Route::get('getMnagerTeam/{id}', [ReportController::class, 'getMnagerTeam']);
+Route::get('getMngrMonthlyTeam', [ReportController::class, 'getMngrMonthlyTeam']);
+
 Route::get('totalEnquiries/{id}', [ReportController::class, 'totalEnquiries']);
 Route::get('getTeamHot/{id}', [ReportController::class, 'getTeamHot']);
 Route::get('monthTillDate/{id}', [ReportController::class, 'monthTillDate']);
@@ -146,6 +153,7 @@ Route::get('tempAchieved/{id}', [ReportController::class, 'tempAchieved']);
 Route::get('payAchieved/{id}', [ReportController::class, 'payAchieved']);
 Route::get('fmsAchieved/{id}', [ReportController::class, 'fmsAchieved']);
 Route::get('todayEnquiry/{id}', [ReportController::class, 'todayEnquiry']);
+
 
 Route::get('teamEnquiryReport', [ReportController::class, 'teamEnquiryReport']);
 Route::get('monthWiseReport', function () {
@@ -181,4 +189,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
+Route::get('hbdreport', function () {
+    return view('reports.hbdReport');
+});
 
+Route::any('/report', [HBDController::class, 'report']);

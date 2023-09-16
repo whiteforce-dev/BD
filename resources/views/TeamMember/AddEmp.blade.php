@@ -18,14 +18,14 @@
                                     <label class="col-sm-3 col-form-label">Full Name</label>
                                     <div class="col-sm-9">
                                         <input type="text" id="name" class="form-control"
-                                            placeholder="enter your name" name="name" required="required" />
+                                            placeholder="enter name" name="name" required="required" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
                                     <label class="col-sm-3 col-form-label">Email</label>
                                     <div class="col-sm-9">
                                         <input type="text" id="email" class="form-control"
-                                            placeholder="enter your email " name="email" />
+                                            placeholder="enter email " name="email" />
                                     </div>
                                 </div>
 
@@ -33,7 +33,7 @@
                                     <label class="col-sm-3 col-form-label">Mobile Number</label>
                                     <div class="col-sm-9">
                                         <input type="text" id="firstname" class="form-control"
-                                            placeholder="enter your Mobile Number" name="mobile" required="required" />
+                                            placeholder="enter Mobile Number" name="mobile" required="required" />
                                     </div>
                                 </div>
                                 <div class="mb-3 row">

@@ -201,7 +201,7 @@
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-TAGCODE');
     </script>
-    
+
     <title>Login Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -241,7 +241,7 @@
                             <div class="center">
                                 <h1>Welcome To The White force</h1>
                             </div>
-                            <p>White - Force is an advanced decision-making platform to make hiring easy, fast, and transparent. White - Force Jobs is a leading job board for employers in india. With more than 1 million candidates registered, professionals receive career advice, news and real-time connections with approved employers. </p>
+                          
                         </div>
                     </div>
                 </div>

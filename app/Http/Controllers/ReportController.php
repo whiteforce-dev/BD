@@ -17,14 +17,38 @@ use App\Models\ManagerRemark;
 use App\Models\UtilitesTools;
 class ReportController extends Controller
 {
-    public function dailyReports(Request $request){
+    public function dailyReports(Request $request) {
         $fromnew = $request->from;
         $tonew = $request->to;
         $Date = $fromnew ? Carbon::parse($fromnew) : Carbon::now()->subDay(6);
-        $now =   $tonew ? Carbon::parse($tonew) : Carbon::now();
+        $now = $tonew ? Carbon::parse($tonew) : Carbon::now();
         $diff = 6;
-        return view('reports.dayWiseReport', compact('fromnew', 'tonew', 'Date', 'now', 'diff'));
+
+        // Build the query to filter users based on your conditions
+        $filteredUsers = User::where('created_by', Auth::user()->id)->orWhere('is_active', 1)->get();
+        // Pass the filtered users to the view using the compact function
+        return view('reports.dayWiseReport', compact('fromnew', 'tonew', 'Date', 'now', 'diff', 'filteredUsers'));
     }
+
+    // Controller method for searching by user
+public function dailyReportsSearch(Request $request) {
+    $fromnew = $request->from;
+    $tonew = $request->to;
+    $Date = $fromnew ? Carbon::parse($fromnew) : Carbon::now()->subDay(6);
+    $now = $tonew ? Carbon::parse($tonew) : Carbon::now();
+    $diff = 6;
+    // Get the selected user ID from the request
+    $selectedUser = $request->input('employee');
+    // Build the query to filter users based on your conditions
+    $usersQuery =User::query();
+
+    if ($selectedUser !== 'all') { // Check if a specific user is selected
+       $usersQuery->where('id', $selectedUser);
+    }
+    $filteredUsers  = $usersQuery->get();
+    // Pass the filtered users to the view using the compact function
+    return view('reports.pages.dayWiseReportBySearch', compact('fromnew', 'tonew', 'Date', 'now', 'diff', 'filteredUsers'));
+}
 
     public function monthlyManagerPage(){
 
@@ -37,6 +61,9 @@ class ReportController extends Controller
         return view('reports.monthlyEnquiryMngrTeam')->with(['Details' => $Details]);
     }
 
+  public function getMngrMonthlyTeam(){
+        return view('reports.TeamMonthlyReport');
+    }
     public function totalEnquiries(/*Parameters*/){
 
         $id = \request('id');
@@ -163,9 +190,15 @@ class ReportController extends Controller
     }
 
     public function teamMonthReport(){
-         $year = request('year');
-         $id = request('id');
-         $user = User::where('id', $id)->where('is_active', 1)->get();
-         return view('reports.pages.teamMonthWiseReport', compact('year', 'user'));
+        $year = request('year');
+        $id = request('id');
+        if ( $id) {
+            $user_list = User::where('id', $id)->where('is_active', 1)->get(); // Use 'first' to retrieve a single user
+            return view('reports.pages.teamMonthWiseReport', compact('year', 'user_list'));
+        } else {
+            $user_list = User::where('created_by', Auth::user()->id)->where('is_active', 1)->get();
+            return view('reports.pages.teamMonthWiseReport', compact('year', 'user_list'));
+        }
+
     }
 }

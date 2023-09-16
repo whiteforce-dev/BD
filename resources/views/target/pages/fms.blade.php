@@ -24,7 +24,7 @@
         <tr>
             <td><strong>{{ $obj+1 }}</strong></td>
             <td>
-                <div class="d-flex align-items-center"><img src="{{ url($users->image) }}" class="rounded-lg me-2" width="24" alt=""/> <span class="w-space-no">{{ $users->name }}</span></div>
+                <div class="d-flex align-items-center"><img src="{{ url($users->image) }}" class="rounded-lg me-2" width="40" height="40" alt=""/> <span class="w-space-no">{{ $users->name }}</span></div>
             </td>
 
             <td>

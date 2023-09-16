@@ -50,6 +50,14 @@ class TeamController extends Controller
         return view('TeamMember.TeamMemberList', compact('Details'));
     }
 
+   public function mngrPage(){
+      return view('TeamMember.managerPage');
+    }
+    public function viewMember($id){
+           $Details=User::where('created_by',$id)->where("is_active", 1)->paginate('9');
+           return view('TeamMember.TeamMemberList', compact('Details'));
+    }
+
     function resignMember(){
         $Details = User::paginate(9);
         return view('TeamMember.ResignedMember', compact('Details'));

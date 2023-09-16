@@ -1,87 +1,80 @@
-    <div class="row"style="margin-bottom: 20px">
-        <div class="col-lg-12">
-            <div class="table-responsive rounded">
-                <table id="example5" class="table customer-table display mb-4 fs-14 card-table">
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+
+            <i class="fa-solid fa-cake-candles" style="color: #3269c8; font-size:1.1rem;"></i>
+            <h2 class="card-title" style= "font-size: 1.01rem;
+            font-weight: 500;">Happy Birthday Report</h4>
+        </div>
+            <div class="table-responsive">
+                <table class="table table-responsive-md">
                     <thead>
                         <tr>
-                            <th>S.NO.</th>
-                            <th>NAME</th>
-                            <th>COMPANY NAME</th>
-                            <th>DESIGNATION</th>
-                            <th>STATUS</th>
-                            <th>BIRTHDAY DATE</th>
-                            <th>REMAINING DAYS</th>
+                            <th style="width:80px;"><p>S.No</p></th>
+                            <th><p>Name</p></th>
+                            <th><p>Company</p></th>
+                            <th><p>Designation</p></th>
+                            <th><p>Status</p></th>
+                            <th><p>Birthday</p></th>
+                            <th><p>Remaining days</p></th>
                         </tr>
                     </thead>
-                    <tbody id="hr_birthday">
+                    <tbody>
                         @foreach ($Details as $index => $obj)
-                    @php
-                        // $year = date('Y');
-                        $year = date('Y-');
-                        $birth = \Carbon\carbon::parse($obj->dob)->format('m-d');
-                        $today = \Carbon\carbon::now()->format('Y-m-d');
+                            @php
+                                // $year = date('Y');
+                                $year = date('Y-');
+                                $birth = \Carbon\carbon::parse($obj->dob)->format('m-d');
+                                $today = \Carbon\carbon::now()->format('Y-m-d');
 
-                        $date1=date_create($today);
-                        $date2=date_create($year.$birth);
+                                $date1=date_create($today);
+                                $date2=date_create($year.$birth);
 
-                        $diff=date_diff($date1,$date2);
-                        $diffrence = $diff->format("%a days Left");
-                        $diffrence_one = $diff->format("%a");
+                                $diff=date_diff($date1,$date2);
+                                $diffrence = $diff->format("%a days Left");
+                                $diffrence_one = $diff->format("%a");
 
-                    @endphp
-                            <tr >
-                                <td>{{ $index +1 }}</td>
+                            @endphp
+                            <tr>
+                                <td><p>{{$index + 1 + ($Details->perPage() * ($Details->currentPage() - 1)) }}</p></td>
                                 <td>{{ $obj->contact_person }}</td>
-                                <td>{{ isset($obj->company_name) ? $obj->company_name : 'N/A' }}</td>
-                                <td>{{ $obj?->desig }}</td>
+                                <td><p style="width: 176px !important; word-break: break-word;">
+                                    {{ $obj->company_name }} <br> <small>Created By - <b>{{ $obj->GetCreatedby->name ?? '-' }}</b></small></p></td>
+                                <td>{{ $obj->desig }}</td>
 
-                                    <?php
-                                            $rowStatus = $obj->GetStatus->remark ?? '-';
-                                        ?>
+                                    <span>
+                                                @if($obj->status_id== 15)
+                                                    <td><span class="badge light badge-success">Break</span></td>
+                                                    @elseif($obj->status_id==6)
+                                                    <td ><span class="badge light badge-warning">Process</span></td>
+                                                    @elseif($obj->status_id==10)
+                                                    <td ><span class="badge light badge-info">Hot</span></td>
+                                                    @elseif($obj->status_id==11)
+                                                    <td><span class="badge light badge-danger">Cold</span></td>
+                                                    @elseif($obj->status_id==16)
+                                                    <td ><span class="badge light badge-info">Hold</span></td>
+                                                    @elseif($obj->status_id==17)
+                                                    <td ><span class="badge light badge-warning">Positive</span></td>
+                                                    @elseif($obj->status_id==null)
+                                                    <td>-</td>
+                                                @endif
+                                  </span>
+                                <td>
+                                    @if($obj->dob != '')
+                                      {{\Carbon\Carbon::parse($obj->dob)->format('d-M')}}
+                                    @endif
+                                </td>
+                                <td >
+                                    <span class="badge light badge-info"> {{ $diffrence == 0 ? 'Today' : $diffrence }}</span>
 
-                                        @if (isset($obj->GetStatus->remark))
-                                            @if ($rowStatus == 'Hot')
-                                                <td><label class="badge badge-danger">Hot</label></td>
-                                            @elseif($rowStatus == 'Cold')
-                                                <td><label class="badge badge-info">Cold</label></td>
-                                            @elseif($rowStatus == 'Process')
-                                                <td><label class="badge badge-primary">Process</label></td>
-                                            @elseif($rowStatus == 'Break')
-                                                <td><label class="badge badge-success">Break</label></td>
-                                            @elseif($rowStatus == 'Hold')
-                                                <td><label class="badge badge-warning">Hold </label></td>
-                                            @elseif($rowStatus == 'Positive')
-                                                <td><label class="badge badge-info">Positive </label></td>
-                                            @endif
-                                        @else
-                                            <td>-</td>
-                                        @endif
-
-                                        <td> @if ($obj->dob != '')
-                                            {{\Carbon\Carbon::parse($obj->dob)->format('d-M')}}
-                                            @else
-                                                N/A
-                                            @endif
-                                        </td>
-
-                                        <?php
-                                        $year = date('Y');
-                                        $birth = \Carbon\carbon::parse($obj->created_at)->format('Y-m-d');
-                                        $today = \Carbon\carbon::now()->format('d-m');
-                                        $date1 = date_create($today . '-' . $year);
-                                        $date2 = date_create($birth . '-' . $year);
-                                        $diff = date_diff($date1, $date2);
-                                        $diffrence_one = $diff->format('%a');
-                                        ?>
-                                        <td class="text-secondary font-w500" style="align-items: center;">{{ $diffrence == 0 ? 'Today' : $diffrence }}
-                                        </td>
+                                </td>
                             </tr>
-                        @endforeach
+                      @endforeach
                     </tbody>
                 </table>
             </div>
-        </div>
     </div>
+</div>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         {{--  <script>

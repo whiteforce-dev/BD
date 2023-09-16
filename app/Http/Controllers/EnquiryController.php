@@ -175,12 +175,14 @@ class EnquiryController extends Controller
             $enquiries = $enquiries->orderBy("id", "desc");
             $enquiries1 = $enquiries->orderBy("id", "desc")->count();
         } elseif ($user->type === 'Manager') {
-            $enquiries = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
-                $query->where('created_by', $user->id)->orderBy("id","desc");
-            });
-            $enquiries1 = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
-                $query->where('created_by', $user->id)->orderBy("id","desc");
-            })->count();
+            // $enquiries = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+            //     $query->where('created_by', $user->id)->orderBy("id","desc");
+            // });
+            // $enquiries1 = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+            //     $query->where('created_by', $user->id)->orderBy("id","desc");
+            // })->count();
+            $enquiries = $enquiries->where('created_by', $user->id)->orderBy("id", "desc");
+            $enquiries1 = $enquiries->where('created_by', $user->id)->orderBy("id", "desc")->count();
         } elseif ($user->type === 'Staff') {
             $enquiries = $enquiries->where('created_by', $user->id)->orderBy("id", "desc");
             $enquiries1 = $enquiries->where('created_by', $user->id)->orderBy("id", "desc")->count();
@@ -275,12 +277,28 @@ class EnquiryController extends Controller
 
     }
 
-    function managerEnquiry() {
+    function teamEnquiry() {
         $user = Auth::user();
         $enquiries = Enquiry::query();
         $enquiries1 = 0;
         if ($user->type === 'Manager') {
-            $enquiries = $enquiries->where('created_by', $user->id)->where('status_id', '!=', '15')->orderBy("id", "desc");
+            // $enquiries = $enquiries->where('created_by', $user->id)->where('status_id', '!=', '15')->orderBy("id", "desc");
+            // $enquiries->each(function ($enquiri) {
+            //     if (!empty($enquiri->image)) { // Corrected line
+            //         $disk = Storage::disk('s3');
+            //         $enquiri->image = $disk->temporaryUrl($enquiri->image, now()->addMinutes(5));
+
+            //     }
+            // });
+            // $enquiries1 = Enquiry::where('created_by', $user->id)->where('status_id', '!=', '15')->orderBy("id", "desc")->count();
+            $enquiries = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+                $query->where('created_by', $user->id)->orderBy("id","desc");
+            });
+            $enquiries1 = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+                $query->where('created_by', $user->id)->orderBy("id","desc");
+            })->count();
+
+            // $enquiries = $enquiries->where('created_by', $user->id)->orderBy("id", "desc");
             $enquiries->each(function ($enquiri) {
                 if (!empty($enquiri->image)) { // Corrected line
                     $disk = Storage::disk('s3');
@@ -288,7 +306,7 @@ class EnquiryController extends Controller
 
                 }
             });
-            $enquiries1 = Enquiry::where('created_by', $user->id)->where('status_id', '!=', '15')->orderBy("id", "desc")->count();
+            // $enquiries1 = Enquiry::where('created_by', $user->id)->orderBy("id", "desc")->count();
         }
         $enquiries = $enquiries->paginate(25);
         foreach ($enquiries as $enquiry) {
@@ -410,12 +428,14 @@ class EnquiryController extends Controller
             $enquiries = $enquiries->where('status_id', '10')->orderBy("id", "desc");
             $enquiries1 = $enquiries->where('status_id', '10')->count();
         } elseif ($user->type === 'Manager') {
-            $enquiries = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
-                $query->where('created_by', $user->id)->where('status_id', '10');
-            });
-            $enquiries1 = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
-                $query->where('created_by', $user->id)->where('status_id', '10');
-            })->count();
+            // $enquiries = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+            //     $query->where('created_by', $user->id)->where('status_id', '10');
+            // });
+            // $enquiries1 = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+            //     $query->where('created_by', $user->id)->where('status_id', '10');
+            // })->count();
+            $enquiries = $enquiries->where('status_id', '10')->where('created_by', $user->id)->orderBy("id", "desc");
+            $enquiries1 = $enquiries->where('status_id', '10')->orderBy("id", "desc")->count();
         } elseif ($user->type === 'Staff') {
             $enquiries = $enquiries->where('status_id', '10')->where('created_by', $user->id)->orderBy("id", "desc");
             $enquiries1 = $enquiries->where('status_id', '10')->orderBy("id", "desc")->count();
@@ -446,12 +466,15 @@ class EnquiryController extends Controller
             $enquiries = $enquiries->where('status_id', '16')->orderBy("id", "desc");
             $enquiries1 = $enquiries->where('status_id', '16')->count();
         } elseif ($user->type === 'Manager') {
-            $enquiries = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
-                $query->where('created_by', $user->id)->where('status_id', '16');
-            });
-            $enquiries1 = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
-                $query->where('created_by', $user->id)->where('status_id', '16');
-            })->count();
+            // $enquiries = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+            //     $query->where('created_by', $user->id)->where('status_id', '16');
+            // });
+            // $enquiries1 = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+            //     $query->where('created_by', $user->id)->where('status_id', '16');
+            // })->count();
+            $enquiries = $enquiries->where('status_id', '16')->where('created_by', $user->id)->orderBy("id", "desc");
+            $enquiries1 = $enquiries->where('status_id', '16')->orderBy("id", "desc")->count();
+
         } elseif ($user->type === 'Staff') {
             $enquiries = $enquiries->where('status_id', '16')->where('created_by', $user->id)->orderBy("id", "desc");
             $enquiries1 = $enquiries->where('status_id', '16')->orderBy("id", "desc")->count();
@@ -506,7 +529,6 @@ class EnquiryController extends Controller
     {
         $id = \request('id');
         $Details = Enquiry::find($id);
-
         return view('Enquiry.EnquiryList')->with(['Details' => $Details]);
     }
 
@@ -520,12 +542,14 @@ class EnquiryController extends Controller
             $enquiries = $enquiries->where('status_id', '15')->orderBy("id", "desc");
             $enquiries1 = $enquiries->where('status_id', '15')->orderBy("id", "desc")->count();
         } elseif ($user->type === 'Manager') {
-            $enquiries = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
-                $query->where('created_by', $user->id)->where('status_id', '15')->orderBy("id","desc");
-            });
-            $enquiries1 = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
-                $query->where('created_by', $user->id)->where('status_id', '15')->orderBy("id","desc");
-            })->count();
+            // $enquiries = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+            //     $query->where('created_by', $user->id)->where('status_id', '15')->orderBy("id","desc");
+            // });
+            // $enquiries1 = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+            //     $query->where('created_by', $user->id)->where('status_id', '15')->orderBy("id","desc");
+            // })->count();
+            $enquiries = $enquiries->where('created_by', $user->id)->where('status_id', '15')->orderBy("id", "desc");
+            $enquiries1 = $enquiries->where('created_by', $user->id)->where('status_id', '15')->orderBy("id", "desc")->count();
         } elseif ($user->type === 'Staff') {
             $enquiries = $enquiries->where('created_by', $user->id)->where('status_id', '15')->orderBy("id", "desc");
             $enquiries1 = $enquiries->where('created_by', $user->id)->where('status_id', '15')->orderBy("id", "desc")->count();
@@ -671,6 +695,33 @@ class EnquiryController extends Controller
 
     }
 
+    public function teamBreakList(){
+
+        $user = Auth::user();
+        $enquiries = Enquiry::query();
+        $enquiries1 = null;
+        if ($user->type === 'Manager') {
+            $enquiries = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+                $query->where('created_by', $user->id)->where('status_id', '15')->orderBy("id","desc");
+            });
+            $enquiries1 = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+                $query->where('created_by', $user->id)->where('status_id', '15')->orderBy("id","desc");
+            })->count();
+        } 
+        if ($enquiries1 === null) {
+            $enquiries1 = 0;
+        }
+        $enquiries = $enquiries->paginate(10);
+        foreach ($enquiries as $enquiry) {
+            if (!empty($enquiry->image)) {
+                $disk = Storage::disk('s3');
+                $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
+            }
+        }
+        return view('Enquiry.breakEnquiry')->with(['Details' => $enquiries, 'Details1' => $enquiries1 ]);
+
+
+    }
     //Allote Client to Manager
 
     function allotClientModal(Request $request){
@@ -854,6 +905,19 @@ class EnquiryController extends Controller
 
         $enquiry = Enquiry::find($id);
         return $enquiry->delete();
+    }
+
+    public function todayEnquiries(){
+
+        $Details = Enquiry::where('created_by', Auth::user()->id)->whereRaw('Date(created_at) = CURDATE()')->paginate(25);
+        $Details1 = Enquiry::where('created_by',  Auth::user()->id)->whereRaw('Date(created_at) = CURDATE()')->get()->count();
+        foreach ($Details as $enquiry) {
+            if (!empty($enquiry->image)) {
+                $disk = Storage::disk('s3');
+                $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
+            }
+        }
+        return view('Enquiry.EnquiryList')->with(['Details' => $Details,'Details1' => $Details1]);
     }
 
 }

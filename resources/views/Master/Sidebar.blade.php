@@ -17,7 +17,7 @@
 
         </svg>
     </a>
-    
+
 </div>
 <!--**********************************
     Nav header end
@@ -54,9 +54,11 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ url('/add-employee') }}">Add Member</a></li>
+                        @if (Auth::user()->type === 'Admin')
+                        <li><a href="{{ url('mngrPage') }}">Member List</a></li>
+                        @else
                         <li><a href="{{ url('/viewTeam') }}">Member List</a></li>
-
-
+                        @endif
                     </ul>
                 </li>
             @endif
@@ -68,9 +70,9 @@
                 <ul aria-expanded="false">
                     <li><a href="{{ url('add-enquiry') }}">Add New Enquiry</a></li>
                     <li><a href="{{ url('enquiry-list') }}">Enquiry List</a></li>
-                    @if( Auth::user()->type == 'Manager' )
+                    {{--  @if( Auth::user()->type == 'Manager' )
                     <li><a href="{{ url('manager-enquiry-list') }}">Manager Enquiry</a></li>
-                    @endif
+                    @endif  --}}
                     <li><a href="{{ url('hot-list') }}">Hot List</a></li>
                     @if( Auth::user()->type == 'Manager' )
                     <li><a href="{{ url('team-hot-list') }}">Team Hot List</a></li>
@@ -107,7 +109,7 @@
                 @endif
                 @if(Auth::user()->type == 'Manager')
                 <li><a href="{{ url('dailyReports') }}">Day Wise Report</a></li>
-                <li><a href="{{ url('teamEnquiryReport') }}">Team Enquiry</a></li>
+                <li><a href="{{ url('getMngrMonthlyTeam') }}">Team Enquiry</a></li>
                 <li><a href="{{ url('monthWiseReport') }}">Month Wise</a></li>
                 <li><a href="{{ url('teamMonthWiseReport') }}">Team Month Wise</a></li>
                 @endif

@@ -187,8 +187,9 @@
 
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Team Member Report</h4>
+                    <div class="card-header" style="display:flex; align-items:center;">
+                        <i class="fa-solid fa-people-group" style="color: #4275cd;  font-size:1.5rem;"></i>
+                        <h4 style="font-size: 1.1rem; font-weight: 500;" class="card-title">Team Member Report</h4>
                     </div>
                         <div class="table-responsive">
                             <table class="table table-responsive-md">
@@ -210,7 +211,7 @@
                                 </thead>
                                 @php
                                   $status = \App\Models\Followup_remark::get();
-                                  $user = \App\Models\User::where('created_by',$Details->id)->where('is_active',1)->get();
+                                  $user = \App\Models\User::where('created_by',Auth::user()->id)->where('is_active',1)->get();
                                    $month = date('n');
 
                                      $from = Carbon\Carbon::parse(date('Y-m-01'))->format('Y-m-01');
@@ -255,7 +256,7 @@
                                         <tr>
                                             <td>{{$obj+1}}</td>
                                             @if($users->image)
-                                                <td><img src="{{ url($users->image) }}" class="rounded-lg me-2" width="24" style="width: 68px; height:68px;
+                                                <td><img src="{{ url($users->image) }}" class="rounded-lg me-2" width="24" style="    width: 68px; height:68px;
                                                     " alt=""/></td>
 
                                             @else

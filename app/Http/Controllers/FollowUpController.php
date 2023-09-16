@@ -90,12 +90,14 @@ class FollowUpController extends Controller
         }
         elseif ($user->type === 'Manager')
          {
-            $enquiries = $enquiries->where('next_follow_date', $today)->whereHas('GetCreatedby', function ($query) use ($user) {
-                $query->where('created_by', $user->id)->orderBy("id","desc");
-            });
-            $enquiries1 = $enquiries->where('next_follow_date', $today)->whereHas('GetCreatedby', function ($query) use ($user) {
-                $query->where('created_by', $user->id)->orderBy("id","desc");
-            })->count();
+            // $enquiries = $enquiries->where('next_follow_date', $today)->whereHas('GetCreatedby', function ($query) use ($user) {
+            //     $query->where('created_by', $user->id)->orderBy("id","desc");
+            // });
+            // $enquiries1 = $enquiries->where('next_follow_date', $today)->whereHas('GetCreatedby', function ($query) use ($user) {
+            //     $query->where('created_by', $user->id)->orderBy("id","desc");
+            // })->count();
+            $enquiries = $enquiries->where('created_by', $user->id)->where('next_follow_date', $today)->orderBy("id","desc");
+            $enquiries1 = $enquiries->where('created_by', $user->id)->where('next_follow_date', $today)->orderBy("id","desc")->count();
         }
         elseif ($user->type === 'Staff') {
             $enquiries = $enquiries->where('created_by', $user->id)->where('next_follow_date', $today)->orderBy("id","desc");

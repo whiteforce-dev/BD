@@ -53,9 +53,9 @@
                                 <div class="card-body pt-sm-4 pt-3 d-flex align-items-center justify-content-between">
                                     <div class="me-3">
                                         @if (!file_exists($obj->image))
-                                        <img style="background:black; height: 180px;width:198px; margin-top: -10px; margin-bottom:-7px; border-radius:5px;  " src="{{ $obj->image }}" alt="">
+                                        <img style="background:black; height: 180px;width:198px; margin-top: -10px; margin-bottom:-7px; border-radius:5px;  " src="{{ url($obj->image) }}" alt="">
                                         @else
-                                        <img style="background:black; height: 180px;width:198px; margin-top: -10px; margin-bottom:-7px; border-radius:5px; " src="{{ $obj->image }}" alt="">
+                                        <img style="background:black; height: 180px;width:198px; margin-top: -10px; margin-bottom:-7px; border-radius:5px; " src="{{ url($obj->image) }}" alt="">
                                         @endif
                                         <div class="name">
                                             <b>{{ $obj->name }}</b>

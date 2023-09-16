@@ -28,7 +28,10 @@
                                         </defs>
                                     </svg>
                                     @php
-                                    $hotCounts = \App\Models\Enquiry::where('status_id','=','10')->count();
+                                    $user = Auth::user();
+                                    $hotCounts = App\Models\Enquiry::whereHas('GetCreatedby', function ($query) use ($user) {
+                                            $query->where('created_by', $user->id)->where('status_id', '10');
+                                       })->count();
                                     @endphp
                                     <div class="media-body">
                                         <p class="mb-1 fs-15 "></p>

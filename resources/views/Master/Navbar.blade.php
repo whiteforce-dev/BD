@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <ul class="navbar-nav header-right">
-                
+
                     {{--  <li class="nav-item dropdown notification_dropdown">
                         <select class="language-btn default-select">
                           <option data-display="ENGLISH">ENGLISH</option>
@@ -28,9 +28,9 @@
                             @endphp
                             <div class="header-info me-3">
                                 <span class="fs-16 font-w600 ">{{ $user->name }}</span>
-                                <small class="text-end fs-14 font-w400">Super Admin</small>
                             </div>
-                            <img src="{{ url($user->image) }}" width="20" alt=""/>
+                            <img style="width: 39px;
+                            height: 39px;" src="{{ url($user->image) }}" width="20" alt=""/>
                         </a>
 
 

@@ -156,8 +156,8 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12"style="margin-top: -50px">
                         <div class="card">
-                            <a href="{{ url('enquiry-list') }}" class="btn btn-dark " style="margin-top: -30px">
-                                <i class="fas fa-redo-alt"></i>
+                            <a href="{{ url('enquiry-list') }}" class="btn btn-light " style="margin-top: -30px">
+                                <i class="fa-solid fa-rotate-right" style="color: #2f66c6;"></i>
                             </a>
                             <div class="card-body">
                                 <!-- Search Form -->

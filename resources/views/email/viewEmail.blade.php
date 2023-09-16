@@ -1,6 +1,7 @@
 @extends('Master.master')
 @section('title', 'Enquiries')
 @section('content')
+
 <style>
     .btn{
         padding: none;
@@ -8,7 +9,6 @@
 </style>
     <div class="content-body">
         <div class="container-fluid">
-
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
@@ -16,18 +16,18 @@
                             <div class="d-flex mb-sm-0 mb-3 me-auto align-items-center">
                                 <div class="media-body">
                                     <p class="mb-1 fs-15 "></p>
-                                    <h3 class="mb-0 font-w600 fs-22"> Template List </h3>
+                                    <h3 class="mb-0 font-w600 fs-22"> Template List</h3>
                                 </div>
                             </div>
-                           <a href="{{ url('addEmailTemplate') }}"> <button style="padding: 10px 16px;
-                            float: right;" class="btn btn-rounded btn-info"><span
-                                class="btn-icon-start text-info"><i class="fa fa-plus color-info"></i>
-                            </span>Add</button></a>
+                            <a href="{{ url('addEmailTemplate') }}"> <button style="padding: 10px 16px;
+                                float: right;" class="btn btn-rounded btn-info"><span
+                                    class="btn-icon-start text-info"><i class="fa fa-plus color-info"></i>
+                                </span>Add</button></a>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table header-border" style="min-width: 500px;">
+                            <table class="table table-bordered table-responsive-sm">
                                 <thead>
                                     <tr>
                                         <th>S.No</th>
@@ -38,7 +38,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($mails as $key=>$mail)
-                                        <tr class="table-active">
+                                        <tr>
                                             <td>{{ ++$key }}</td>
                                             <td>{{ $mail->name }}</td>
                                             <td>{{  Auth::user()->name }}</td>
@@ -56,6 +56,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
