@@ -91,6 +91,7 @@ Route::post('allot-client', [EnquiryController::class, 'allotClient']);
 Route::post('storeFeedback', [EnquiryController::class, 'storeFeedback']);
 
 //add agreement
+
 Route::post('storeAgreement', [EnquiryController::class, 'storeAgreement']);
 Route::get('cancel-agreement/{id}', [EnquiryController::class, 'cancelAgreement']);
 Route::get('/deleteEnquiry/{id}', [EnquiryController::class, 'deleteEnquiry_1']);
@@ -172,6 +173,7 @@ Route::get('viewEmailList', [EmailController::class, 'viewEmailList']);
 Route::get('editTemplate/{id}', [EmailController::class, 'editTemplate']);
 Route::post('updateTemplate/{id}', [EmailController::class, 'updateTemplate']);
 Route::get('deleteTemplate/{id}', [EmailController::class, 'deleteTemplate']);
+Route::get('email-send', [EmailController::class, 'sendEmail']);
 
 //Proposal Type
 Route::get('addEnquiryType', [ProposalTypeController::class, 'addEnquiryType']);

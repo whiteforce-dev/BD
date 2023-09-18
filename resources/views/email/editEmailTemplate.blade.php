@@ -20,7 +20,7 @@
                                     <div class="basic-form">
                                             <div class="mb-3">
                                                 <label class="form-label">Description</label>
-                                                <textarea class="form-control" rows="4"  id="dz-password" class="tinymce-editor"style="height:150px" name="description" value="{{ $data->description }}"  ></textarea>
+                                                <textarea class="form-control" rows="4"  id="dz-password" class="tinymce-editor"style="height:150px" name="description" value=""  >{{ $data->description }}</textarea>
                                             </div>
                                     </div>
 

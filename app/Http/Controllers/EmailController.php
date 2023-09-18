@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Models\CompanyAllotment;
 use App\Models\ManagerRemark;
 use App\Models\UtilitesTools;
+use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
 {
@@ -29,7 +30,7 @@ class EmailController extends Controller
         $temp->created_by = Auth::user()->name;
         $temp->save();
         //  ?dd($temp);
-        return redirect('viewEmailList')->back()->with('success', 'Email Template Created Successfully.');
+        return redirect('viewEmailList')->with('success', 'Email Template Created Successfully.');
     }
 
      public  function viewEmailList()
@@ -63,5 +64,38 @@ class EmailController extends Controller
       $data->delete();
 
       return redirect('viewEmailList')->with('success1', 'Email Template has been deleted Successfully.');
+    }
+
+    public function sendEmail(Request $request)
+    {
+    $enquiry_id = $request->checkedVals;
+     $template_id = $request->template_id;
+
+     
+      $template = Email::where('id',$template_id)->first();
+     $temp = $template->description;
+     $name = Auth::user()->name;
+     $email = Auth::user()->email;
+     $mobile = Auth::user()->mobile;
+     $temp = str_replace('[name]', $name, $temp);
+     $temp = str_replace('[email]', $email, $temp);
+     $temp = str_replace('[mobile]', $mobile, $temp);
+foreach ($enquiry_id as $id) {
+    $recipients = Enquiry::where('id', $id)->first();
+
+    $data = [
+      'reciepent' => $recipients->email,
+      'msg' => $temp,
+    ];
+    // $email=$users->email;
+    Mail::send('tempView', ["data1" => $data], function ($message) use ($data) {
+        $message->from('priyaswhiteforce@gmail.com', 'White-Force');
+        $message->subject('Offer Letter');
+        $message->to($data['reciepent'], $data['msg']);
+    });
+}
+    return 1;
+
+
     }
 }

@@ -6,6 +6,7 @@
             background: rgb(98 98 98 / 59%);
         }
 
+        
         .modal.left .modal-dialog,
         .modal.right .modal-dialog {
             position: fixed;
