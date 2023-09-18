@@ -69,14 +69,15 @@
 
                         </div>
                     </div>
-                    <a id="searchingForm" class="searchbtn btn float-right "
+                    {{--  <a id="searchingForm" class="searchbtn btn float-right "
                         style="padding: 10px 14px !important;
                         margin-top: 1px;
                         cursor: pointer;
                         width: 8%;"
                         onclick="toggleSearchForm(event)">
                         <i class="fa-solid fa-magnifying-glass" style="color: #2e6ad1; font-size: 1.2rem;"></i>
-                    </a>
+                    </a>  --}}
+                    <i id="searchingForm"  onclick="toggleSearchForm(event)" class="fa-solid fa-magnifying-glass" style="color: #2e6ad1; font-size: 1.2rem; "></i>
                 </div>
 
             </div>

@@ -160,9 +160,7 @@
                                 <i class="fa-solid fa-rotate-right" style="color: #2f66c6;"></i>
                             </a>
                             <div class="card-body">
-                                <!-- Search Form -->
                                 <form id="searchForm" action="{{ url('searchEnquiry') }}" method="get">
-
                                     <div class="row mb-3">
                                         <div class="col-md-4">
                                             <label class="form-label">Contact Person</label>

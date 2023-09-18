@@ -198,7 +198,18 @@ class HomeController extends Controller
                  $totalTeamEnquiry = 0;
              }
 
-        return view('DashBoard', compact('enquiries1', 'hotCount', 'todayEnquiries', 'approached', 'approachedPending', 'activeMember', 'breakEnquiry', 'totalBreakEnquiry', 'totalHotEnquiry', 'totalTeamEnquiry' ));
+               // Total Team Approach Achived
+
+               $teamApproachAchived = null;
+
+               if ($user->type === 'Manager') {
+                  $teamApproachAchived = Enquiry::where('user_id', Auth::user()->id)->whereMonth('created_at', Carbon::now()->month)->whereYear('created_at', Carbon::now()->year)->count();
+               }
+
+               if ($teamApproachAchived === null) {
+                   $teamApproachAchived = 0;
+               }
+        return view('DashBoard', compact('enquiries1', 'hotCount', 'todayEnquiries', 'approached', 'approachedPending', 'activeMember', 'breakEnquiry', 'totalBreakEnquiry', 'totalHotEnquiry', 'totalTeamEnquiry', 'teamApproachAchived' ));
     }
 
 

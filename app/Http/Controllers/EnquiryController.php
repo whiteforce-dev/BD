@@ -707,7 +707,7 @@ class EnquiryController extends Controller
             $enquiries1 = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
                 $query->where('created_by', $user->id)->where('status_id', '15')->orderBy("id","desc");
             })->count();
-        } 
+        }
         if ($enquiries1 === null) {
             $enquiries1 = 0;
         }
@@ -920,4 +920,5 @@ class EnquiryController extends Controller
         return view('Enquiry.EnquiryList')->with(['Details' => $Details,'Details1' => $Details1]);
     }
 
+   
 }
