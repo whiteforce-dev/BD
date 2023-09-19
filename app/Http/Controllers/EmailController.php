@@ -73,6 +73,10 @@ class EmailController extends Controller
 
      
       $template = Email::where('id',$template_id)->first();
+      
+      if($template_id==19){
+
+    
      $temp = $template->description;
      $name = Auth::user()->name;
      $email = Auth::user()->email;
@@ -86,11 +90,12 @@ foreach ($enquiry_id as $id) {
     $data = [
       'reciepent' => $recipients->email,
       'msg' => $temp,
+      
     ];
     // $email=$users->email;
     Mail::send('tempView', ["data1" => $data], function ($message) use ($data) {
         $message->from('priyaswhiteforce@gmail.com', 'White-Force');
-        $message->subject('Offer Letter');
+        $message->subject('Are You Looking For Vendors- Contact White Force Group');
         $message->to($data['reciepent'], $data['msg']);
     });
 }
@@ -98,4 +103,25 @@ foreach ($enquiry_id as $id) {
 
 
     }
+    else
+    {
+      $temp = $template->description;
+      foreach ($enquiry_id as $id) {
+        $recipients = Enquiry::where('id', $id)->first();
+    
+        $data = [
+          'reciepent' => $recipients->email,
+          'msg' => $temp,
+          
+        ];
+        // $email=$users->email;
+        Mail::send('tempView', ["data1" => $data], function ($message) use ($data) {
+            $message->from('priyaswhiteforce@gmail.com', 'White-Force');
+            $message->subject('Are You Looking For Vendors- Contact White Force Group');
+            $message->to($data['reciepent'], $data['msg']);
+        });
+    }
+        return 1;
+    }
+  }
 }
