@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 <style>
     .form-control {
         display: block;
@@ -15,6 +16,57 @@
         border-radius: 0.25rem;
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     }
+    /* heart checkbox style start */
+
+    /* body {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  height: 100vh;
+} */
+
+[id^="heart"] {
+  /* position: absolute; */
+  left: -500vw;
+}
+
+[for^="heart"] {
+  color: #aab8c2;
+  cursor: pointer;
+  font-size: 2em;
+  align-self: center;
+  transition: color 0.2s ease-in-out;
+  /* margin-left: -478px; */
+    /* margin-top: -34px; */
+}
+
+[for^="heart"]:hover {
+  color: grey;
+}
+
+[for^="heart"]::selection {
+  color: none;
+  background: transparent;
+}
+
+[for^="heart"]::moz-selection {
+  color: none;
+  background: transparent;
+}
+
+[id^="heart"]:checked + label {
+  color: #e2264d;
+  will-change: font-size;
+  animation: heart 1s cubic-bezier(0.17, 0.89, 0.32, 1.49);
+}
+
+@keyframes heart {
+  0%,
+  17.5% {
+    font-size: 0;
+  }
+}
+
 </style>
 <div class="col-xl-12 col-lg-8"
     style="padding-left: 0px !important;
@@ -40,6 +92,7 @@
                                     top: 26%; border: 2px solid #d2d4DE;"
                             type="checkbox" class="form-check-input" type="checkbox" onchange="checkAll(this)"
                             name="chk[]" />
+                            
                         <div class="row" style="width: 180%;">
                             <div class="col-4" style="max-width: 66.333333%;">
                                 <h3 class="mb-0 font-w600 fs-22"
@@ -112,9 +165,14 @@
                                     top: 8px;"
                         class="form-check-input checkemail " name="enquiryid[]" value="{{ $obj->id }}"
                         class="checkBoxClass" />
+      @if( $obj->status_id == 10)
+                      @if($obj->is_important == 0)
 
-
-
+                    <input type="button" class="btn btn-success btn-sm important"style= "margin-right: 26px;margin-top: -6px;" id="{{ $obj->id }}" value="Mark as important" onclick="importantenq(this.id)">
+                    @else
+                    <input type="button" class="btn btn-danger btn-sm important" style= "margin-right: 26px;margin-top: -6px;"id="{{ $obj->id }}" value="Important" onclick="unimportantenq(this.id)">
+                    @endif
+                @endif
                     <div class="enq">
                         {{--  <!-- <p class="date">Enquiry Date : 07/08/2023</p>
                                                 <p class="date">Lead Days :28 </p> -->  --}}
@@ -156,7 +214,7 @@
                 </div>
                 <div class="dropdown btn" style="margin-top: 30px;">
                     <button class="dropbtn"
-                        style="display: flex; align-items: center; justify-content: center; text-align: center; margin-top: -35px;">Action
+                        style="display: flex; align-items: center; justify-content: center; text-align: center; margin-top: -29px;">Action
                         <i style="font-size: 1.2rem; margin-left: 5px; margin-top: -12px;"
                             class="fa-solid fa-sort-down"></i></button>
                     <div class="dropdown-content">
@@ -540,5 +598,53 @@ if(response ==1){
 }
         })
         // alert(checkedVals.join(","));
+    }
+    
+</script>
+
+<script>
+    function importantenq(e){
+      $.ajax({
+        url:"{{ url('importantenquiries') }}",
+        type:"GET",
+        data:{"id":e},
+        success:function(response){
+            if(response ==1){
+    Swal.fire(
+  'Good job!',
+  'Status has been changed!',
+  'success'
+)
+    location.reload();
+}
+        },
+        error:function(error){
+            console.log(error);
+        }
+      })
+        // alert(e);
+    }
+</script>
+<script>
+    function unimportantenq(e){
+      $.ajax({
+        url:"{{ url('unimportantenquiries') }}",
+        type:"GET",
+        data:{"id":e},
+        success:function(response){
+            if(response ==1){
+    Swal.fire(
+  'Good job!',
+  'Status has been changed!',
+  'success'
+)
+    location.reload();
+}
+        },
+        error:function(error){
+            console.log(error);
+        }
+      })
+        // alert(e);
     }
 </script>

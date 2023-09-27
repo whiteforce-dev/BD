@@ -919,5 +919,33 @@ class EnquiryController extends Controller
         }
         return view('Enquiry.EnquiryList')->with(['Details' => $Details,'Details1' => $Details1]);
     }
+    public function importantenquiries(Request $request)
+    {
+
+       
+        $important_enquiry = Enquiry::where('id', $request->id)->first();
+        if($important_enquiry->is_important == 0)
+        {
+            $important_enquiry->is_important = 1;
+            $important_enquiry->save();
+            return 1;
+
+
+        }
+    }
+    public function unimportantenquiries(Request $request)
+    {
+
+       
+        $important_enquiry = Enquiry::where('id', $request->id)->first();
+        if($important_enquiry->is_important == 1)
+        {
+            $important_enquiry->is_important = 0;
+            $important_enquiry->save();
+            return 1;
+
+
+        }
+    }
 
 }

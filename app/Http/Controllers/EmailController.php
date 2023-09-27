@@ -124,4 +124,22 @@ foreach ($enquiry_id as $id) {
         return 1;
     }
   }
+  // public function sendBirthdayEmail()
+
+  // {
+  //   $details = Enquiry::get();
+  //   foreach($details as $detail)
+  //   {
+  //     $birth_date = carbon::parse($detail->dob)->format('d-m');
+  //     return $birth_date;
+  //     $today =carbon::now()->format('d-m');
+      
+  //     if($birth_date==$today)
+  //     {
+        
+
+  //     }
+
+  //   }
+  // }
 }

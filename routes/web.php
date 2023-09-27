@@ -61,6 +61,9 @@ Route::post('update-enquiry/{id}', [EnquiryController::class, 'updateEnquiry']);
 Route::get('delete-enquiry/{id}', [EnquiryController::class, 'deleteEnquiry']);
 Route::get('searchEnquiry', [EnquiryController::class, 'searchEnquiry']);
 Route::get('todayEnquiries', [EnquiryController::class, 'todayEnquiries']);
+Route::any('importantenquiries', [EnquiryController::class, 'importantenquiries']);
+Route::any('unimportantenquiries', [EnquiryController::class, 'unimportantenquiries']);
+
 
 
 
@@ -174,6 +177,7 @@ Route::get('editTemplate/{id}', [EmailController::class, 'editTemplate']);
 Route::post('updateTemplate/{id}', [EmailController::class, 'updateTemplate']);
 Route::get('deleteTemplate/{id}', [EmailController::class, 'deleteTemplate']);
 Route::get('email-send', [EmailController::class, 'sendEmail']);
+// Route::get('sendBirthdayEmail', [EmailController::class, 'sendBirthdayEmail']);
 
 //Proposal Type
 Route::get('addEnquiryType', [ProposalTypeController::class, 'addEnquiryType']);
