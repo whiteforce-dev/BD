@@ -67,7 +67,7 @@ public function dailyReportsSearch(Request $request) {
     public function totalEnquiries(/*Parameters*/){
 
         $id = \request('id');
-        $Details = Enquiry::where('created_by', $id)->orderBy("id", "desc")->paginate(25);
+        $Details = Enquiry::where('created_by', $id)->orderBy("id", "desc")->paginate (10);
         $Details1 = Enquiry::where('created_by', $id)->orderBy("id", "desc")->count();
         foreach ($Details as $enquiry) {
             if (!empty($enquiry->image)) {
@@ -75,12 +75,13 @@ public function dailyReportsSearch(Request $request) {
                 $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
             }
         }
-        return view('Enquiry.EnquiryList')->with(['Details' => $Details,'Details1' => $Details1]);
+        $totalMonthEnquiry = "Total Enquiries";
+        return view('Enquiry.EnquiryList')->with(['Details' => $Details,'Details1' => $Details1, 'totalMonthEnquiry'=>$totalMonthEnquiry]);
     }
     public function getTeamHot(/*Parameters*/){
 
         $id = \request('id');
-        $Details = Enquiry::where(['status_id' => 10, 'created_by' => $id])->paginate(25);
+        $Details = Enquiry::where(['status_id' => 10, 'created_by' => $id])->paginate (10);
         $Details1 = Enquiry::where(['status_id' => 10, 'created_by' => $id])->count();
         foreach ($Details as $enquiry) {
             if (!empty($enquiry->image)) {
@@ -88,13 +89,15 @@ public function dailyReportsSearch(Request $request) {
                 $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
             }
         }
-        return view('Enquiry.EnquiryList')->with(['Details' => $Details,'Details1' => $Details1]);
+        $hotMonthEnquiry = "Hot Enquiries";
+
+        return view('Enquiry.EnquiryList')->with(['Details' => $Details,'Details1' => $Details1, 'hotMonthEnquiry'=>$hotMonthEnquiry]);
     }
 
     public function monthTillDate(/*Parameters*/){
 
         $id = \request('id');
-        $Details = Enquiry::where('created_by', $id)->whereMonth('created_at', Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->paginate(25);
+        $Details = Enquiry::where('created_by', $id)->whereMonth('created_at', Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->paginate (10);
         $Details1 = Enquiry::where('created_by', $id)->whereMonth('created_at', Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->count();
 
         foreach ($Details as $enquiry) {
@@ -103,12 +106,13 @@ public function dailyReportsSearch(Request $request) {
                 $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
             }
         }
-        return view('Enquiry.EnquiryList')->with(['Details' => $Details,'Details1' => $Details1]);
+        $mtdMonthEnquiry = "Month Till Date Enquiries";
+        return view('Enquiry.EnquiryList')->with(['Details' => $Details,'Details1' => $Details1, 'mtdMonthEnquiry'=>$mtdMonthEnquiry]);
     }
     public function recAchieved(/*Parameters*/){
 
         $id = \request('id');
-        $Details = Enquiry::where('created_by', $id)->where(['status_id' => 15, 'enquiry_type_id' => 4])->whereMonth('break_date', Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->paginate(25);
+        $Details = Enquiry::where('created_by', $id)->where(['status_id' => 15, 'enquiry_type_id' => 4])->whereMonth('break_date', Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->paginate (10);
         $Details1 = Enquiry::where('created_by', $id)->where(['status_id' => 15, 'enquiry_type_id' => 4])->whereMonth('break_date', Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->count();
 
         foreach ($Details as $enquiry) {
@@ -117,12 +121,13 @@ public function dailyReportsSearch(Request $request) {
                 $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
             }
         }
-        return view('Enquiry.breakEnquiry')->with(['Details' => $Details,'Details1' => $Details1]);
+        $recMonthEnquiry = "Recuirment Achieve Enquiries";
+        return view('Enquiry.breakEnquiry')->with(['Details' => $Details,'Details1' => $Details1, 'recMonthEnquiry'=>$recMonthEnquiry]);
     }
     public function tempAchieved(/*Parameters*/){
 
         $id = \request('id');
-        $Details = Enquiry::where('created_by', $id)->where(['status_id' => 15, 'enquiry_type_id' => 5])->whereMonth('break_date', Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->paginate(25);
+        $Details = Enquiry::where('created_by', $id)->where(['status_id' => 15, 'enquiry_type_id' => 5])->whereMonth('break_date', Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->paginate (10);
         $Details1 = Enquiry::where('created_by', $id)->where(['status_id' => 15, 'enquiry_type_id' => 5])->whereMonth('break_date', Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->count();
         foreach ($Details as $enquiry) {
             if (!empty($enquiry->image)) {
@@ -130,13 +135,14 @@ public function dailyReportsSearch(Request $request) {
                 $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
             }
         }
-        return view('Enquiry.breakEnquiry')->with(['Details' => $Details,'Details1' => $Details1]);
+        $tempMonthEnquiry = "Temp Achieve Enquiries";
+        return view('Enquiry.breakEnquiry')->with(['Details' => $Details,'Details1' => $Details1, 'tempMonthEnquiry'=>$tempMonthEnquiry]);
     }
 
     public function fmsAchieved(/*Parameters*/){
 
         $id = \request('id');
-        $Details = Enquiry::where('created_by', $id)->where(['status_id' => 15, 'enquiry_type_id' => 6])->whereMonth('break_date', Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->paginate(25);
+        $Details = Enquiry::where('created_by', $id)->where(['status_id' => 15, 'enquiry_type_id' => 6])->whereMonth('break_date', Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->paginate (10);
         $Details1 = Enquiry::where('created_by', $id)->where(['status_id' => 15, 'enquiry_type_id' => 6])->whereMonth('break_date', Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->count();
 
         foreach ($Details as $enquiry) {
@@ -145,12 +151,13 @@ public function dailyReportsSearch(Request $request) {
                 $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
             }
         }
-        return view('Enquiry.breakEnquiry')->with(['Details' => $Details,'Details1' => $Details1]);
+        $fmsMonthEnquiry = "FMS Achieve Enquiries";
+        return view('Enquiry.breakEnquiry')->with(['Details' => $Details,'Details1' => $Details1, 'fmsMonthEnquiry'=>$fmsMonthEnquiry]);
     }
     public function payAchieved(/*Parameters*/){
 
         $id = \request('id');
-        $Details = Enquiry::where('created_by', $id)->where(['status_id' => 15, 'enquiry_type_id' => 7])->whereMonth('break_date', Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->paginate(25);
+        $Details = Enquiry::where('created_by', $id)->where(['status_id' => 15, 'enquiry_type_id' => 7])->whereMonth('break_date', Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->paginate (10);
         $Details1 = Enquiry::where('created_by', $id)->where(['status_id' => 15, 'enquiry_type_id' => 7])->whereMonth('break_date', Carbon::now()->month)->whereYear('created_at',Carbon::now()->year)->count();
 
         foreach ($Details as $enquiry) {
@@ -159,13 +166,14 @@ public function dailyReportsSearch(Request $request) {
                 $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
             }
         }
-        return view('Enquiry.breakEnquiry')->with(['Details' => $Details,'Details1' => $Details1]);
+        $payrollMonthEnquiry = "Payroll Achieve Enquiries";
+        return view('Enquiry.breakEnquiry')->with(['Details' => $Details,'Details1' => $Details1, 'payrollMonthEnquiry'=>$payrollMonthEnquiry]);
     }
 
     public function todayEnquiry(/*Parameters*/){
 
         $id = \request('id');
-        $Details = Enquiry::where('created_by', $id)->whereRaw('Date(created_at) = CURDATE()')->paginate(25);
+        $Details = Enquiry::where('created_by', $id)->whereRaw('Date(created_at) = CURDATE()')->paginate (10);
         $Details1 = Enquiry::where('created_by', $id)->whereRaw('Date(created_at) = CURDATE()')->get()->count();
         foreach ($Details as $enquiry) {
             if (!empty($enquiry->image)) {
@@ -173,7 +181,8 @@ public function dailyReportsSearch(Request $request) {
                 $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
             }
         }
-        return view('Enquiry.EnquiryList')->with(['Details' => $Details,'Details1' => $Details1]);
+        $todayMonthEnquiry = "Today Enquiries";
+        return view('Enquiry.EnquiryList')->with(['Details' => $Details,'Details1' => $Details1, 'todayMonthEnquiry'=>$todayMonthEnquiry]);
     }
 
     public function teamEnquiryReport(){

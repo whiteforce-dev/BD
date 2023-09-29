@@ -51,6 +51,9 @@ Route::get('/edit-employee/{id}', [TeamController::class, 'editEmp']);
 Route::post('/update-employee/{id}', [TeamController::class, 'updateEmp']);
 Route::get('/delete-employee/{id}', [TeamController::class, 'deleteEmp']);
 Route::get('/resign-employee/{id}', [TeamController::class, 'resignEmp']);
+Route::get('change-password/{id}', [TeamController::class, 'changePassword']);
+Route::get('update-password/{id}', [TeamController::class, 'updatePassword']);
+
 
 
 //Enquiry
@@ -131,7 +134,8 @@ Route::get('searchHbd', [HBDController::class, 'searchHbd']);
 Route::get('pendingBirthdays', [HBDController::class, 'pendingBirthdays']);
 Route::get('pendingBirthdaysList/{id}', [HBDController::class, 'pendingBirthdaysList'])->name('pendingBirthdaysList');
 Route::get('searchPendingHbdCount', [HBDController::class, 'searchPendingHbdCount']);
-
+Route::get('addedBirthdaysList/{id}',[HBDController::class, 'addedBirthdaysList']);
+// Route::get('pendingbirthdayslist/{userid}/{pending}/{from_date}/{to_date}/{status}',[AdminController::class, 'pendingbirthdayslist']);
 
 // Monthly Target
 Route::get('assignTarget', [TargetController::class, 'assignTarget']);

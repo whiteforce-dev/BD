@@ -23,7 +23,7 @@
                                     <h3 class="mb-0 font-w600 fs-22" style="font-size: 1.05rem !important;
                                     color: #383e45;
                                     margin-top: -3px;">
-                                        Total Enquiries - {{ $Details1 }}</h3>
+                                        Total Break Enquiries - {{ $Details1 }}</h3>
                                 </div>
 
                                     <div class="col-md-4" style="max-width: 11% !important;
@@ -80,7 +80,7 @@
                             <input type="checkbox"
                             style="border: 2px solid #d2d4DE; position: absolute;
                                     right: 0 !important;
-                                    left: 980px;
+                                    margin-right: 10px;
                                     top: 8px;"
                             type="checkbox" class="form-check-input" name="email" value="{{ $obj->email }}"
                             class="checkBoxClass" value="{{ $obj->id }}" />
@@ -152,9 +152,6 @@
                              @endif
                             </div>
                         </div>
-                        <!-- <div class="btn">
-                                                        <button>Action</button>
-                                        </div> -->
                     </div>
 
                 </div>
@@ -433,5 +430,6 @@
             @include('Enquiry.viewFollowUp')
         @endforeach
    {{ $Details->appends(request()->except('page'))->links('pagination::bootstrap-4') }}
+
 
 

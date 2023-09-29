@@ -212,156 +212,187 @@
 
 		<div class="content">
 			<div class="row">
-                <div class="col-xl-8">
-                    <div class="card">
-                        <div class="card-header border-0 pb-0 flex-wrap">
-                            <h4 class="fs-20 font-w500">Best Selling</h4>
-                            <div class="card-action coin-tabs">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#Monthly">
-                                            Monthly
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " data-bs-toggle="tab" href="#Weekly">
-                                            Weekly
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " data-bs-toggle="tab" href="#Weekly">
-                                            Weekly
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " data-bs-toggle="tab" href="#Daily">
-                                            Daily
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-body pt-2">
-                            <div class="tab-content">
-                                <div class="tab-pane fade active show" id="Monthly">
-                                    <div class="d-sm-flex d-block align-items-center justify-content-center">
-                                        <div class="col-xl-6 col-xxl-5 text-center">
-                                            <div id="donutChart2" class="donutChart2 d-inline-block"></div>
-                                        </div>
-                                        <div class="col-xl-6 col-xxl-7">
-                                            <p class="fs-12 mt-3">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                                                dolore magna aliqua. Ut enim ad mini</p>
-                                            <div class="d-flex  mt-4">
-                                                <div class="me-4">
-                                                    <svg width="20" height="8" viewBox="0 0 20 8"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="20" height="8" rx="4" fill="#FB3E7A" />
-                                                    </svg>
-                                                    <h4 class="fs-18 text-black mb-0 font-w600">21,512</h4>
-                                                    <span class="fs-14">Ticket Left</span>
-                                                </div>
-                                                <div class="me-4">
-                                                    <svg class="primary-icon" width="20" height="8"
-                                                        viewBox="0 0 20 8" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="20" height="8" rx="4" fill="#4585ED" />
-                                                    </svg>
-                                                    <h4 class="fs-18 text-black mb-0 font-w600">45,612</h4>
-                                                    <span class="fs-14">Ticket Sold</span>
-                                                </div>
-                                                <div class="">
-                                                    <svg width="20" height="8" viewBox="0 0 20 8" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="20" height="8" rx="4" fill="#C8C8C8" />
-                                                    </svg>
-                                                    <h4 class="fs-18 text-black mb-0 font-w600">275</h4>
-                                                    <span class="fs-14">Event Held</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="Weekly">
-                                    <div class="d-sm-flex d-block align-items-center justify-content-center">
-                                        <div class="col-xl-6 col-xxl-5 text-center">
-                                            <div id="donutChart3" class="donutChart2 d-inline-block"></div>
-                                        </div>
-                                        <div class="col-xl-6 col-xxl-7">
-                                            <p class="fs-12 mt-3">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                                                dolore magna aliqua. Ut enim ad mini</p>
-                                            <div class="d-flex  mt-4">
-                                                <div class="me-4">
-                                                    <svg width="20" height="8" viewBox="0 0 20 8" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="20" height="8" rx="4" fill="#FB3E7A" />
-                                                    </svg>
-                                                    <h4 class="fs-18 text-black mb-0 font-w600">21,512</h4>
-                                                    <span class="fs-14">Ticket Left</span>
-                                                </div>
-                                                <div class="me-4">
-                                                    <svg width="20" height="8" viewBox="0 0 20 8" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="20" height="8" rx="4" fill="#0E8A74" />
-                                                    </svg>
-                                                    <h4 class="fs-18 text-black mb-0 font-w600">45,612</h4>
-                                                    <span class="fs-14">Ticket Sold</span>
-                                                </div>
-                                                <div class="">
-                                                    <svg width="20" height="8" viewBox="0 0 20 8" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="20" height="8" rx="4" fill="#C8C8C8" />
-                                                    </svg>
-                                                    <h4 class="fs-18 text-black mb-0 font-w600">275</h4>
-                                                    <span class="fs-14">Event Held</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="Daily">
-                                    <div class="d-sm-flex d-block align-items-center justify-content-center">
-                                        <div class="col-xl-6 col-xxl-5 text-center">
-                                            <div id="donutChart4" class="donutChart2 d-inline-block"></div>
-                                        </div>
-                                        <div class="col-xl-6 col-xxl-7">
-                                            <p class="fs-12 mt-3">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                                                dolore magna aliqua. Ut enim ad mini</p>
-                                            <div class="d-flex  mt-4">
-                                                <div class="me-4">
-                                                    <svg width="20" height="8" viewBox="0 0 20 8" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="20" height="8" rx="4" fill="#FB3E7A" />
-                                                    </svg>
-                                                    <h4 class="fs-18 text-black mb-0 font-w600">21,512</h4>
-                                                    <span class="fs-14">Ticket Left</span>
-                                                </div>
-                                                <div class="me-4">
-                                                    <svg width="20" height="8" viewBox="0 0 20 8" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="20" height="8" rx="4" fill="#0E8A74" />
-                                                    </svg>
-                                                    <h4 class="fs-18 text-black mb-0 font-w600">45,612</h4>
-                                                    <span class="fs-14">Ticket Sold</span>
-                                                </div>
-                                                <div class="">
-                                                    <svg width="20" height="8" viewBox="0 0 20 8" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <rect width="20" height="8" rx="4" fill="#C8C8C8" />
-                                                    </svg>
-                                                    <h4 class="fs-18 text-black mb-0 font-w600">275</h4>
-                                                    <span class="fs-14">Event Held</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+				<div class="col-md-8">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="fs-20">Users Behavior</h4>
+							<p class="card-category">24 Hours performance</p>
+						</div>
+						<div class="card-body">
+							<div id="div_151327004007" class="ct-chart"><svg
+									xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="245px"
+									class="ct-chart-line" style="width: 100%; height: 245px;">
+									<g class="ct-grids">
+										<line y1="210" y2="210" x1="50" x2="594" class="ct-grid ct-vertical"></line>
+										<line y1="185.625" y2="185.625" x1="50" x2="594" class="ct-grid ct-vertical">
+										</line>
+										<line y1="161.25" y2="161.25" x1="50" x2="594" class="ct-grid ct-vertical">
+										</line>
+										<line y1="136.875" y2="136.875" x1="50" x2="594" class="ct-grid ct-vertical">
+										</line>
+										<line y1="112.5" y2="112.5" x1="50" x2="594" class="ct-grid ct-vertical"></line>
+										<line y1="88.125" y2="88.125" x1="50" x2="594" class="ct-grid ct-vertical">
+										</line>
+										<line y1="63.75" y2="63.75" x1="50" x2="594" class="ct-grid ct-vertical"></line>
+										<line y1="39.375" y2="39.375" x1="50" x2="594" class="ct-grid ct-vertical">
+										</line>
+										<line y1="15" y2="15" x1="50" x2="594" class="ct-grid ct-vertical"></line>
+									</g>
+									<g>
+										<g class="ct-series ct-series-a">
+											<path
+												d="M50,140.044C75.905,132.081,101.81,124.393,127.714,116.156C153.619,107.919,179.524,90.881,205.429,90.563C231.333,90.244,257.238,90.39,283.143,90.075C309.048,89.76,334.952,78.392,360.857,74.963C386.762,71.533,412.667,71.207,438.571,67.163C464.476,63.118,490.381,39.863,516.286,39.863C542.19,39.863,568.095,40.35,594,40.594"
+												class="ct-line"></path>
+											<line x1="50" y1="140.04375" x2="50.01" y2="140.04375" class="ct-point"
+												ct:value="287" opacity="1"></line>
+											<line x1="127.71428571428571" y1="116.15625" x2="127.72428571428571"
+												y2="116.15625" class="ct-point" ct:value="385" opacity="1"></line>
+											<line x1="205.42857142857142" y1="90.5625" x2="205.4385714285714"
+												y2="90.5625" class="ct-point" ct:value="490" opacity="1"></line>
+											<line x1="283.1428571428571" y1="90.075" x2="283.1528571428571" y2="90.075"
+												class="ct-point" ct:value="492" opacity="1"></line>
+											<line x1="360.85714285714283" y1="74.9625" x2="360.8671428571428"
+												y2="74.9625" class="ct-point" ct:value="554" opacity="1"></line>
+											<line x1="438.57142857142856" y1="67.1625" x2="438.58142857142855"
+												y2="67.1625" class="ct-point" ct:value="586" opacity="1"></line>
+											<line x1="516.2857142857142" y1="39.86250000000001" x2="516.2957142857142"
+												y2="39.86250000000001" class="ct-point" ct:value="698" opacity="1">
+											</line>
+											<line x1="594" y1="40.59375" x2="594.01" y2="40.59375" class="ct-point"
+												ct:value="695" opacity="1"></line>
+										</g>
+										<g class="ct-series ct-series-b">
+											<path
+												d="M50,193.669C75.905,186.763,101.81,172.95,127.714,172.95C153.619,172.95,179.524,175.144,205.429,175.144C231.333,175.144,257.238,156.645,283.143,151.5C309.048,146.355,334.952,143.903,360.857,140.044C386.762,136.185,412.667,133.614,438.571,128.344C464.476,123.073,490.381,104.287,516.286,103.969C542.19,103.65,568.095,103.644,594,103.481"
+												class="ct-line"></path>
+											<line x1="50" y1="193.66875" x2="50.01" y2="193.66875" class="ct-point"
+												ct:value="67" opacity="1"></line>
+											<line x1="127.71428571428571" y1="172.95" x2="127.72428571428571"
+												y2="172.95" class="ct-point" ct:value="152" opacity="1"></line>
+											<line x1="205.42857142857142" y1="175.14375" x2="205.4385714285714"
+												y2="175.14375" class="ct-point" ct:value="143" opacity="1"></line>
+											<line x1="283.1428571428571" y1="151.5" x2="283.1528571428571" y2="151.5"
+												class="ct-point" ct:value="240" opacity="1"></line>
+											<line x1="360.85714285714283" y1="140.04375" x2="360.8671428571428"
+												y2="140.04375" class="ct-point" ct:value="287" opacity="1"></line>
+											<line x1="438.57142857142856" y1="128.34375" x2="438.58142857142855"
+												y2="128.34375" class="ct-point" ct:value="335" opacity="1"></line>
+											<line x1="516.2857142857142" y1="103.96875" x2="516.2957142857142"
+												y2="103.96875" class="ct-point" ct:value="435" opacity="1"></line>
+											<line x1="594" y1="103.48125" x2="594.01" y2="103.48125" class="ct-point"
+												ct:value="437" opacity="1"></line>
+										</g>
+										<g class="ct-series ct-series-c">
+											<path
+												d="M50,204.394C75.905,197.081,101.81,182.456,127.714,182.456C153.619,182.456,179.524,193.669,205.429,193.669C231.333,193.669,257.238,188.117,283.143,183.675C309.048,179.233,334.952,168.672,360.857,163.688C386.762,158.703,412.667,156.372,438.571,151.744C464.476,147.116,490.381,135.329,516.286,135.169C542.19,135.009,568.095,135.006,594,134.925"
+												class="ct-line"></path>
+											<line x1="50" y1="204.39375" x2="50.01" y2="204.39375" class="ct-point"
+												ct:value="23" opacity="1"></line>
+											<line x1="127.71428571428571" y1="182.45625" x2="127.72428571428571"
+												y2="182.45625" class="ct-point" ct:value="113" opacity="1"></line>
+											<line x1="205.42857142857142" y1="193.66875" x2="205.4385714285714"
+												y2="193.66875" class="ct-point" ct:value="67" opacity="1"></line>
+											<line x1="283.1428571428571" y1="183.675" x2="283.1528571428571"
+												y2="183.675" class="ct-point" ct:value="108" opacity="1"></line>
+											<line x1="360.85714285714283" y1="163.6875" x2="360.8671428571428"
+												y2="163.6875" class="ct-point" ct:value="190" opacity="1"></line>
+											<line x1="438.57142857142856" y1="151.74375" x2="438.58142857142855"
+												y2="151.74375" class="ct-point" ct:value="239" opacity="1"></line>
+											<line x1="516.2857142857142" y1="135.16875" x2="516.2957142857142"
+												y2="135.16875" class="ct-point" ct:value="307" opacity="1"></line>
+											<line x1="594" y1="134.925" x2="594.01" y2="134.925" class="ct-point"
+												ct:value="308" opacity="1"></line>
+										</g>
+									</g>
+									<g class="ct-labels">
+										<foreignObject style="overflow: visible;" x="50" y="215"
+											width="77.71428571428571" height="20"><span
+												class="ct-label ct-horizontal ct-end"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="width: 78px; height: 20px;">9:00AM</span></foreignObject>
+										<foreignObject style="overflow: visible;" x="127.71428571428571" y="215"
+											width="77.71428571428571" height="20"><span
+												class="ct-label ct-horizontal ct-end"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="width: 78px; height: 20px;">12:00AM</span></foreignObject>
+										<foreignObject style="overflow: visible;" x="205.42857142857142" y="215"
+											width="77.7142857142857" height="20"><span
+												class="ct-label ct-horizontal ct-end"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="width: 78px; height: 20px;">3:00PM</span></foreignObject>
+										<foreignObject style="overflow: visible;" x="283.1428571428571" y="215"
+											width="77.71428571428572" height="20"><span
+												class="ct-label ct-horizontal ct-end"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="width: 78px; height: 20px;">6:00PM</span></foreignObject>
+										<foreignObject style="overflow: visible;" x="360.85714285714283" y="215"
+											width="77.71428571428572" height="20"><span
+												class="ct-label ct-horizontal ct-end"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="width: 78px; height: 20px;">9:00PM</span></foreignObject>
+										<foreignObject style="overflow: visible;" x="438.57142857142856" y="215"
+											width="77.71428571428567" height="20"><span
+												class="ct-label ct-horizontal ct-end"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="width: 78px; height: 20px;">12:00PM</span></foreignObject>
+										<foreignObject style="overflow: visible;" x="516.2857142857142" y="215"
+											width="77.71428571428578" height="20"><span
+												class="ct-label ct-horizontal ct-end"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="width: 78px; height: 20px;">3:00AM</span></foreignObject>
+										<foreignObject style="overflow: visible;" x="594" y="215" width="30"
+											height="20"><span class="ct-label ct-horizontal ct-end"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="width: 30px; height: 20px;">6:00AM</span></foreignObject>
+										<foreignObject style="overflow: visible;" y="185.625" x="10" height="24.375"
+											width="30"><span class="ct-label ct-vertical ct-start"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="height: 24px; width: 30px;">0</span></foreignObject>
+										<foreignObject style="overflow: visible;" y="161.25" x="10" height="24.375"
+											width="30"><span class="ct-label ct-vertical ct-start"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="height: 24px; width: 30px;">100</span></foreignObject>
+										<foreignObject style="overflow: visible;" y="136.875" x="10" height="24.375"
+											width="30"><span class="ct-label ct-vertical ct-start"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="height: 24px; width: 30px;">200</span></foreignObject>
+										<foreignObject style="overflow: visible;" y="112.5" x="10" height="24.375"
+											width="30"><span class="ct-label ct-vertical ct-start"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="height: 24px; width: 30px;">300</span></foreignObject>
+										<foreignObject style="overflow: visible;" y="88.125" x="10" height="24.375"
+											width="30"><span class="ct-label ct-vertical ct-start"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="height: 24px; width: 30px;">400</span></foreignObject>
+										<foreignObject style="overflow: visible;" y="63.75" x="10" height="24.375"
+											width="30"><span class="ct-label ct-vertical ct-start"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="height: 24px; width: 30px;">500</span></foreignObject>
+										<foreignObject style="overflow: visible;" y="39.375" x="10" height="24.375"
+											width="30"><span class="ct-label ct-vertical ct-start"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="height: 24px; width: 30px;">600</span></foreignObject>
+										<foreignObject style="overflow: visible;" y="15" x="10" height="24.375"
+											width="30"><span class="ct-label ct-vertical ct-start"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="height: 24px; width: 30px;">700</span></foreignObject>
+										<foreignObject style="overflow: visible;" y="-15" x="10" height="30" width="30">
+											<span class="ct-label ct-vertical ct-start"
+												xmlns="http://www.w3.org/2000/xmlns/"
+												style="height: 30px; width: 30px;">800</span></foreignObject>
+									</g>
+								</svg></div>
+						</div>
+						<div class="card-footer">
+							<div class="legend"><i class="fa fa-circle text-info"></i> Open
+								<i class="fa fa-circle text-danger"></i> Click
+								<i class="fa fa-circle text-warning"></i> Click Second Time
+							</div>
+							<div class="stats">
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="col-md-4">
 					<div class="card">
 						<div style="height:20px;opacity: 0.8;" class="card-body">
@@ -513,38 +544,155 @@
 
 				<div class="col-xl-12">
 					<div class="row">
-						<div class="col-lg-6">
+						<div class="col-xl-6">
 							<div class="card">
-								<div class="card-header border-0 pb-0">
-									<h4 class="fs-20"> Business Achieved (month)</h4>
+								<div class="card-header border-0 pb-0 flex-wrap">
+									<h4 class="fs-20 font-w500">Best Selling</h4>
+									<div class="card-action coin-tabs">
+										<ul class="nav nav-tabs" role="tablist">
+											<li class="nav-item">
+												<a class="nav-link active" data-bs-toggle="tab" href="#Monthly">
+													Monthly
+												</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link " data-bs-toggle="tab" href="#Weekly">
+													Weekly
+												</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link " data-bs-toggle="tab" href="#Weekly">
+													Weekly
+												</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link " data-bs-toggle="tab" href="#Daily">
+													Daily
+												</a>
+											</li>
+										</ul>
+									</div>
 								</div>
-								<div style: opacity :0.6; class="card-body pb-0">
-									<ul class="list-group list-group-flush">
-										<li class="list-group-item d-flex px-0 justify-content-between">
-											<h6>Gender</h6>
-											<span class="mb-0">Male</span>
-										</li>
-										<li class="list-group-item d-flex px-0 justify-content-between">
-											<h6>Education</h6>
-											<span class="mb-0">PHD</span>
-										</li>
-										<li class="list-group-item d-flex px-0 justify-content-between">
-											<h6>Designation</h6>
-											<span class="mb-0">Se. Professor</span>
-										</li>
-										<li class="list-group-item d-flex px-0 justify-content-between">
-											<h6>Operation Done</h6>
-											<span class="mb-0">120</span>
-										</li>
-									</ul>
-
-								</div>
-								<div class="card-footer pt-0 border-0">
-									<a href="javascript:void(0);" class="btn btn-secondary btn-block text-white">View
-										Detail</a>
+								<div class="card-body pt-2">
+									<div class="tab-content">
+										<div class="tab-pane fade active show" id="Monthly">
+											<div class="d-sm-flex d-block align-items-center justify-content-center">
+												<div class="col-xl-6 col-xxl-5 text-center">
+													<div id="donutChart2" class="donutChart2 d-inline-block"></div>
+												</div>
+												<div class="col-xl-6 col-xxl-7">
+													<p class="fs-12 mt-3">Lorem ipsum dolor sit amet, consectetur
+														adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+														dolore magna aliqua. Ut enim ad mini</p>
+													<div class="d-flex  mt-4">
+														<div class="me-4">
+															<svg width="20" height="8" viewBox="0 0 20 8"
+																xmlns="http://www.w3.org/2000/svg">
+																<rect width="20" height="8" rx="4" fill="#FB3E7A" />
+															</svg>
+															<h4 class="fs-18 text-black mb-0 font-w600">21,512</h4>
+															<span class="fs-14">Ticket Left</span>
+														</div>
+														<div class="me-4">
+															<svg class="primary-icon" width="20" height="8"
+																viewBox="0 0 20 8" fill="none"
+																xmlns="http://www.w3.org/2000/svg">
+																<rect width="20" height="8" rx="4" fill="#4585ED" />
+															</svg>
+															<h4 class="fs-18 text-black mb-0 font-w600">45,612</h4>
+															<span class="fs-14">Ticket Sold</span>
+														</div>
+														<div class="">
+															<svg width="20" height="8" viewBox="0 0 20 8" fill="none"
+																xmlns="http://www.w3.org/2000/svg">
+																<rect width="20" height="8" rx="4" fill="#C8C8C8" />
+															</svg>
+															<h4 class="fs-18 text-black mb-0 font-w600">275</h4>
+															<span class="fs-14">Event Held</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="Weekly">
+											<div class="d-sm-flex d-block align-items-center justify-content-center">
+												<div class="col-xl-6 col-xxl-5 text-center">
+													<div id="donutChart3" class="donutChart2 d-inline-block"></div>
+												</div>
+												<div class="col-xl-6 col-xxl-7">
+													<p class="fs-12 mt-3">Lorem ipsum dolor sit amet, consectetur
+														adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+														dolore magna aliqua. Ut enim ad mini</p>
+													<div class="d-flex  mt-4">
+														<div class="me-4">
+															<svg width="20" height="8" viewBox="0 0 20 8" fill="none"
+																xmlns="http://www.w3.org/2000/svg">
+																<rect width="20" height="8" rx="4" fill="#FB3E7A" />
+															</svg>
+															<h4 class="fs-18 text-black mb-0 font-w600">21,512</h4>
+															<span class="fs-14">Ticket Left</span>
+														</div>
+														<div class="me-4">
+															<svg width="20" height="8" viewBox="0 0 20 8" fill="none"
+																xmlns="http://www.w3.org/2000/svg">
+																<rect width="20" height="8" rx="4" fill="#0E8A74" />
+															</svg>
+															<h4 class="fs-18 text-black mb-0 font-w600">45,612</h4>
+															<span class="fs-14">Ticket Sold</span>
+														</div>
+														<div class="">
+															<svg width="20" height="8" viewBox="0 0 20 8" fill="none"
+																xmlns="http://www.w3.org/2000/svg">
+																<rect width="20" height="8" rx="4" fill="#C8C8C8" />
+															</svg>
+															<h4 class="fs-18 text-black mb-0 font-w600">275</h4>
+															<span class="fs-14">Event Held</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="Daily">
+											<div class="d-sm-flex d-block align-items-center justify-content-center">
+												<div class="col-xl-6 col-xxl-5 text-center">
+													<div id="donutChart4" class="donutChart2 d-inline-block"></div>
+												</div>
+												<div class="col-xl-6 col-xxl-7">
+													<p class="fs-12 mt-3">Lorem ipsum dolor sit amet, consectetur
+														adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+														dolore magna aliqua. Ut enim ad mini</p>
+													<div class="d-flex  mt-4">
+														<div class="me-4">
+															<svg width="20" height="8" viewBox="0 0 20 8" fill="none"
+																xmlns="http://www.w3.org/2000/svg">
+																<rect width="20" height="8" rx="4" fill="#FB3E7A" />
+															</svg>
+															<h4 class="fs-18 text-black mb-0 font-w600">21,512</h4>
+															<span class="fs-14">Ticket Left</span>
+														</div>
+														<div class="me-4">
+															<svg width="20" height="8" viewBox="0 0 20 8" fill="none"
+																xmlns="http://www.w3.org/2000/svg">
+																<rect width="20" height="8" rx="4" fill="#0E8A74" />
+															</svg>
+															<h4 class="fs-18 text-black mb-0 font-w600">45,612</h4>
+															<span class="fs-14">Ticket Sold</span>
+														</div>
+														<div class="">
+															<svg width="20" height="8" viewBox="0 0 20 8" fill="none"
+																xmlns="http://www.w3.org/2000/svg">
+																<rect width="20" height="8" rx="4" fill="#C8C8C8" />
+															</svg>
+															<h4 class="fs-18 text-black mb-0 font-w600">275</h4>
+															<span class="fs-14">Event Held</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
-
 						</div>
 						<div class="col-xl-6">
 							<div class="card bg-primary">

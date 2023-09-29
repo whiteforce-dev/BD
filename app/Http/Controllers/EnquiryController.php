@@ -132,7 +132,7 @@ class EnquiryController extends Controller
 
          }
             $detail2 = $detail->get();
-            $detail = $detail->orderBy("id", "desc")->paginate(25);
+            $detail = $detail->orderBy("id", "desc")->paginate(10);
             $detail1 = $detail2->count();
 
         if ($request->ajax()) {
@@ -197,11 +197,31 @@ class EnquiryController extends Controller
                 $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
             }
         }
-        return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1 ]);
+        $enquiryTagline = "Total Enquiries";
+
+        return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1, 'enquiryTagline'=>$enquiryTagline ]);
     }
 
 
     function storeEnquiry(Request $request){
+
+        $request->validate([
+            'company_name' => 'required|string|max:255',
+            'contact_person' => 'required|string|max:255',
+            'vertical' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'company_type' => 'required|string|in:Old,Start-Up',
+            'next_follow_date' => 'nullable|date',
+            'next_follow_time' => 'nullable|date_format:H:i',
+            'break_date' => 'nullable|date',
+            'email' => 'required|email|max:255',
+            'contact' => 'required|string|max:255',
+            'enquiry_type_id' => 'required|integer',
+            'status_id' => 'required|integer',
+            'desig' => 'required|string|max:255',
+            'dob' => 'nullable|date',
+            'remark' => 'required|string',
+        ]);
 
             $enquiry = new Enquiry();
             $enquiry->enquiry_type_id = $request->input('enquiry_type_id');
@@ -308,7 +328,7 @@ class EnquiryController extends Controller
             });
             // $enquiries1 = Enquiry::where('created_by', $user->id)->orderBy("id", "desc")->count();
         }
-        $enquiries = $enquiries->paginate(25);
+        $enquiries = $enquiries->paginate (10);
         foreach ($enquiries as $enquiry) {
             if (!empty($enquiry->image)) {
                 $disk = Storage::disk('s3');
@@ -327,7 +347,7 @@ class EnquiryController extends Controller
             $enquiries1 = Enquiry::where('created_by', $user->id)->where('status_id', '!=', '15')->orderBy("id", "desc")->count();
         }
 
-        $enquiries = $enquiries->paginate(25);
+        $enquiries = $enquiries->paginate (10);
 
         return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1]);
     }
@@ -445,15 +465,15 @@ class EnquiryController extends Controller
             $enquiries1 = 0;
         }
 
-        $enquiries = $enquiries->paginate(25);
+        $enquiries = $enquiries->paginate(10);
         foreach ($enquiries as $enquiry) {
             if (!empty($enquiry->image)) {
                 $disk = Storage::disk('s3');
                 $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
             }
         }
-
-        return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1 ]);
+        $hotTagline = "Total Hot Enquiries";
+        return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1, 'hotTagline'=>$hotTagline ]);
     }
 
     function holdList(){
@@ -484,15 +504,15 @@ class EnquiryController extends Controller
             $enquiries1 = 0;
         }
 
-        $enquiries = $enquiries->paginate(25);
+        $enquiries = $enquiries->paginate (10);
         foreach ($enquiries as $enquiry) {
             if (!empty($enquiry->image)) {
                 $disk = Storage::disk('s3');
                 $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
             }
         }
-
-        return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1 ]);
+        $holdTagline = "Total Hold Enquiries";
+        return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1, 'holdTagline'=>$holdTagline ]);
 
     }
 
@@ -502,7 +522,7 @@ class EnquiryController extends Controller
     }
 
     public function teamMemberHotList($id){
-        $Details = Enquiry::where(['status_id' => 10, 'created_by' => $id])->paginate(25);
+        $Details = Enquiry::where(['status_id' => 10, 'created_by' => $id])->paginate (10);
         $Details1 = Enquiry::where(['status_id' => 10, 'created_by' => $id])->count();
         return view('Enquiry.EnquiryList')->with(['Details' => $Details,'Details1' => $Details1]);
     }
@@ -513,7 +533,7 @@ class EnquiryController extends Controller
 
         $hotListDetails = Enquiry::whereIn('created_by', $selectedUserIds)
             ->where('status_id', 10)
-            ->paginate(25);
+            ->paginate (10);
 
         $hotListDetailsCount = Enquiry::whereIn('created_by', $selectedUserIds)
             ->where('status_id', 10)
@@ -663,7 +683,7 @@ class EnquiryController extends Controller
 
          }
             $detail2 = $detail->get();
-            $detail = $detail->orderBy("id", "desc")->paginate(25);
+            $detail = $detail->orderBy("id", "desc")->paginate(10);
             $detail1 = $detail2->count();
 
         if ($request->ajax()) {
@@ -909,7 +929,7 @@ class EnquiryController extends Controller
 
     public function todayEnquiries(){
 
-        $Details = Enquiry::where('created_by', Auth::user()->id)->whereRaw('Date(created_at) = CURDATE()')->paginate(25);
+        $Details = Enquiry::where('created_by', Auth::user()->id)->whereRaw('Date(created_at) = CURDATE()')->paginate (10);
         $Details1 = Enquiry::where('created_by',  Auth::user()->id)->whereRaw('Date(created_at) = CURDATE()')->get()->count();
         foreach ($Details as $enquiry) {
             if (!empty($enquiry->image)) {
@@ -920,5 +940,5 @@ class EnquiryController extends Controller
         return view('Enquiry.EnquiryList')->with(['Details' => $Details,'Details1' => $Details1]);
     }
 
-   
+
 }

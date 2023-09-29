@@ -10,27 +10,27 @@
                     </div>
                     <div class="card-body">
                         <div class="basic-form">
-                            <form action = "{{ url('storeEnquiryType') }}" method="POST" enctype="multipart/form-data">
+                            <form class="needs-validation" novalidate action = "{{ url('storeEnquiryType') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
                                     <label class="form-label">Proposal Type</label>
-                                    <input type="text" class="form-control input-default " placeholder="Enter Enquiry Type" name="name" value="{{isset($preview)?$preview->name:''}}" >
-                                    @error('name')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
+                                    <input type="text" class="form-control input-default " placeholder="Enter Enquiry Type" name="name" value="{{isset($preview)?$preview->name:''}}" required >
+                                    <div class="invalid-feedback">
+                                        Please Enter Proposal Type.
+                                    </div>
                                 </div>
                                     <div class="basic-form">
                                             <div class="mb-3">
                                                 <label class="form-label">Description</label>
-                                                <select class="form-control" name="status">
+                                                <select class="form-control" name="status" required>
                                                     <option  value="{{isset($preview)?$preview->status:''}}">{{isset($preview)?$preview->status:'Select'}}</option>
                                                     <option value="Active">Active</option>
                                                     <option value="De-active">De-active</option>
                                                 </select>
+                                                <div class="invalid-feedback">
+                                                    Please Enter Description.
+                                                </div>
                                             </div>
-                                            @error('status')
-                                            <p class="text-danger">{{ $message }}</p>
-                                        @enderror
                                     </div>
 
                                     <div class="col-6" style="margin-left: 200px;">
@@ -44,6 +44,41 @@
 
         </div>
     </div>
+
+        <script src="vendor/global/global.min.js"></script>
+
+    <!-- Jquery Validation -->
+    <!-- <script src="./vendor/jquery-validation/jquery.validate.min.js"></script> -->
+    <!-- Form validate init -->
+    <!-- <script src="./js/plugins-init/jquery.validate-init.js"></script> -->
+
+    <script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+    <script src="js/custom.min.js"></script>
+    <script src="js/deznav-init.js"></script>
+    <script src="js/demo.js"></script>
+    <script src="js/styleSwitcher.js"></script>
+    <script>
+        (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+            })
+        })()
+    </script>
 
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script type="text/javascript">

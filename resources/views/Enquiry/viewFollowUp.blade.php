@@ -35,8 +35,8 @@
                             </a>
                         @endif
                         @if(Auth::user()->type == 'Manager' && 6 == $obj->created_by)
-                                <a href="javascript:void(0)" data-toggle="modal"
-                                  data-target="#addfollowup{{ $obj->id }}"><svg xmlns="http://www.w3.org/2000/svg"
+                        <a href="javascript:void(0)" data-toggle="modal"
+                            data-target="#addfollowup{{ $obj->id }}"><svg xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px"
                                     viewBox="0 0 24 24" version="1.1">
                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -47,8 +47,8 @@
                                             x="4" y="11" width="16" height="2"
                                             rx="1" />
                                     </g>
-                                    </svg>
-                                </a>
+                                </svg>
+                            </a>
                             @else
                             <a href="javascript:void(0)" data-toggle="modal"
                                 data-target="#addMngrRemark{{ $obj->id }}"><svg xmlns="http://www.w3.org/2000/svg"

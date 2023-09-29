@@ -3,14 +3,14 @@
         <div class="modal-dialog">
             <div class="modal-content" style="height:620px;width:750px;">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Remark</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Allote Client</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="card">
                     <div class="model-body">
-                        <form action="{{url('allot-client')}}" method="post" enctype="multipart/form-data">
+                        <form class="needs-validation" novalidate action="{{url('allot-client')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
                                 <div class="row">
@@ -27,6 +27,9 @@
                                             <option value="IT" {{ ($obj->company_sub_type == 'IT') ? 'selected' : '' }}>IT</option>
                                             <option value="one-time" {{ ($obj->company_sub_type == 'one-time') ? 'selected' : '' }}>One Time</option>
                                         </select>
+                                        <div class="invalid-feedback">
+                                            Please select a Company Type.
+                                        </div>
                                     </div>
                                     <div class="form-group col-sm-6" >
                                         <label>Company Sub Type</label>
@@ -37,6 +40,9 @@
                                             <option value="franchise-onrole" {{ ($obj->alloted_software_type == 'franchise-onrole') ? 'selected' : '' }}>Franchise Onrole</option>
                                             <option value="franchise-offrole" {{ ($obj->alloted_software_type == 'franchise-offrole') ? 'selected' : '' }}>Franchise Offrole</option>
                                         </select>
+                                        <div class="invalid-feedback">
+                                            Please select Company Sub Type.
+                                        </div>
                                     </div>
 
                                     <div class="form-group col-sm-6">
@@ -45,7 +51,9 @@
                                             <select   name="alloted_to[]" class="form-control manager" id="alloted_to{{ $obj->id }}" required multiple = "multiple" >
                                                 <option>Select Senior Manager/Manager</option>
                                             </select>
-
+                                            <div class="invalid-feedback">
+                                                Please select a Senior Manager/Manager.
+                                            </div>
                                         </div>
 
 
@@ -54,26 +62,41 @@
                                     <div class="form-group col-sm-6" >
                                         <label>Number Of Requirement</label>
                                         <input type="number" name="no_of_requirement" id="no_of_requirement" value="{{ $obj->no_req }}" class="form-control" required>
+                                        <div class="invalid-feedback">
+                                            Please enter Number Of Requirement.
+                                        </div>
                                     </div>
 
                                     <div class="form-group col-sm-6" >
                                         <label>Percetange</label>
                                         <input type="text" name="percentage" id="percentage" value="{{ $obj->percentage }}" class="form-control" >
+                                        <div class="invalid-feedback">
+                                            Please enter Percetange.
+                                        </div>
                                     </div>
 
                                     <div class="form-group col-sm-6" >
                                         <label>Company Logo</label>
                                         <input type="file" name="company_logo" id="company_logo" value="" class="form-control" required>
+                                        <div class="invalid-feedback">
+                                            Please select Company Logo.
+                                        </div>
                                     </div>
 
                                     <div class="form-group col-sm-6" >
                                         <label>Company Website</label>
                                         <input type="text" name="company_website" id="company_website" value="{{ $obj->client_website }}" class="form-control">
+                                        <div class="invalid-feedback">
+                                            Please enter Company Website.
+                                        </div>
                                     </div>
 
                                     <div class="form-group col-sm-12" >
                                         <label>About Company</label>
                                         <input type="text" name="about_company" id="about_company" value="{{ $obj->clientabt }}" class="form-control">
+                                        <div class="invalid-feedback">
+                                            Please enter About Company.
+                                        </div>
                                     </div>
 
 
@@ -97,6 +120,41 @@
         </div>
     </div>
 @endif
+
+    <script src="vendor/global/global.min.js"></script>
+
+    <!-- Jquery Validation -->
+    <!-- <script src="./vendor/jquery-validation/jquery.validate.min.js"></script> -->
+    <!-- Form validate init -->
+    <!-- <script src="./js/plugins-init/jquery.validate-init.js"></script> -->
+
+    <script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+    <script src="js/custom.min.js"></script>
+    <script src="js/deznav-init.js"></script>
+    <script src="js/demo.js"></script>
+    <script src="js/styleSwitcher.js"></script>
+    <script>
+        (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+            })
+        })()
+    </script>
 
  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

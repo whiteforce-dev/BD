@@ -209,8 +209,18 @@ class HomeController extends Controller
                if ($teamApproachAchived === null) {
                    $teamApproachAchived = 0;
                }
-        return view('DashBoard', compact('enquiries1', 'hotCount', 'todayEnquiries', 'approached', 'approachedPending', 'activeMember', 'breakEnquiry', 'totalBreakEnquiry', 'totalHotEnquiry', 'totalTeamEnquiry', 'teamApproachAchived' ));
+
+               //monthly target
+               $userr = User::where(['is_active'=> 1])->get();
+
+               //yesterday enquiries
+               $yesterday = Carbon::yesterday()->toDateString();
+               $yesterdayEnq = Enquiry::where('created_by', Auth::user()->id)
+               ->whereDate('created_at', $yesterday)
+               ->count();
+
+        return view('DashBoard', compact('enquiries1', 'hotCount', 'todayEnquiries', 'approached', 'approachedPending', 'activeMember', 'breakEnquiry', 'totalBreakEnquiry', 'totalHotEnquiry', 'totalTeamEnquiry', 'teamApproachAchived', 'userr', 'yesterdayEnq' ));
     }
 
-
+   
 }

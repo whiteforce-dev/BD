@@ -9,7 +9,7 @@
             </div>
             <div class="card">
                 <div class="model-body">
-                    <form action="{{url('storeAgreement')}}" method="post"  enctype="multipart/form-data">
+                    <form class="needs-validation" novalidate action="{{url('storeAgreement')}}" method="post"  enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
 
@@ -28,15 +28,19 @@
 
                             <div class="form-group">
                                 <label>Aggrement Pdf Upload</label>
-                               <input type="file" name="pdf_upload" class="form-control" value="{{ isset($obj->pdf_upload)?$obj->pdf_upload:'N/A' }}">
-
+                               <input type="file" name="pdf_upload" class="form-control" value="{{ isset($obj->pdf_upload)?$obj->pdf_upload:'N/A' }}" required>
+                               <div class="invalid-feedback">
+                                  Please Aggrement Pdf Upload.
+                               </div>
                             </div>
 
 
                             <div class="form-group">
                                 <label>Payment Invoice Upload</label>
-                                <input type="file" name="invoice" class="form-control" value="{{ isset($obj->invoice)?$obj->invoice:'N/A' }}">
-
+                                <input type="file" name="invoice" class="form-control" value="{{ isset($obj->invoice)?$obj->invoice:'N/A' }}" required>
+                                <div class="invalid-feedback">
+                                    Please Payment Invoice Upload.
+                                </div>
                             </div>
                         </div>
 
@@ -56,3 +60,37 @@
         </div>
     </div>
 </div>
+<script src="vendor/global/global.min.js"></script>
+
+<!-- Jquery Validation -->
+<!-- <script src="./vendor/jquery-validation/jquery.validate.min.js"></script> -->
+<!-- Form validate init -->
+<!-- <script src="./js/plugins-init/jquery.validate-init.js"></script> -->
+
+<script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+<script src="js/custom.min.js"></script>
+<script src="js/deznav-init.js"></script>
+<script src="js/demo.js"></script>
+<script src="js/styleSwitcher.js"></script>
+<script>
+    (function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+        })
+    })()
+</script>

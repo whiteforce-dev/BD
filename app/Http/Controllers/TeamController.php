@@ -101,8 +101,24 @@ class TeamController extends Controller
         return redirect()->back()->with('success', ' Deleted Sucessfully');
     }
     function deleteEmp($id){
-        $Emp = User::where('id', $id)->first();
-        $Emp->delete();
-        return redirect()->back()->with('success', ' Deleted Sucessfully');
+            $id = \request('id');
+            $obj = User::find($id);
+            $obj->is_active = 0;
+            $obj->save();
+         return redirect()->back()->with('success', ' Deleted Sucessfully');
     }
+
+    public function changePassword($id) {
+        $Details = User::find($id);
+        return view('TeamMember.resetPassword')->with(['Details' => $Details]);
+    }
+
+    public function updatePassword(Request $request){
+        $id = \request('id');
+        $obj1= User::find($id);
+        $obj1->password =Hash::make($request->password);
+        $obj1->save();
+      return redirect()->back()->with('success', ' Updated Sucessfully ');
+    }
+    
 }

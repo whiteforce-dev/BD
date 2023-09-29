@@ -4,7 +4,8 @@
 
             <i class="fa-solid fa-cake-candles" style="color: #3269c8; font-size:1.1rem;"></i>
             <h2 class="card-title" style= "font-size: 1.01rem;
-            font-weight: 500;">Happy Birthday Report</h4>
+            font-weight: 500;
+            margin-right: 896px;">Happy Birthday Report</h4>
         </div>
             <div class="table-responsive">
                 <table class="table table-responsive-md">
@@ -15,6 +16,8 @@
                             <th><p>Company</p></th>
                             <th><p>Designation</p></th>
                             <th><p>Status</p></th>
+                            <th><p>Email</p></th>
+                            <th><p>Contact Number</p></th>
                             <th><p>Birthday</p></th>
                             <th><p>Remaining days</p></th>
                         </tr>
@@ -59,6 +62,8 @@
                                                     <td>-</td>
                                                 @endif
                                   </span>
+                                  <td>{{ $obj->email}}</td>
+                                  <td>{{ $obj->contact}}</td>
                                 <td>
                                     @if($obj->dob != '')
                                       {{\Carbon\Carbon::parse($obj->dob)->format('d-M')}}

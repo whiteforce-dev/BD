@@ -22,67 +22,96 @@
     padding-right: 0px !important;">
     <form action="{{ url('/email-send') }}" method="POST">
         @csrf
-    <div class="card m-0 ">
-        <div class="card-body py-3 py-md-2">
-            <div class="d-sm-flex  d-block align-items-center">
-                <div class="d-flex mb-sm-0 mb-3 me-auto align-items-center"
-                    style="width: 97%;
-                    margin: 10px 5px;">
-                    <i class="fa-solid fa-user-tie" style="color: #3772d7;
-                    font-size: 1.4rem;
-                    margin-top: -10px;"></i>
-                    <div class="media-body" style="padding-left: 15px;">
-                        {{--  <p class="mb-1 fs-12 "></p>  --}}
-                        <input id="chkCheckAll"
-                            style="position: absolute;
-                                right: 1%;
-                                top: 26%; border: 2px solid #d2d4DE;"
-                            type="checkbox" class="form-check-input" type="checkbox" onchange="checkAll(this)"
-                            name="chk[]" />
-                        <div class="row" style="width: 180%;">
-                            <div class="col-4" style="max-width: 66.333333%;">
-                                <h3 class="mb-0 font-w600 fs-22" style="font-size: 1.05rem !important;
-                                color: #383e45;
-                                margin-top: -3px;">
-                                    Total Enquiries - {{ $Details1 }}</h3>
-                            </div>
+        <div class="card m-0 ">
+            <div class="card-body py-3 py-md-2">
+                <div class="d-sm-flex  d-block align-items-center">
+                    <div class="d-flex mb-sm-0 mb-3 me-auto align-items-center"
+                        style="width: 97%;
+                        margin: 10px 5px;">
+                        <i class="fa-solid fa-user-tie" style="color: #3772d7;
+                        font-size: 1.4rem;
+                        margin-top: -10px;"></i>
+                        <div class="media-body" style="padding-left: 15px;">
+                            {{--  <p class="mb-1 fs-12 "></p>  --}}
+                            <input id="chkCheckAll"
+                                style="position: absolute;
+                                    right: 1%;
+                                    top: 26%; border: 2px solid #d2d4DE;"
+                                type="checkbox" class="form-check-input" type="checkbox" onchange="checkAll(this)"
+                                name="chk[]" />
+                            <div class="row" style="width: 180%;">
+                                <div class="col-4" style="max-width: 66.333333%;">
+                                    <h3 class="mb-0 font-w600 fs-22" style="font-size: 1.05rem !important;
+                                    color: #383e45;
+                                    margin-top: -3px;">
+                                    @if(isset($hotTagline))
+                                        {{ $hotTagline }}
+                                @endif
+                                @if(isset($holdTagline))
+                                   {{ $holdTagline }}
+                               @endif
+                                            @if(isset($enquiryTagline))
+                                            {{ $enquiryTagline }}
+                                    @endif
+                                     @if(isset($todayfollowUp))
+                                    {{ $todayfollowUp }}
+                            @endif
+                            @if(isset($totalfollowUp))
+                            {{ $totalfollowUp }}
+                    @endif
+                    @if(isset($missedfollowUp))
+                    {{ $missedfollowUp }}
+                    @endif
+                    @if(isset($totalMonthEnquiry))
+                    {{ $totalMonthEnquiry }}
+                    @endif
+                    @if(isset($hotMonthEnquiry))
+                    {{ $hotMonthEnquiry }}
+                    @endif
+                    @if(isset($mtdMonthEnquiry))
+                    {{ $mtdMonthEnquiry }}
+                    @endif
 
-                                <div class="col-md-4" style="max-width: 11% !important;
-                                margin-top: -8px;">
-                                    <select class="form-control" name="template" value=""
-                                        style="border:1px solid #ccc; font-size:0.9rem; height:34px; ">
-                                        <option>Select Template</option>
-                                        @php
-                                            $user = \App\Models\Email::get();
-                                        @endphp
-                                        @foreach ($user as $users)
-                                            <option value="">{{ $users->name }}</option>
-                                        @endforeach
-                                    </select>
-                              </div>
-                                <div class="col-md-4" style=" max-width: 8% !important;
-                                margin-top: -8px;">
-                                    <button type="submit" class="btn btn-primary col-md-12" style="margin-top: -4px; font-size:0.9rem; height:34px;">Send
-                                        Mail</button>
+             - {{ $Details1 }}</h3>
                                 </div>
 
+                                    <div class="col-md-4" style="max-width: 11% !important;
+                                    margin-top: -8px;">
+                                        <select class="form-control" name="template" value=""
+                                            style="border:1px solid #ccc; font-size:0.9rem; height:34px; ">
+                                            <option>Select Template</option>
+                                            @php
+                                                $user = \App\Models\Email::get();
+                                            @endphp
+                                            @foreach ($user as $users)
+                                                <option value="">{{ $users->name }}</option>
+                                            @endforeach
+                                        </select>
+                                </div>
+                                    <div class="col-md-4" style=" max-width: 8% !important;
+                                    margin-top: -8px;">
+                                        <button type="submit" class="btn btn-primary col-md-12" style="margin-top: -4px; font-size:0.9rem; height:34px;">Send
+                                            Mail</button>
+                                    </div>
 
+
+                            </div>
                         </div>
+                        {{--  <a id="searchingForm" class="searchbtn btn float-right "
+                            style="padding: 10px 14px !important;
+                            margin-top: 1px;
+                            cursor: pointer;
+                            width: 8%;"
+                            onclick="toggleSearchForm(event)">
+                            <i class="fa-solid fa-magnifying-glass" style="color: #2e6ad1; font-size: 1.2rem;"></i>
+                        </a>  --}}
+                        <i id="searchingForm"  onclick="toggleSearchForm(event)" class="fa-solid fa-magnifying-glass" style="color: #2e6ad1; font-size: 1.2rem; "></i>
                     </div>
-                    {{--  <a id="searchingForm" class="searchbtn btn float-right "
-                        style="padding: 10px 14px !important;
-                        margin-top: 1px;
-                        cursor: pointer;
-                        width: 8%;"
-                        onclick="toggleSearchForm(event)">
-                        <i class="fa-solid fa-magnifying-glass" style="color: #2e6ad1; font-size: 1.2rem;"></i>
-                    </a>  --}}
-                    <i id="searchingForm"  onclick="toggleSearchForm(event)" class="fa-solid fa-magnifying-glass" style="color: #2e6ad1; font-size: 1.2rem; "></i>
-                </div>
 
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 
     @foreach ($Details as $index => $obj)
@@ -104,7 +133,7 @@
                          <input type="checkbox"
                             style="border: 2px solid #d2d4DE; position: absolute;
                                     right: 0 !important;
-                                    left: 980px;
+                                    margin-right: 11px;
                                     top: 8px;"
                             type="checkbox" class="form-check-input" name="email" value="{{ $obj->email }}"
                             class="checkBoxClass" value="{{ $obj->id }}" />
@@ -452,65 +481,35 @@
         @include('Enquiry.AddFollowup')
         @include('Enquiry.viewFollowUp')
     @endforeach
-</form>
 {{ $Details->appends(request()->except('page'))->links('pagination::bootstrap-4') }}
 
 
-<script>
-    var searchFormContainer = document.getElementById("searchFormContainer");
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(function(e) {
+            $("#chkcheckAll").click(function() {
+                $("#checkBoxClass").prop('checked', $(this).prop('checked'));
 
-    function toggleSearchForm(event) {
-        if (searchFormContainer.style.display === "none" || searchFormContainer.style.display === "") {
-            searchFormContainer.style.display = "block";
-        } else {
-            searchFormContainer.style.display = "none";
-        }
+            })
 
-        // Prevent the default behavior of the link
-        event.preventDefault();
-        event.stopPropagation();
-    }
-
-    // Prevent the form from closing when clicking inside it
-    searchFormContainer.addEventListener("click", function(event) {
-        event.stopPropagation();
-    });
-
-    // Close the search form if a click occurs outside of it
-    window.addEventListener("click", function(event) {
-        if (!event.target.matches("#searchFormContainer") && !event.target.matches("#searchingForm")) {
-            searchFormContainer.style.display = "none";
-        }
-    });
-</script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-<script>
-    $(function(e) {
-        $("#chkcheckAll").click(function() {
-            $("#checkBoxClass").prop('checked', $(this).prop('checked'));
-
-        })
-
-    });
-    function checkAll(ele) {
-        var checkboxes = document.getElementsByTagName('input');
-        if (ele.checked) {
-            for (var i = 0; i < checkboxes.length; i++) {
-                if (checkboxes[i].type == 'checkbox') {
-                    checkboxes[i].checked = true;
+        });
+        function checkAll(ele) {
+            var checkboxes = document.getElementsByTagName('input');
+            if (ele.checked) {
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].type == 'checkbox') {
+                        checkboxes[i].checked = true;
+                    }
                 }
-            }
-        } else {
-            for (var i = 0; i < checkboxes.length; i++) {
-                console.log(i)
-                if (checkboxes[i].type == 'checkbox') {
-                    checkboxes[i].checked = false;
+            } else {
+                for (var i = 0; i < checkboxes.length; i++) {
+                    console.log(i)
+                    if (checkboxes[i].type == 'checkbox') {
+                        checkboxes[i].checked = false;
+                    }
                 }
             }
         }
-    }
-</script>
-<script src="https://kit.fontawesome.com/66f2518709.js" crossorigin="anonymous"></script>
+    </script>
+    <script src="https://kit.fontawesome.com/66f2518709.js" crossorigin="anonymous"></script>
 

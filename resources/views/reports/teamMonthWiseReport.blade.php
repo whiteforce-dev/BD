@@ -97,7 +97,7 @@
         margin-left: -15px;
     }
     .table {
-        max-width: 1000px; /* Set your desired maximum width in pixels */
+        {{--  max-width: 1000px; /* Set your desired maximum width in pixels */  --}}
     width: 100%; /* Set it to 100% to fill the container or adjust as needed */
     background: #fff;
     -webkit-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);

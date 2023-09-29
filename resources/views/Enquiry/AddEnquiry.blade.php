@@ -143,11 +143,11 @@
                                     <div class="col-xl-6">
 
                                         <div class="mb-3">
-                                            <label class="form-label" for="validationCustom01">Company Name
+                                            <label class="form-label" >Company Name
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input type="text" class="form-control" placeholder="Enter Company Name"
-                                                name="company_name"  id="validationCustom01" required>
+                                                name="company_name"   required>
                                                 <div class="invalid-feedback">
                                                     Please enter a company_name.
                                                 </div>
@@ -172,7 +172,7 @@
                                                 @php
                                                 $industries = \App\Models\Industry::get()
                                             @endphp
-                                            <select name="vertical" id="vertical" class="form-control" id="validationCustom03">
+                                            <select name="vertical" id="vertical" class="form-control" id="validationCustom03" required >
                                                 <option value="">Select</option>
                                                 @foreach($industries as $industry)
                                                 <option value="{{$industry->industry_name}}" {{ (!empty($preview->vertical) && $preview->vertical == $industry->industry_name) ? 'selected' : '' }}>{{$industry->industry_name}}</option>
@@ -197,12 +197,12 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label class="form-label" for="validationCustom13">Company Type
+                                            <label class="form-label" for="validationCustom5">Company Type
                                                 <span class="text-danger">*</span>
                                             </label>
 
-                                                <select class="form-control" name="company_type" id="validationCustom13">
-
+                                                <select class="form-control" name="company_type" id="validationCustom5" required >
+                                                    <option value="">Select Company Type</option>
                                                     <option value="Old">Old</option>
                                                     <option value="Start-Up">Start-Up</option>
 
@@ -214,12 +214,12 @@
 
                                         <div id="select">
                                             <div class="mb-3" >
-                                                <label class="form-label" for="validationCustom11">Next Follow Date
+                                                <label class="form-label" for="validationCustom6">Next Follow Date
                                                     <span class="text-danger">*</span>
                                                 </label>
 
                                                     <input type="date" class="form-control" placeholder="Select Next-Follow-Date " name="next_follow_date"
-                                                    id="validationCustom11"  >
+                                                    id="validationCustom6" required >
                                                     <div class="invalid-feedback">
                                                         Please enter Next Follow Date.
                                                     </div>
@@ -227,22 +227,22 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label class="form-label" for="validationCustom12">Next Follow Time <span
+                                                <label class="form-label" for="validationCustom7">Next Follow Time <span
                                                         class="text-danger">*</span>
                                                 </label>
 
                                                     <input type="time" class="form-control" placeholder="Select Next-Follow-Time " name="next_follow_time"
-                                                    id="validationCustom12" >
+                                                    id="validationCustom7" required >
                                                     <div class="invalid-feedback">
                                                         Please enter Next Follow Time.
                                                     </div>
                                             </div>
                                         </div>
                                         <div class="mb-3" id="break" style="display:none">
-                                            <label class="form-label" for="validationCustom11">Break Date
+                                            <label class="form-label" for="validationCustom8">Break Date
                                                 <span class="text-danger">*</span>
                                             </label>
-                                            <input type="date" class="form-control" name="break_date" >
+                                            <input type="date" class="form-control" name="break_date" for="validationCustom8" >
                                                 <div class="invalid-feedback">
                                                     Please enter Break Date.
                                                 </div>
@@ -251,43 +251,41 @@
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="mb-3">
-                                            <label class="form-label" for="validationCustom01">Complete Company Name
+                                            <label class="form-label" for="validationCustom9">Complete Company Name
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <input type="text" class="form-control" placeholder="Enter Complete Company Name"
-                                                name="complete_com_name"  id="validationCustom01" required>
+                                                name="complete_com_name"  id="validationCustom9" required>
                                                 <div class="invalid-feedback">
                                                     Please enter Complete company_name.
                                                 </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label" for="validationCustom08">Email
+                                            <label class="form-label" for="validationCustom10">Email
                                                 <span class="text-danger">*</span>
                                             </label>
-
-                                                <input type="text" id="email" class="form-control" placeholder="Enter Your Email " name="email" id="validationCustom08" />
+                                                <input type="text" id="email" class="form-control" placeholder="Enter Your Email " name="email" id="validationCustom10" required />
                                                 <div class="invalid-feedback">
                                                     Please enter a email.
                                                 </div>
-
                                         </div>
 
                                         <div class="mb-3">
-                                            <label class="form-label" for="validationCustom07">Phon Number
+                                            <label class="form-label" for="validationCustom11">Phon Number
                                                 <span class="text-danger">*</span>
                                             </label>
                                                 <input type="tel" class="form-control" placeholder="Enter Phone Number" name="contact"
-                                                id="validationCustom07" required>
+                                                id="validationCustom11" required>
                                                 <div class="invalid-feedback">
                                                     Please enter contact.
                                                 </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label" for="validationCustom09">Proposal Type <span
+                                            <label class="form-label" for="validationCustom12">Proposal Type <span
                                                     class="text-danger">*</span>
                                             </label>
 
-                                                <select name="enquiry_type_id" class="form-control" id="validationCustom09" required>
+                                                <select name="enquiry_type_id" class="form-control" id="validationCustom12" required>
                                                     <option value="">Select Enquiry Type</option>
                                                     @php($Enquiry=\App\Models\EnquiryType::where(['status'=>'Active'])->get())
                                                     @foreach($Enquiry as $Enquirys)
@@ -301,11 +299,11 @@
 
                                         </div>
                                         <div class="mb-3">
-                                            <label class="form-label" for="validationCustom10">Status <span
+                                            <label class="form-label" for="validationCustom13">Status <span
                                                     class="text-danger">*</span>
                                             </label>
 
-                                                <select name="status_id" class="form-control" onchange="addbreakdate(this.value);" id="validationCustom10" required>
+                                                <select name="status_id" class="form-control" onchange="addbreakdate(this.value);" id="validationCustom13" required>
                                                     <option value="">Select Status</option>
                                                     @php($status=\App\Models\Followup_remark::get())
                                                     @foreach($status as $statuss)
@@ -319,12 +317,12 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label class="form-label" for="validationCustom05">Designation
+                                            <label class="form-label" for="validationCustom14">Designation
                                                 <span class="text-danger">*</span>
                                             </label>
 
                                                 <input type="text" class="form-control" placeholder="Enter Designation" name="desig"
-                                               id="validationCustom05" required>
+                                               id="validationCustom14" required>
                                                 <div class="invalid-feedback">
                                                     Please enter a Designation.
                                                 </div>
@@ -332,12 +330,12 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label class="form-label" for="validationCustom06">DOB
+                                            <label class="form-label" for="validationCustom15">DOB
                                                 <span class="text-danger">*</span>
                                             </label>
 
                                                 <input type="date" max="2004-12-31" class="form-control" placeholder="Enters Dob" name="dob"
-                                                id="validationCustom06">
+                                                id="validationCustom15" required>
                                                 <div class="invalid-feedback">
                                                     Please enter a DOB.
                                                 </div>
@@ -351,9 +349,9 @@
                                 <div class="row">
                                     <div class="col-xl-12">
                                         <div class="mb-3">
-                                            <label for="validationCustom14" class="form-label">Remark <span class="text-danger">*</span></label>
+                                            <label for="validationCustom16" class="form-label">Remark <span class="text-danger">*</span></label>
                                             <textarea class="form-control" name="remark" rows="4"
-                                        placeholder="Enter Remark" id="validationCustom14"></textarea>
+                                        placeholder="Enter Remark" id="validationCustom16" required></textarea>
                                             <div class="invalid-feedback">
                                                 Please enter Remark.
                                             </div>
@@ -363,7 +361,7 @@
                                 <div class="row">
                                     <div class="col-xl-12 ">
                                         <div class="mb-3">
-                                            <label for="validationCustom14" class="form-label">Select Company Logo <span class="text-danger">*</span></label>
+                                            <label for="validationCustom17" class="form-label">Select Company Logo <span class="text-danger">*</span></label>
                                             <div class="input-group ">
                                                 <div class="form-file">
                                                     @include('cropper')
@@ -446,4 +444,5 @@
 
     });
 </script>
+
 @endsection

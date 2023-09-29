@@ -9,13 +9,16 @@
             </div>
             <div class="card">
                 <div class="model-body">
-                    <form action="{{url('storeFeedback')}}" method="post"  enctype="multipart/form-data">
+                    <form class="needs-validation" novalidate action="{{url('storeFeedback')}}" method="post"  enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                           <input type="hidden" name="id" value="{{ $obj->id }}">
                             <div class="form-group">
                                 <label><b>Requiter Feedback</b></label>
-                                <textarea class="form-control" rows="5" name="feedback" placeholder="Write Your Feedback">{{ $obj->feedback }}</textarea>
+                                <textarea class="form-control" rows="5" name="feedback" placeholder="Write Your Feedback" required>{{ $obj->feedback }}</textarea>
+                                <div class="invalid-feedback">
+                                    Please enter requiter feedback.
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -35,3 +38,37 @@
         </div>
     </div>
 </div>
+<script src="vendor/global/global.min.js"></script>
+
+<!-- Jquery Validation -->
+<!-- <script src="./vendor/jquery-validation/jquery.validate.min.js"></script> -->
+<!-- Form validate init -->
+<!-- <script src="./js/plugins-init/jquery.validate-init.js"></script> -->
+
+<script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+<script src="js/custom.min.js"></script>
+<script src="js/deznav-init.js"></script>
+<script src="js/demo.js"></script>
+<script src="js/styleSwitcher.js"></script>
+<script>
+    (function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+        })
+    })()
+</script>

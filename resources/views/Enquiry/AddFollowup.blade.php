@@ -10,7 +10,7 @@
             </div>
             <div class="card">
                 <div class="model-body">
-                    <form action="{{url('storeFollowUp')}}" method="post">
+                    <form class="needs-validation" novalidate action="{{url('storeFollowUp')}}" method="post">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
@@ -20,18 +20,24 @@
 
                             <div class="form-group ">
                                 <label>Status</label>
-                                <select name="status_id"  class="form-control" data-enquiry-id="{{ $obj->id }}">
+                                <select name="status_id"  class="form-control" data-enquiry-id="{{ $obj->id }}" required >
                                     <option value="">Select Status</option>
                                     @php($status=\App\Models\Followup_remark::get())
                                     @foreach($status as $statuss)
                                         <option value="{{$statuss->id}}">{{$statuss->remark}}</option>
                                     @endforeach
                                 </select>
+                                <div class="invalid-feedback">
+                                    Please Select Status.
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label>Remark</label>
-                                <textarea class="form-control" name="remark" rows="4" placeholder="Enter Remark">{{isset($obj)?$obj->remark:''}}</textarea>
+                                <textarea class="form-control" name="remark" rows="4" placeholder="Enter Remark" required>{{isset($obj)?$obj->remark:''}}</textarea>
+                                <div class="invalid-feedback">
+                                    Please Select Remark.
+                                </div>
                             </div>
 
 
@@ -40,6 +46,7 @@
                                 <div class="form-group col-sm-6">
                                     <label>Next Follow Date</label>
                                     <input type="date" class="form-control" name="date" >
+                                    
                                 </div>
 
                                 <div class="form-group col-sm-6" id="select-status">
@@ -78,6 +85,41 @@
         </div>
     </div>
 </div>
+
+<script src="vendor/global/global.min.js"></script>
+
+<!-- Jquery Validation -->
+<!-- <script src="./vendor/jquery-validation/jquery.validate.min.js"></script> -->
+<!-- Form validate init -->
+<!-- <script src="./js/plugins-init/jquery.validate-init.js"></script> -->
+
+<script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+<script src="js/custom.min.js"></script>
+<script src="js/deznav-init.js"></script>
+<script src="js/demo.js"></script>
+<script src="js/styleSwitcher.js"></script>
+<script>
+    (function () {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     {{--  <script>

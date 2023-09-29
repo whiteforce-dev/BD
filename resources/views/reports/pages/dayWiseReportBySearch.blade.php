@@ -66,6 +66,7 @@
                                             $temp = \App\Models\Enquiry::whereBetween('created_at', [$dateFrom, $dateTo])->where(['created_by' => $userId, 'enquiry_type_id' => 5])->count();
                                             $fms = \App\Models\Enquiry::whereBetween('created_at', [$dateFrom, $dateTo])->where(['created_by' => $userId, 'enquiry_type_id' => 6])->count();
                                             $pay = \App\Models\Enquiry::whereBetween('created_at', [$dateFrom, $dateTo])->where(['created_by' => $userId, 'enquiry_type_id' => 7])->count();
+                                            
                                             $enqCount = \App\Models\Enquiry::whereBetween('created_at', [$dateFrom, $dateTo])->where('created_by', $userId)->count();
                                         @endphp
                                         <td>

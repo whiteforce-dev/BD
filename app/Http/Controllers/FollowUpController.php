@@ -113,16 +113,25 @@ class FollowUpController extends Controller
                 $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
             }
         }
-        return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1 ]);
+
+        $todayfollowUp = "Today Followup";
+        return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1, 'todayfollowUp'=>$todayfollowUp ]);
     }
 
     public function totalFollowups()
     {
-
-        $total=2099-12-31;
-        $enquiries =Enquiry::where('created_by',Auth::user()->id)->where('next_follow_date','>=', $total)->orderBy("id","desc")->paginate(25);
-        $enquiries1 =Enquiry::where('created_by',Auth::user()->id)->where('next_follow_date','>=', $total)->orderBy("id","desc")->count();
-        return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1 ]);
+        $user = Auth::user();
+        if ($user->type === 'Admin') {
+            $total=2099-12-31;
+            $enquiries =Enquiry::where('next_follow_date','>=', $total)->orderBy("id","desc")->paginate (10);
+            $enquiries1 =Enquiry::where('next_follow_date','>=', $total)->orderBy("id","desc")->count();
+        } else {
+                $total=2099-12-31;
+            $enquiries =Enquiry::where('created_by',Auth::user()->id)->where('next_follow_date','>=', $total)->orderBy("id","desc")->paginate (10);
+            $enquiries1 =Enquiry::where('created_by',Auth::user()->id)->where('next_follow_date','>=', $total)->orderBy("id","desc")->count();
+        }
+        $totalfollowUp = "Total Followup";
+        return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1, 'totalfollowUp'=>$totalfollowUp ]);
     }
 
     public function missedFollowups()
@@ -159,8 +168,8 @@ class FollowUpController extends Controller
                 $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
             }
         }
-
-        return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1]);
+        $missedfollowUp = "Missed Followup";
+        return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1, 'missedfollowUp'=>$missedfollowUp]);
     }
 
 }

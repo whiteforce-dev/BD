@@ -98,7 +98,7 @@
         margin-left: -15px;
     }
     .table {
-        max-width: 1000px; /* Set your desired maximum width in pixels */
+        {{--  max-width: 1000px; /* Set your desired maximum width in pixels */  --}}
     width: 100%; /* Set it to 100% to fill the container or adjust as needed */
     background: #fff;
     -webkit-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
@@ -219,7 +219,7 @@
                                      $to= $to.' 23:59:59';
                                    @endphp
 
-                                <tfoot>
+                                {{--  <tfoot>
                                     <th>Total</th>
                                     <th>0</th>
                                     <th>0</th>
@@ -246,7 +246,7 @@
                                         <td><label class="badge badge-dark"> {{ \App\Models\Enquiry::where('user_id',Auth::user()->id)->where('status_id','=','15')->whereBetween('updated_at',array(date('Y-10-01'),date('Y-12-31')))->count()}}</label></td>
                                     @endif
                                     <th><label class="badge badge-dark">{{\App\Models\Enquiry::where('user_id',Auth::user()->id)->whereRaw('Date(created_at) = CURDATE()')->count()}}</label></th>
-                                </tfoot>
+                                </tfoot>  --}}
 
                                 <tbody>
                                     @foreach($user as $obj=> $users)

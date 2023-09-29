@@ -1,4 +1,4 @@
-</div>
+
 <!--**********************************
     Main wrapper end
 ***********************************-->
@@ -34,7 +34,3 @@
 <script src="{{ url('js/deznav-init.js') }}"></script>
 <script src="{{ url('js/demo.js') }}"></script>
 <script src="{{ url('js/styleSwitcher.js') }}"></script>
-</body>
-
-<!-- Mirrored from ventic.dexignzone.com/xhtml/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 22 Jul 2023 13:33:38 GMT -->
-</html>

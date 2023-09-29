@@ -161,7 +161,7 @@
                                 </a>
                                 <div class="card-body">
                                     <!-- Search Form -->
-                                    <form id="searchForm" action="{{ url('searchBreakEnquiry') }}" method="get">
+                                    <form id="searchingForm" action="{{ url('searchBreakEnquiry') }}" method="get">
 
                                         <div class="row mb-3">
                                             <div class="col-md-4">
@@ -223,7 +223,7 @@
                                                         <option value="">All</option>
 
                                                         @php
-                                                            $user = \App\Models\User::where('is_active', 1)->get();
+                                                            $user = \App\Models\User::where('is_active', 1)->select('id', 'name')->get();
                                                         @endphp
                                                         @foreach ($user as $users)
                                                             <option value="{{ $users->id }}"
@@ -250,7 +250,7 @@
                     </div>
                 </div>
             </div>
-            <div id="searchResults">
+            <div id="searchingResults">
                 @include('Enquiry.searchresultBreak')
             </div>
         </div>
@@ -264,7 +264,7 @@
     <!-- Include Bootstrap CSS and JS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
+    {{--  <script>
         document.addEventListener("DOMContentLoaded", function() {
             var employeeRemark = document.querySelector(".employee-remark");
             employeeRemark.addEventListener("mouseenter", function(event) {
@@ -284,22 +284,22 @@
                 $("#myModal2").modal("show");
             });
         });
-    </script>
+    </script>  --}}
 
     //remarks
 
+
     <script>
         $(document).ready(function() {
-            $('#searchForm').submit(function(event) {
+            $('#searchingForm').submit(function(event) {
                 event.preventDefault();
                 var formData = $(this).serialize();
-
                 $.ajax({
                     type: 'GET',
                     url: $(this).attr('action'),
                     data: formData,
                     success: function(response) {
-                        $('#searchResults').html(response);
+                        $('#searchingResults').html(response);
                     },
                     error: function(xhr, status, error) {
                         console.log(xhr.responseText);
@@ -308,7 +308,6 @@
             });
         });
     </script>
-
 
     <script>
         var searchFormContainer = document.getElementById("searchFormContainer");
@@ -337,8 +336,6 @@
             }
         });
     </script>
-
-
 
 @endsection
 

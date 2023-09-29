@@ -98,7 +98,7 @@
         margin-left: -15px;
     }
     .table {
-        max-width: 1000px; /* Set your desired maximum width in pixels */
+        {{--  max-width: 1000px; /* Set your desired maximum width in pixels */  --}}
     width: 100%; /* Set it to 100% to fill the container or adjust as needed */
     background: #fff;
     -webkit-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
@@ -184,12 +184,12 @@
 </style>
 <div class="content-body">
     <div class="container-fluid">
-
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header" style="display:flex; align-items:center;">
                         <i class="fa-solid fa-people-group" style="color: #4275cd;  font-size:1.5rem;"></i>
-                        <h4 style="font-size: 1.1rem; font-weight: 500;" class="card-title">Team Member Report</h4>
+                        <h4 style="    font-size: 1.1rem;
+                        font-weight: 600; margin-right: 845px;" class="card-title">Team Member Report</h4>
                     </div>
                         <div class="table-responsive">
                             <table class="table table-responsive-md">
@@ -220,12 +220,12 @@
                                      $to= $to.' 23:59:59';
                                    @endphp
 
-                                <tfoot>
+                                {{--  <tfoot>
                                     <th>Total</th>
                                     <th>0</th>
                                     <th>0</th>
 
-                                    <th><label class="badge badge-dark">{{\App\Models\Enquiry::where('user_id',Auth::user()->id)->where('status_id','=','10')->count()}}</label></th>
+                                    <th><label class="badge badge-dark">{{\App\Models\Enquiry::where('user_id',Auth::user()->id)->where('status_id','=','10')->whereMonth('created_at', Carbon\Carbon::Now()->month)->count()}}</label></th>
 
                                     <th><label class="badge badge-dark">{{\App\Models\Enquiry::where('user_id',Auth::user()->id)->whereBetween('created_at',array(date('Y-m-01'),date('Y-m-t')))->count()}}</label></th>
 
@@ -247,7 +247,7 @@
                                         <td><label class="badge badge-dark"> {{ \App\Models\Enquiry::where('user_id',Auth::user()->id)->where('status_id','=','15')->whereBetween('updated_at',array(date('Y-10-01'),date('Y-12-31')))->count()}}</label></td>
                                     @endif
                                     <th><label class="badge badge-dark">{{\App\Models\Enquiry::where('user_id',Auth::user()->id)->whereRaw('Date(created_at) = CURDATE()')->count()}}</label></th>
-                                </tfoot>
+                                </tfoot>  --}}
 
                                 <tbody>
                                     @foreach($user as $obj=> $users)

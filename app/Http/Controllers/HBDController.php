@@ -171,7 +171,6 @@ public function searchHbd()
                 $fromDate = $request->input('from_date', '2020-01-01');
             $toDate = $request->input('to_date', now()->format('Y-m-d'));
             $status = $request->input('status', null);
-
             $usersQuery = User::where('type', '!=', 'Admin');
             if (Auth::user()->type == 'Staff') {
                 $usersQuery->where('id', Auth::user()->id)->where('is_active', 1);
@@ -292,5 +291,20 @@ public function searchHbd()
         return view('reports.hbdReport', compact('hrdata'));
 
 
+      }
+
+      public function addedBirthdaysList($id){
+        $loggedInUser = Auth::user();
+        if ($loggedInUser->type === 'Admin') {
+            $Details = Enquiry::whereNotNull('dob')->paginate(10);
+        $Details1 = Enquiry::whereNotNull('dob')->count();
+        } elseif ($loggedInUser->type === 'Manager') {
+                $Details = Enquiry::where('created_by', $id)->whereNotNull('dob')->paginate(10);
+            $Details1 = Enquiry::where('created_by', $id)->whereNotNull('dob')->count();
+        } elseif($loggedInUser->type === 'Staff') {
+            $Details = Enquiry::where('created_by', $id)->whereNotNull('dob')->pagiate(10);
+        $Details1 = Enquiry::where('created_by', $id)->whereNotNull('dob')->count();
+        }
+        return view('Enquiry.EnquiryList')->with(['Details' => $Details, 'Details1' => $Details1 ]);
       }
 }

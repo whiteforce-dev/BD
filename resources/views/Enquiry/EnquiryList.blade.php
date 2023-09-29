@@ -150,10 +150,10 @@
 
             <div id="searchFormContainer" style="display: none;">
                 <div class="container mt-5"
-                style="padding-left: 0px !important;
-                /* width: 0px; */
-                padding-right: 0px !important;">
-                <div class="row justify-content-center">
+                    style="padding-left: 0px !important;
+                    /* width: 0px; */
+                    padding-right: 0px !important;">
+                  <div class="row justify-content-center">
                     <div class="col-md-12"style="margin-top: -50px">
                         <div class="card">
                             <a href="{{ url('enquiry-list') }}" class="btn btn-light " style="margin-top: -30px">
@@ -277,6 +277,7 @@
     <!-- Include Bootstrap CSS and JS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var employeeRemark = document.querySelector(".employee-remark");
@@ -322,5 +323,33 @@
         });
     </script>
 
+
+    <script>
+        var searchFormContainer = document.getElementById("searchFormContainer");
+
+        function toggleSearchForm(event) {
+            if (searchFormContainer.style.display === "none" || searchFormContainer.style.display === "") {
+                searchFormContainer.style.display = "block";
+            } else {
+                searchFormContainer.style.display = "none";
+            }
+
+            // Prevent the default behavior of the link
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        // Prevent the form from closing when clicking inside it
+        searchFormContainer.addEventListener("click", function(event) {
+            event.stopPropagation();
+        });
+
+        // Close the search form if a click occurs outside of it
+        window.addEventListener("click", function(event) {
+            if (!event.target.matches("#searchFormContainer") && !event.target.matches("#searchingForm")) {
+                searchFormContainer.style.display = "none";
+            }
+        });
+    </script>
 
 @endsection

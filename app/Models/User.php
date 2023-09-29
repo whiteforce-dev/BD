@@ -68,7 +68,7 @@ class User extends Authenticatable
     }
     public function temptargets()
     {
-        return $this->hasMany(Target::class,'user_id')->where('type','5')->latest();
+        return $this->hasMany(Target::class)->where('type','5')->latest();
     }
     public function fmstargets()
     {
@@ -76,10 +76,18 @@ class User extends Authenticatable
     }
     public function recruitmenttargets()
     {
-        return $this->hasMany(Target::class,'user_id')->where('type','4')->latest();
+        return $this->hasMany(Target::class)->where('type','4')->latest();
     }
     public function teamtargets()
     {
         return $this->hasMany(TeamTarget::class,'user_id')->latest();
     }
+
+    // User.php (User model)
+
+    public function team()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
