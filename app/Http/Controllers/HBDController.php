@@ -5,7 +5,9 @@ use Aws\S3\Visibility\PortableVisibilityConverter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Storage;
+use DB;
 use App\Models\Enquiry;
+use App\Models\AddedBirthday;
 use App\Models\User;
 use App\Models\Target;
 use Carbon\Carbon;
@@ -115,6 +117,12 @@ public function searchHbd()
             $user->totalClients = Enquiry::where('created_by', $user->id)->count();
             $user->addedBirthdays = Enquiry::where('created_by', $user->id)->whereNotNull('dob')->count();
             $user->pendingBirthdays = Enquiry::where('created_by', $user->id)->whereNull('dob')->count();
+            $user->mtdAdded = Enquiry::join('added_birthdays', 'enquiries.id', '=', 'added_birthdays.enquiry_id')
+                ->where('enquiries.created_by', $user->id)
+                ->whereNotNull('enquiries.dob')
+                ->whereMonth('added_birthdays.created_at', Carbon::now()->month)
+                ->whereYear('added_birthdays.created_at', Carbon::now()->year)
+                ->count();
         }
         return view('hbdReports.pendingBirthdays')->with([
             'users' => $users,
@@ -179,7 +187,18 @@ public function searchHbd()
 
             foreach ($users as $user) {
                 $user->totalClients = Enquiry::where('created_by', $user->id)->count();
-                $user->addedBirthdays = Enquiry::where('created_by', $user->id)->whereNotNull('dob')->count();
+                $user->addedBirthdays = Enquiry::where('created_by', $user->id)->whereNotNull('dob')->when($status, function ($query) use ($status) {
+                    return $query->where('status_id', $status);
+                })
+                ->whereBetween('created_at', [$fromDate, $toDate])->count();
+
+                $user->mtdAdded = Enquiry::join('added_birthdays', 'enquiries.id', '=', 'added_birthdays.enquiry_id')
+                ->where('enquiries.created_by', $user->id)
+                ->whereNotNull('enquiries.dob')
+                ->whereMonth('added_birthdays.created_at', Carbon::now()->month)
+                ->whereYear('added_birthdays.created_at', Carbon::now()->year)
+                ->count();
+
                 $user->pendingBirthdays = Enquiry::where('created_by', $user->id)
                     ->whereNull('dob')
                     ->when($status, function ($query) use ($status) {
@@ -296,15 +315,65 @@ public function searchHbd()
       public function addedBirthdaysList($id){
         $loggedInUser = Auth::user();
         if ($loggedInUser->type === 'Admin') {
-            $Details = Enquiry::whereNotNull('dob')->paginate(10);
-        $Details1 = Enquiry::whereNotNull('dob')->count();
-        } elseif ($loggedInUser->type === 'Manager') {
-                $Details = Enquiry::where('created_by', $id)->whereNotNull('dob')->paginate(10);
-            $Details1 = Enquiry::where('created_by', $id)->whereNotNull('dob')->count();
-        } elseif($loggedInUser->type === 'Staff') {
-            $Details = Enquiry::where('created_by', $id)->whereNotNull('dob')->pagiate(10);
-        $Details1 = Enquiry::where('created_by', $id)->whereNotNull('dob')->count();
+            $Details = Enquiry::join('added_birthdays', 'enquiries.id', '=', 'added_birthdays.enquiry_id')
+            ->where('enquiries.created_by', $id)
+            ->whereNotNull('enquiries.dob')
+            ->whereMonth('added_birthdays.created_at', Carbon::now()->month)
+            ->whereYear('added_birthdays.created_at', Carbon::now()->year)
+            ->paginate(10);
+
+        $Details1 = Enquiry::join('added_birthdays', 'enquiries.id', '=', 'added_birthdays.enquiry_id')
+            ->where('enquiries.created_by', $id)
+            ->whereNotNull('enquiries.dob')
+            ->whereMonth('added_birthdays.created_at', Carbon::now()->month)
+            ->whereYear('added_birthdays.created_at', Carbon::now()->year)
+            ->count();
+        }elseif ($loggedInUser->type === 'Manager' || $loggedInUser->type === 'Staff') {
+            $Details = Enquiry::join('added_birthdays', 'enquiries.id', '=', 'added_birthdays.enquiry_id')
+                ->where('enquiries.created_by', $id)
+                ->whereNotNull('enquiries.dob')
+                ->whereMonth('added_birthdays.created_at', Carbon::now()->month)
+                ->whereYear('added_birthdays.created_at', Carbon::now()->year)
+                ->paginate(10);
+
+            $Details1 = Enquiry::join('added_birthdays', 'enquiries.id', '=', 'added_birthdays.enquiry_id')
+                ->where('enquiries.created_by', $id)
+                ->whereNotNull('enquiries.dob')
+                ->whereMonth('added_birthdays.created_at', Carbon::now()->month)
+                ->whereYear('added_birthdays.created_at', Carbon::now()->year)
+                ->count();
         }
-        return view('Enquiry.EnquiryList')->with(['Details' => $Details, 'Details1' => $Details1 ]);
+
+        $addedBdayCount = "Total Added Birthdays";
+        return view('Enquiry.EnquiryList')->with(['Details' => $Details, 'Details1' => $Details1, 'addedBdayCount' => $addedBdayCount ]);
+      }
+
+      public function aa($id)
+      {
+          $loggedInUser = Auth::user();
+
+          $query = AddedBirthday::query()
+              ->whereMonth('updated_at', Carbon::now()->month)
+              ->whereYear('updated_at', Carbon::now()->year);
+
+          if ($loggedInUser->type === 'Admin') {
+              $query->whereHas('enquiry', function ($q) {
+                  $q->whereNotNull('dob');
+              });
+          } elseif ($loggedInUser->type === 'Manager' || $loggedInUser->type === 'Staff') {
+              $query->whereHas('enquiry', function ($q) use ($id) {
+                  $q->where('created_by', $id)->whereNotNull('dob');
+              });
+          }
+
+          $details = $query->paginate(10);
+          $detailsCount = $query->count();
+          $addedBdayCount = "Total Updated Birthdays";
+
+          return view('Enquiry.EnquiryList')->with([
+              'Details' => $details,
+              'Details1' => $detailsCount,
+              'addedBdayCount' => $addedBdayCount,
+          ]);
       }
 }

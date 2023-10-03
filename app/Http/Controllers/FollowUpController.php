@@ -122,13 +122,13 @@ class FollowUpController extends Controller
     {
         $user = Auth::user();
         if ($user->type === 'Admin') {
-            $total=2099-12-31;
-            $enquiries =Enquiry::where('next_follow_date','>=', $total)->orderBy("id","desc")->paginate (10);
-            $enquiries1 =Enquiry::where('next_follow_date','>=', $total)->orderBy("id","desc")->count();
+            $total= \Carbon\Carbon::now()->format('Y-m-d');
+            $enquiries =Enquiry::where('next_follow_date','<', $total)->orderBy("id","desc")->paginate (10);
+            $enquiries1 =Enquiry::where('next_follow_date','<', $total)->orderBy("id","desc")->count();
         } else {
-                $total=2099-12-31;
-            $enquiries =Enquiry::where('created_by',Auth::user()->id)->where('next_follow_date','>=', $total)->orderBy("id","desc")->paginate (10);
-            $enquiries1 =Enquiry::where('created_by',Auth::user()->id)->where('next_follow_date','>=', $total)->orderBy("id","desc")->count();
+            $total= \Carbon\Carbon::now()->format('Y-m-d');
+            $enquiries =Enquiry::where('created_by',Auth::user()->id)->where('next_follow_date','<', $total)->orderBy("id","desc")->paginate (10);
+            $enquiries1 =Enquiry::where('created_by',Auth::user()->id)->where('next_follow_date','<', $total)->orderBy("id","desc")->count();
         }
         $totalfollowUp = "Total Followup";
         return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1, 'totalfollowUp'=>$totalfollowUp ]);
@@ -141,19 +141,43 @@ class FollowUpController extends Controller
         $enquiries1 = null;
         $today = \Carbon\Carbon::now()->format('Y-m-d');
 
+
         if ($user->type === 'Admin') {
+            $totalAtndFollowUp = Remark::whereRaw('created_at' >= $today)
+            ->distinct('enquiry_id');
+            $totalAtndFollowUp1 = Remark::whereRaw('created_at' >= $today)
+            ->distinct('enquiry_id')
+            ->count('enquiry_id');
             $enquiries = $enquiries->orderBy("id", "desc")->where('next_follow_date', '<', $today);
-            $enquiries1 = $enquiries->orderBy("id", "desc")->where('next_follow_date', '<', $today)->count();
+            $enquiry = $enquiries->orderBy("id", "desc")->where('next_follow_date', '<', $today)->count();
+            $enquiries1 = $enquiry - $totalAtndFollowUp1;
         } elseif ($user->type === 'Manager') {
-            $enquiries = $enquiries->where('next_follow_date', '<', $today)->whereHas('GetCreatedby', function ($query) use ($user) {
-                $query->where('created_by', $user->id)->orderBy("id", "desc");
-            });
-            $enquiries1 = $enquiries->where('next_follow_date', '<', $today)->whereHas('GetCreatedby', function ($query) use ($user) {
-                $query->where('created_by', $user->id)->orderBy("id", "desc");
-            })->count();
-        } elseif ($user->type === 'Staff') {
+            $totalAtndFollowUp = Remark::whereRaw('created_at' >= $today)->where('created_by', $user->id)
+            ->distinct('enquiry_id');
+            $totalAtndFollowUp1 = Remark::whereRaw('created_at' >= $today)->where('created_by', $user->id)
+            ->distinct('enquiry_id')
+            ->count('enquiry_id');
+            // $enquiries = $enquiries->where('next_follow_date', '<', $today)->whereHas('GetCreatedby', function ($query) use ($user) {
+            //     $query->where('created_by', $user->id)->orderBy("id", "desc");
+            // });
+            // $enquiries1 = $enquiries->where('next_follow_date', '<', $today)->whereHas('GetCreatedby', function ($query) use ($user) {
+            //     $query->where('created_by', $user->id)->orderBy("id", "desc");
+            // })->count();
             $enquiries = $enquiries->where('created_by', $user->id)->where('next_follow_date', '<', $today)->orderBy("id", "desc");
-            $enquiries1 = $enquiries->where('created_by', $user->id)->where('next_follow_date', '<', $today)->orderBy("id", "desc")->count();
+            $enquiry = $enquiries->where('created_by', $user->id)->where('next_follow_date', '<', $today)->orderBy("id", "desc")->count();
+            $enquiries1 = $enquiry - $totalAtndFollowUp1;
+            // return $enquiries1;
+        } elseif ($user->type === 'Staff') {
+
+            $totalAtndFollowUp = Remark::whereRaw('created_at' >= $today)->where('created_by', $user->id)
+            ->distinct('enquiry_id');
+            $totalAtndFollowUp1 = Remark::whereRaw('created_at' >= $today)->where('created_by', $user->id)
+            ->distinct('enquiry_id')
+            ->count('enquiry_id');
+            $enquiries = $enquiries->where('created_by', $user->id)->where('next_follow_date', '<', $today)->orderBy("id", "desc");
+            $enquiry = $enquiries->where('created_by', $user->id)->where('next_follow_date', '<', $today)->orderBy("id", "desc")->count();
+            $enquiries1 = $enquiry - $totalAtndFollowUp1;
+
         }
 
         if ($enquiries1 === null) {

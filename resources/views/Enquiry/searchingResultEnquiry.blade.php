@@ -71,6 +71,9 @@
                     @if(isset($mtdMonthEnquiry))
                     {{ $mtdMonthEnquiry }}
                     @endif
+                    @if(isset($addedBdayCount))
+                    {{ $addedBdayCount }}
+                    @endif
 
              - {{ $Details1 }}</h3>
                                 </div>
@@ -476,14 +479,12 @@
                 </div>
             </div>
         </div>
-        @include('Enquiry.viewManagerRemarks')
+        {{--  @include('Enquiry.viewManagerRemarks')
         @include('Enquiry.AddManagerRemarks ')
         @include('Enquiry.AddFollowup')
-        @include('Enquiry.viewFollowUp')
+        @include('Enquiry.viewFollowUp')  --}}
     @endforeach
 {{ $Details->appends(request()->except('page'))->links('pagination::bootstrap-4') }}
-
-
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(function(e) {

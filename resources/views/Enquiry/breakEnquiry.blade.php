@@ -253,6 +253,12 @@
             <div id="searchingResults">
                 @include('Enquiry.searchresultBreak')
             </div>
+            <div class="modal" id="alloteClient">
+            </div>
+            <div class="modal" id="addAgreement">
+            </div>
+            <div class="modal" id="addFeedback">
+            </div>
         </div>
     </div>
     <script src="https://kit.fontawesome.com/66f2518709.js" crossorigin="anonymous"></script>
@@ -287,7 +293,38 @@
     </script>  --}}
 
     //remarks
+    <script>
 
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+       });
+
+         function alloteClient(url, id) {
+                $.get(url, id, function(rs) {
+                    $('#alloteClient').html(rs);
+                    $('#alloteClient').modal('show');
+                    scrollBottom()
+                });
+            }
+
+            function addAgreement(url, id) {
+                $.get(url, id, function(rs) {
+                    $('#addAgreement').html(rs);
+                    $('#addAgreement').modal('show');
+                    scrollBottom()
+                });
+            }
+
+            function addFeedback(url, id) {
+                $.get(url, id, function(rs) {
+                    $('#addFeedback').html(rs);
+                    $('#addFeedback').modal('show');
+                    scrollBottom()
+                });
+            }
+    </script>
 
     <script>
         $(document).ready(function() {

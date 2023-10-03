@@ -1,4 +1,4 @@
-<div class="modal fade" id="addFeedback{{ $obj->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"  aria-hidden="true">
+{{--  <div class="modal fade" id="addFeedback{{ $enquiry->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"  aria-hidden="true">  --}}
     <div class="modal-dialog">
         <div class="modal-content" style="height:350px;">
             <div class="modal-header">
@@ -12,10 +12,10 @@
                     <form class="needs-validation" novalidate action="{{url('storeFeedback')}}" method="post"  enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
-                          <input type="hidden" name="id" value="{{ $obj->id }}">
+                          <input type="hidden" name="id" value="{{ $enquiry->id }}">
                             <div class="form-group">
                                 <label><b>Requiter Feedback</b></label>
-                                <textarea class="form-control" rows="5" name="feedback" placeholder="Write Your Feedback" required>{{ $obj->feedback }}</textarea>
+                                <textarea class="form-control" rows="5" name="feedback" placeholder="Write Your Feedback" required >{{ $enquiry->feedback }}</textarea>
                                 <div class="invalid-feedback">
                                     Please enter requiter feedback.
                                 </div>
@@ -37,7 +37,7 @@
             </div>
         </div>
     </div>
-</div>
+{{--  </div>  --}}
 <script src="vendor/global/global.min.js"></script>
 
 <!-- Jquery Validation -->

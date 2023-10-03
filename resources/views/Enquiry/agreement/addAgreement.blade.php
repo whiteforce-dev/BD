@@ -1,4 +1,4 @@
-<div class="modal fade" id="addAgreement{{ $obj->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{--  <div class="modal fade" id="addAgreement{{ $enquiry->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">  --}}
     <div class="modal-dialog">
         <div class="modal-content" style="height:430px;width:750px;">
             <div class="modal-header">
@@ -14,7 +14,7 @@
                         <div class="modal-body">
 
 
-                      <input type="hidden" name="id" value="{{ $obj->id }}">
+                      <input type="hidden" name="id" value="{{ $enquiry->id }}">
                              <div class="form-group">
                                 <label>Aggrement</label>
                                 <select class="form-control"  name="aggrement">
@@ -28,7 +28,7 @@
 
                             <div class="form-group">
                                 <label>Aggrement Pdf Upload</label>
-                               <input type="file" name="pdf_upload" class="form-control" value="{{ isset($obj->pdf_upload)?$obj->pdf_upload:'N/A' }}" required>
+                               <input type="file" name="pdf_upload" class="form-control" value="{{ isset($enquiry->pdf_upload)?$enquiry->pdf_upload:'N/A' }}" required>
                                <div class="invalid-feedback">
                                   Please Aggrement Pdf Upload.
                                </div>
@@ -37,7 +37,7 @@
 
                             <div class="form-group">
                                 <label>Payment Invoice Upload</label>
-                                <input type="file" name="invoice" class="form-control" value="{{ isset($obj->invoice)?$obj->invoice:'N/A' }}" required>
+                                <input type="file" name="invoice" class="form-control" value="{{ isset($enquiry->invoice)?$enquiry->invoice:'N/A' }}" required>
                                 <div class="invalid-feedback">
                                     Please Payment Invoice Upload.
                                 </div>
@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-</div>
+{{--  </div>  --}}
 <script src="vendor/global/global.min.js"></script>
 
 <!-- Jquery Validation -->

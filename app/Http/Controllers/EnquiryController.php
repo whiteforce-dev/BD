@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\AddedBirthday;
 use Aws\S3\Visibility\PortableVisibilityConverter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -292,6 +293,13 @@ class EnquiryController extends Controller
             }}
         }
 
+        if ($request->input('dob')) {
+           $addedBirthdays = new AddedBirthday();
+           $addedBirthdays->enquiry_id = $enquiry->id;
+           $addedBirthdays->user_id = $request->input('user_id');
+        //    return $addedBirthdays;
+           $addedBirthdays->save();
+        }
                 return redirect('enquiry-list');
 
 
@@ -359,8 +367,16 @@ class EnquiryController extends Controller
     }
 
     function updateEnquiry(Request $request, $id){
-
+        // return dd($request);
         $enquiry = Enquiry::where('id', $id)->first();
+        // return  $enquiry->dob !== $request->input('dob')  ? "true":"false";
+        if ( $enquiry->dob != $request->input('dob')) {
+            $addedBirthdays = new AddedBirthday();
+            $addedBirthdays->enquiry_id = $enquiry->id;
+            $addedBirthdays->user_id = $request->input('user_id');
+            // return $addedBirthdays;
+            $addedBirthdays->save();
+         }
         $enquiry->enquiry_type_id = $request->input('enquiry_type_id');
         $enquiry->company_name = $request->input('company_name');
         $enquiry->complete_com_name = $request->input('complete_com_name');
@@ -428,6 +444,7 @@ class EnquiryController extends Controller
                 $lastTargetRecord->save();
             }}
         }
+
             return redirect('enquiry-list');
 
 
@@ -584,6 +601,7 @@ class EnquiryController extends Controller
                 $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
             }
         }
+        // return $enquiries1;
         return view('Enquiry.breakEnquiry')->with(['Details' => $enquiries, 'Details1' => $enquiries1 ]);
 
     }
@@ -743,7 +761,48 @@ class EnquiryController extends Controller
 
     }
     //Allote Client to Manager
+    // public function alloteClient(Request $request){
 
+    //     if(!empty($request->id)){
+    //         $enquiry = Enquiry::find($request->id);
+    //         $alloted = CompanyAllotment::where('enquiry_id',$request->id)->pluck('alloted_to')->toArray();
+    //         $alloted_ids = !empty($alloted) ? implode(',',$alloted) : '';
+    //         return view('Enquiry.clientAllote.alloteClient',compact('enquiry','alloted_ids'));
+    //     } else {
+    //         return view('Enquiry.clientAllote.alloteClient');
+    //     }
+    // }
+
+    function alloteClients(Request $request){
+
+        $enquiry = Enquiry::find($request->id);
+        return view('Enquiry.clientAllote.alloteClient',compact('enquiry'));
+        // if(!empty($request->id)){
+
+        // } else {
+        //     return view('Enquiry.clientAllote.alloteClient');
+        // }
+    }
+    function addAgreement(Request $request){
+
+        $enquiry = Enquiry::find($request->id);
+        return view('Enquiry.agreement.addAgreement',compact('enquiry'));
+        // if(!empty($request->id)){
+
+        // } else {
+        //     return view('Enquiry.clientAllote.alloteClient');
+        // }
+    }
+    function addFeedback(Request $request){
+
+        $enquiry = Enquiry::find($request->id);
+        return view('Enquiry.feedback.feedback',compact('enquiry'));
+        // if(!empty($request->id)){
+
+        // } else {
+        //     return view('Enquiry.clientAllote.alloteClient');
+        // }
+    }
     function allotClientModal(Request $request){
 
         if(!empty($request->id)){

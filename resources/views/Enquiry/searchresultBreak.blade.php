@@ -130,6 +130,9 @@
                                 <i style="font-size: 1.2rem; margin-left: 5px; margin-top: -12px;"
                                     class="fa-solid fa-sort-down"></i></button>
                             <div class="dropdown-content">
+                                <a href="javascript:" onclick="alloteClient('{{ url('alloteClients?id=' . $obj->id) }}')" class="dropdown-item border-radius-md" href="javascript:;">Allot to Manager</a>
+                                <a href="javascript:" onclick="addAgreement('{{ url('addAgreement?id=' . $obj->id) }}')" class="dropdown-item border-radius-md" href="javascript:;">Add Agreement</a>
+                                <a href="javascript:" onclick="addFeedback('{{ url('addFeedback?id=' . $obj->id) }}')" class="dropdown-item border-radius-md" href="javascript:;">Add Feedback</a>
                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal2{{ $obj->id }}">View
                                     Details</a>
 
@@ -424,11 +427,12 @@
                     </div>
                 </div>
             </div>
-            @include('Enquiry.clientAllote.alloteClient')
+            {{--  @include('Enquiry.clientAllote.alloteClient')
             @include('Enquiry.feedback.feedback')
             @include('Enquiry.agreement.addAgreement')
-            @include('Enquiry.viewFollowUp')
+            @include('Enquiry.viewFollowUp')  --}}
         @endforeach
+        
    {{ $Details->appends(request()->except('page'))->links('pagination::bootstrap-4') }}
 
 

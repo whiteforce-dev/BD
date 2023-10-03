@@ -258,7 +258,7 @@
             </div>
        </div>
             <div class="col-lg-12">
-                <div class="card">
+                {{--  <div class="card">  --}}
                     <div class="card-header">
                         <img style="height:30px;"
                         src=" {{ url('dashboard_icons/PendingApproach.png') }}"
@@ -274,6 +274,7 @@
                                         <th style="font-size: 14.5px;padding: 0.2rem;"><p style="margin-bottom: 0px !important;">Employee Name</p></th>
                                         <th style="font-size: 14.5px;padding: 0.2rem;"><p style="margin-bottom: 0px !important;">Total Client</p></th>
                                         <th style="font-size: 14.5px;padding: 0.2rem;"><p style="margin-bottom: 0px !important;">Added Birhtday</p></th>
+                                        <th style="font-size: 14.5px;padding: 0.2rem;"><p style="margin-bottom: 0px !important;">MTD Added Birhtday</p></th>
                                         <th style="font-size: 14.5px;padding: 0.2rem;"><p style="margin-bottom: 0px !important;">Pending Birhtday</p></th>
                                     </tr>
                                 </thead>
@@ -288,7 +289,10 @@
                                             </div>
                                         </td>
                                         <td style="font-size: 16px;"><span style="background: transparent;" class="badge badge-info light">{{ $currentUser->totalClients }}</span></td>
-                                        <td style="font-size: 16px;"><a href="{{ url('addedBirthdaysList', $currentUser->id) }}"><span style="background: transparent;" class="badge badge-success light">{{ $currentUser->addedBirthdays }}</span></a></td>
+                                        <td style="font-size: 16px;"><a href="}"><span style="background: transparent;" class="badge badge-success light">{{ $currentUser->addedBirthdays }}</span></a></td>
+
+                                        <td style="font-size: 16px;"><a href="{{ url('addedBirthdaysList', $currentUser->id) }}"><span style="background: transparent;" class="badge badge-success light">{{ $currentUser->mtdAdded }}</span></a></td>
+
                                         <td style="font-size: 16px;"><a style="background: transparent;" href="{{route('pendingBirthdaysList',['id' => $currentUser->id])}}" class="badge badge-danger light">{{ $currentUser->pendingBirthdays }}</a></td>
                                     </tr>
                                     @endforeach
@@ -297,7 +301,7 @@
 
 
                         </div>
-                </div>
+                {{--  </div>  --}}
             </div>
         </div>
     </div>

@@ -60,4 +60,8 @@ class Enquiry extends Model
     {
         return $this->belongsTo(ManagerRemark::class,'id');
     }
+    public function GetUpdatedBirthday()
+    {
+        return $this->hasMany(AddedBirthday::class, 'enquiry_id');
+    }
 }

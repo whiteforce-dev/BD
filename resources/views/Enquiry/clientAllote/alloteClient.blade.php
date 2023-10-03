@@ -1,7 +1,8 @@
-@if(isset($obj))
-    <div class="modal fade" id="alloteClient{{ $obj->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@if(isset($enquiry))
+    {{--  <div class="modal fade" id="alloteClient{{ $enquiry->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">  --}}
         <div class="modal-dialog">
-            <div class="modal-content" style="height:620px;width:750px;">
+            <div class="modal-content" style="height: 710px;
+            width: 750px;">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Allote Client</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -14,7 +15,7 @@
                             @csrf
                             <div class="modal-body">
                                 <div class="row">
-                                    <input type="hidden" name="enquiry_id" value="{{ $obj->id }}">
+                                    <input type="hidden" name="enquiry_id" value="{{ $enquiry->id }}">
                                     <div class="form-group col-sm-6" >
                                         <label>Allot Date</label>
                                         <input type="date" name="allot_date" id="allot_date" value="{{ date('Y-m-d') }}" class="form-control" disabled>
@@ -23,9 +24,9 @@
                                         <label>Company Type</label>
                                         <select name="company_type"  class="form-control" id="company_type" required>
                                             <option value="">Select Company Type</option>
-                                            <option value="temp" {{ ($obj->company_sub_type == 'temp') ? 'selected' : '' }}>Temp</option>
-                                            <option value="IT" {{ ($obj->company_sub_type == 'IT') ? 'selected' : '' }}>IT</option>
-                                            <option value="one-time" {{ ($obj->company_sub_type == 'one-time') ? 'selected' : '' }}>One Time</option>
+                                            <option value="temp" {{ ($enquiry->company_sub_type == 'temp') ? 'selected' : '' }}>Temp</option>
+                                            <option value="IT" {{ ($enquiry->company_sub_type == 'IT') ? 'selected' : '' }}>IT</option>
+                                            <option value="one-time" {{ ($enquiry->company_sub_type == 'one-time') ? 'selected' : '' }}>One Time</option>
                                         </select>
                                         <div class="invalid-feedback">
                                             Please select a Company Type.
@@ -35,10 +36,10 @@
                                         <label>Company Sub Type</label>
                                         <select name="alloted_software_type"  class="form-control"  id="alloted_software_type" onchange="getUserList(this.value)" required>
                                             <option value="">Select Company Sub Type</option>
-                                            <option value="onrole" {{ ($obj->alloted_software_type == 'onrole') ? 'selected' : '' }}>Onrole</option>
-                                            <option value="offrole" {{ ($obj->alloted_software_type == 'offrole') ? 'selected' : '' }}>Offrole</option>
-                                            <option value="franchise-onrole" {{ ($obj->alloted_software_type == 'franchise-onrole') ? 'selected' : '' }}>Franchise Onrole</option>
-                                            <option value="franchise-offrole" {{ ($obj->alloted_software_type == 'franchise-offrole') ? 'selected' : '' }}>Franchise Offrole</option>
+                                            <option value="onrole" {{ ($enquiry->alloted_software_type == 'onrole') ? 'selected' : '' }}>Onrole</option>
+                                            <option value="offrole" {{ ($enquiry->alloted_software_type == 'offrole') ? 'selected' : '' }}>Offrole</option>
+                                            <option value="franchise-onrole" {{ ($enquiry->alloted_software_type == 'franchise-onrole') ? 'selected' : '' }}>Franchise Onrole</option>
+                                            <option value="franchise-offrole" {{ ($enquiry->alloted_software_type == 'franchise-offrole') ? 'selected' : '' }}>Franchise Offrole</option>
                                         </select>
                                         <div class="invalid-feedback">
                                             Please select Company Sub Type.
@@ -48,7 +49,7 @@
                                     <div class="form-group col-sm-6">
                                         <div class="col-md- col-12 mb-2">
                                             <label>Senior Manager/Manager</label>
-                                            <select   name="alloted_to[]" class="form-control manager" id="alloted_to{{ $obj->id }}" required multiple = "multiple" >
+                                            <select   name="alloted_to[]" class="form-control manager" id="alloted_to{{ $enquiry->id }}" required multiple = "multiple" >
                                                 <option>Select Senior Manager/Manager</option>
                                             </select>
                                             <div class="invalid-feedback">
@@ -61,7 +62,7 @@
 
                                     <div class="form-group col-sm-6" >
                                         <label>Number Of Requirement</label>
-                                        <input type="number" name="no_of_requirement" id="no_of_requirement" value="{{ $obj->no_req }}" class="form-control" required>
+                                        <input type="number" name="no_of_requirement" id="no_of_requirement" value="{{ $enquiry->no_req }}" class="form-control" required>
                                         <div class="invalid-feedback">
                                             Please enter Number Of Requirement.
                                         </div>
@@ -69,7 +70,7 @@
 
                                     <div class="form-group col-sm-6" >
                                         <label>Percetange</label>
-                                        <input type="text" name="percentage" id="percentage" value="{{ $obj->percentage }}" class="form-control" >
+                                        <input type="text" name="percentage" id="percentage" value="{{ $enquiry->percentage }}" class="form-control" >
                                         <div class="invalid-feedback">
                                             Please enter Percetange.
                                         </div>
@@ -85,7 +86,7 @@
 
                                     <div class="form-group col-sm-6" >
                                         <label>Company Website</label>
-                                        <input type="text" name="company_website" id="company_website" value="{{ $obj->client_website }}" class="form-control">
+                                        <input type="text" name="company_website" id="company_website" value="{{ $enquiry->client_website }}" class="form-control">
                                         <div class="invalid-feedback">
                                             Please enter Company Website.
                                         </div>
@@ -93,7 +94,7 @@
 
                                     <div class="form-group col-sm-12" >
                                         <label>About Company</label>
-                                        <input type="text" name="about_company" id="about_company" value="{{ $obj->clientabt }}" class="form-control">
+                                        <input type="text" name="about_company" id="about_company" value="{{ $enquiry->clientabt }}" class="form-control">
                                         <div class="invalid-feedback">
                                             Please enter About Company.
                                         </div>
@@ -118,7 +119,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    {{--  </div>  --}}
 @endif
 
     <script src="vendor/global/global.min.js"></script>
@@ -175,7 +176,7 @@
 
 
 <script>
-    $("#alloted_to{{ $obj->id }}").select2({
+    $("#alloted_to{{ $enquiry->id }}").select2({
         tags: true,
         tokenSeparators: [','],
     });

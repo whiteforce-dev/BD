@@ -36,7 +36,7 @@ Route::get('dash', function () {
 });
 
 Auth::routes();
-Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -89,9 +89,15 @@ Route::get('team-break-list', [EnquiryController::class, 'teamBreakList']);
 
 
 //Allote Client to Manager
+Route::get('alloteClients', [EnquiryController::class, 'alloteClients']);
+Route::get('addFeedback', [EnquiryController::class, 'addFeedback']);
+Route::get('addAgreement', [EnquiryController::class, 'addAgreement']);
+
 Route::get('allot-client-modal', [EnquiryController::class, 'allotClientModal']);
 Route::get('getUserList/{type}',[EnquiryController::class, 'getUserList']);
 Route::post('allot-client', [EnquiryController::class, 'allotClient']);
+// Route::get('alloteClient',[EnquiryController::class, 'alloteClient']);
+
 
 //add Feedback
 Route::post('storeFeedback', [EnquiryController::class, 'storeFeedback']);
@@ -191,8 +197,8 @@ Route::get('deleteEnquiryType/{id}', [ProposalTypeController::class, 'deleteEnqu
 
 Route::get('totalEnquiryCount', [DashboardController::class, 'totalEnquiryCount']);
 
-Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Auth::routes();
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 
