@@ -66,38 +66,38 @@
                                             $temp = \App\Models\Enquiry::whereBetween('created_at', [$dateFrom, $dateTo])->where(['created_by' => $userId, 'enquiry_type_id' => 5])->count();
                                             $fms = \App\Models\Enquiry::whereBetween('created_at', [$dateFrom, $dateTo])->where(['created_by' => $userId, 'enquiry_type_id' => 6])->count();
                                             $pay = \App\Models\Enquiry::whereBetween('created_at', [$dateFrom, $dateTo])->where(['created_by' => $userId, 'enquiry_type_id' => 7])->count();
-                                            
+
                                             $enqCount = \App\Models\Enquiry::whereBetween('created_at', [$dateFrom, $dateTo])->where('created_by', $userId)->count();
                                         @endphp
                                         <td>
                                             @if ($pay)
-                                                <span class="badge badge-primary light">{{ $pay }}</span>
+                                                <span class="badge badge-primary light" style="font-size: 13px;background: transparent;">{{ $pay }}</span>
                                             @else
-                                                <span class="badge badge-primary light">0</span>
+                                                <span class="badge badge-primary light" style="font-size: 13px;background: transparent;">0</span>
                                             @endif
                                             <hr style="height: 0.0px !important;">
                                             @if ($temp)
-                                                <span class="badge badge-primary light"> {{ $temp }}</span>
+                                                <span class="badge badge-primary light" style="font-size: 13px;background: transparent;"> {{ $temp }}</span>
                                             @else
-                                                <span class="badge badge-primary light">0</span>
+                                                <span class="badge badge-primary light" style="font-size: 13px;background: transparent;">0</span>
                                             @endif
                                             <hr style="height: 0.0px !important;">
                                             @if ($fms)
-                                                <span class="badge badge-primary light">{{ $fms }}</span>
+                                                <span class="badge badge-primary light" style="font-size: 13px;background: transparent;">{{ $fms }}</span>
                                             @else
-                                                <span class="badge badge-primary light">0</span>
+                                                <span class="badge badge-primary light" style="font-size: 13px;background: transparent;">0</span>
                                             @endif
                                             <hr style="height: 0.0px !important;">
                                             @if ($rec)
-                                                <span class="badge badge-primary light"> {{ $rec }}</span>
+                                                <span class="badge badge-primary light" style="font-size: 13px;background: transparent;"> {{ $rec }}</span>
                                             @else
-                                                <span class="badge badge-primary light">0</span>
+                                                <span class="badge badge-primary light" style="font-size: 13px;background: transparent;">0</span>
                                             @endif
                                             <hr style="height: 0.0px !important;">
                                             @if ($enqCount)
-                                                <span class="badge badge-danger light"> {{ $enqCount }}</span>
+                                                <span class="badge badge-danger light" style="font-size: 13px;background: transparent;"> {{ $enqCount }}</span>
                                             @else
-                                                <span class="badge badge-danger light">0</span>
+                                                <span class="badge badge-danger light" style="font-size: 13px;background: transparent;">0</span>
                                             @endif
                                         </td>
                                     @endfor

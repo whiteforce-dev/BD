@@ -209,9 +209,9 @@
         max-width: 16.666667% !important;
     }
 </style>
+
     <div class="content-body">
         <div class="container-fluid">
-
             <div class="container mt-5"
                 style="padding-left: 0px !important;
                 /* width: 0px; */
@@ -237,10 +237,11 @@
                                     <div class="col-md-3">
                                         <label for="" style="font-size: 0.9rem; margin-top:8px;">Select Status</label>
                                         <select name="status" id="status" class="form-control" style="width: 40% !important;">
-                                            <option value="">All</option>
+
                                             @php
                                             $status = App\Models\Followup_remark::where('status','active')->get()
                                             @endphp
+                                            <option value="all">all</option>
                                             @foreach($status as $obj)
                                             <option value="{{ $obj->id }}">{{ $obj->remark }}</option>
                                             @endforeach
@@ -257,6 +258,11 @@
                 </div>
             </div>
        </div>
+       <?php
+    $fromDate = request('from_date');
+    $toDate = request('to_date');
+    $status = request('status');
+?>
             <div class="col-lg-12">
                 {{--  <div class="card">  --}}
                     <div class="card-header">
@@ -274,7 +280,7 @@
                                         <th style="font-size: 14.5px;padding: 0.2rem;"><p style="margin-bottom: 0px !important;">Employee Name</p></th>
                                         <th style="font-size: 14.5px;padding: 0.2rem;"><p style="margin-bottom: 0px !important;">Total Client</p></th>
                                         <th style="font-size: 14.5px;padding: 0.2rem;"><p style="margin-bottom: 0px !important;">Added Birhtday</p></th>
-                                        <th style="font-size: 14.5px;padding: 0.2rem;"><p style="margin-bottom: 0px !important;">MTD Added Birhtday</p></th>
+                                        {{--  <th style="font-size: 14.5px;padding: 0.2rem;"><p style="margin-bottom: 0px !important;">MTD Added Birhtday</p></th>  --}}
                                         <th style="font-size: 14.5px;padding: 0.2rem;"><p style="margin-bottom: 0px !important;">Pending Birhtday</p></th>
                                     </tr>
                                 </thead>
@@ -291,9 +297,9 @@
                                         <td style="font-size: 16px;"><span style="background: transparent;" class="badge badge-info light">{{ $currentUser->totalClients }}</span></td>
                                         <td style="font-size: 16px;"><a href="}"><span style="background: transparent;" class="badge badge-success light">{{ $currentUser->addedBirthdays }}</span></a></td>
 
-                                        <td style="font-size: 16px;"><a href="{{ url('addedBirthdaysList', $currentUser->id) }}"><span style="background: transparent;" class="badge badge-success light">{{ $currentUser->mtdAdded }}</span></a></td>
+                                        {{--  <td style="font-size: 16px;"><a href="{{ url('addedBirthdaysList', $currentUser->id) }}"><span style="background: transparent;" class="badge badge-success light">{{ $currentUser->mtdAdded }}</span></a></td>  --}}
 
-                                        <td style="font-size: 16px;"><a style="background: transparent;" href="{{route('pendingBirthdaysList',['id' => $currentUser->id])}}" class="badge badge-danger light">{{ $currentUser->pendingBirthdays }}</a></td>
+                                        <td style="font-size: 16px;"><a style="background: transparent;"  href="{{ url('/pendingBirthdaysList') . "?id=$currentUser->id&fromDate=$fromDate&toDate=$toDate&status=$status" }}"class="badge badge-danger light">{{ $currentUser->pendingBirthdays }}</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

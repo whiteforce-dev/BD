@@ -203,7 +203,17 @@ class EnquiryController extends Controller
         return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1, 'enquiryTagline'=>$enquiryTagline ]);
     }
 
+    public function viewDetailsEnq(Request $request){
 
+        $enquiry = Enquiry::find($request->id);
+        return view('Enquiry.viewEnquiryDetails',compact('enquiry'));
+    }
+
+    public function viewDetailsBreakEnq(Request $request){
+
+        $enquiry = Enquiry::find($request->id);
+        return view('Enquiry.viewBreakEnqDetails',compact('enquiry'));
+    }
     function storeEnquiry(Request $request){
 
         $request->validate([

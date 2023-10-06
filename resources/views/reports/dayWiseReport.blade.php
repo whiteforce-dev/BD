@@ -210,10 +210,17 @@
                                     <select name="employee" class="form-control">
                                         <option value="">Select</option>
                                       <!-- Add a value for "All" -->
+                                        @if (Auth::user()->type == 'Manager')
+                                        @php
+                                        $users = \App\Models\User::where('is_active', 1)->where('parent_id', Auth::user()->id )->get();
+                                        $selectedUserId = request('employee'); // Get the selected user ID from the request
+                                        @endphp
+                                        @else
                                         @php
                                         $users = \App\Models\User::where('is_active', 1)->get();
                                         $selectedUserId = request('employee'); // Get the selected user ID from the request
-                                    @endphp
+                                        @endphp
+                                        @endif
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}" {{ $selectedUserId == $user->id ? 'selected' : '' }}>
                                             {{ $user->name }}

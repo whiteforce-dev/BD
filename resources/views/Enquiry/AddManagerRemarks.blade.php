@@ -1,4 +1,4 @@
-<div class="modal fade" id="addMngrRemark{{ $obj->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{--  <div class="modal fade" id="addMngrRemark{{ $enquiry->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">  --}}
     <div class="modal-dialog">
         <div class="modal-content" style="height:350px;">
             <div class="modal-header">
@@ -15,11 +15,11 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" placeholder="Enters Next Action "
-                                        name="enquiry_id" value="{{ $obj->id }}" required>
+                                        name="enquiry_id" value="{{ $enquiry->id }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Remark</label>
-                                    <textarea class="form-control" name="manager_remark" rows="4" placeholder="Enter Remark" required >{{ $obj->manager_remark }}</textarea>
+                                    <textarea class="form-control" name="manager_remark" rows="4" placeholder="Enter Remark" required >{{ $enquiry->manager_remark }}</textarea>
                                     <div class="invalid-feedback">
                                         Please enter a company_name.
                                     </div>
@@ -40,7 +40,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    {{--  </div>  --}}
 </div>
 <script src="vendor/global/global.min.js"></script>
 

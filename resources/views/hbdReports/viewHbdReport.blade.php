@@ -204,19 +204,34 @@
                                         </select>
                                     </div>
                                     <div class="col-md-3">
+                                        @if (Auth::user()->type == 'Manager' || Auth::user()->type == 'Staff')
                                         <select name="employee" class="form-control">
                                             <option value="">Select</option>
-                                            <option value="">All</option>
-
                                             @php
-                                                $user = \App\Models\User::where('is_active', 1)->get();
-                                            @endphp
-                                            @foreach ($user as $users)
+                                            $users = \App\Models\User::where('is_active', 1)->where('parent_id', Auth::user()->id)->get();
+                                        @endphp
+                                            @foreach ($users as $users)
+                                            {{--  <option value="">All</option>  --}}
                                                 <option value="{{ $users->id }}"
                                                     {{ request('employee') == $users->id ? 'selected' : '' }}>
                                                     {{ $users->name }}</option>
                                             @endforeach
                                         </select>
+                                        @elseif(Auth::user()->type == 'Admin')
+                                        <select name="employee" class="form-control">
+                                            <option value="">Select</option>
+                                            <option value="">All</option>
+                                            @php
+                                            $users = \App\Models\User::where('is_active', 1)->get();
+                                        @endphp
+                                            @foreach ($users as $users)
+                                                <option value="{{ $users->id }}"
+                                                    {{ request('employee') == $users->id ? 'selected' : '' }}>
+                                                    {{ $users->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @endif
+
                                     </div>
                                     <div class="col-md-3">
                                         <select name="status" id="status" class="form-control">

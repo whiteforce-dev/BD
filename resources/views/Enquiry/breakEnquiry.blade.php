@@ -259,6 +259,9 @@
             </div>
             <div class="modal" id="addFeedback">
             </div>
+            <div class="model" id="viewDetailsBreakEnq">
+
+            </div>
         </div>
     </div>
     <script src="https://kit.fontawesome.com/66f2518709.js" crossorigin="anonymous"></script>
@@ -321,6 +324,14 @@
                 $.get(url, id, function(rs) {
                     $('#addFeedback').html(rs);
                     $('#addFeedback').modal('show');
+                    scrollBottom()
+                });
+            }
+
+            function viewDetailsBreakEnq(url, id) {
+                $.get(url, id, function(rs) {
+                    $('#viewDetailsBreakEnq').html(rs);
+                    $('#viewDetailsBreakEnq').modal('show');
                     scrollBottom()
                 });
             }

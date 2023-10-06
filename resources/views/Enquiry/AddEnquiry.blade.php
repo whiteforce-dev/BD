@@ -138,7 +138,6 @@
                                 @csrf
                                 <input type="hidden" class="form-control" placeholder="Enter Conpany Name" name="user_id"
                                           value="{{Auth::user()->created_by}}">
-
                                 <div class="row">
                                     <div class="col-xl-6">
 

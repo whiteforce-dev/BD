@@ -179,7 +179,7 @@
                                                 </label>
 
                                                     <input type="date" class="form-control" placeholder="Select Next-Follow-Date " name="next_follow_date"
-                                                    id="validationCustom11"  >
+                                                    id="validationCustom11" value="{{ $enquiry->next_follow_date }}" >
                                                     <div class="invalid-feedback">
                                                         Please enter Next Follow Date.
                                                     </div>
@@ -192,7 +192,7 @@
                                                 </label>
 
                                                     <input type="time" class="form-control" placeholder="Select Next-Follow-Time " name="next_follow_time"
-                                                    id="validationCustom12" >
+                                                    id="validationCustom12" value="{{ $enquiry->next_follow_time }}" >
                                                     <div class="invalid-feedback">
                                                         Please enter Next Follow Time.
                                                     </div>

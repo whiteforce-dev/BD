@@ -260,10 +260,18 @@
                     </div>
                 </div>
           </div>
-            </div >
+            </div>
 
             <div id="searchResults">
                 @include('Enquiry.searchingResultEnquiry')
+            </div>
+            <div class="modal" id="viewRemarks">
+            </div>
+            <div class="modal" id="addFollowUpModel">
+            </div>
+            <div class="modal" id="addMngrRemarkModel">
+            </div>
+            <div class="modal" id="viewDetailsEnq">
             </div>
         </div>
     </div>
@@ -278,6 +286,44 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+           });
+
+             function viewRemark(url, id) {
+                    $.get(url, id, function(rs) {
+                        $('#viewRemarks').html(rs);
+                        $('#viewRemarks').modal('show');
+                        scrollBottom()
+                    });
+                }
+
+                function addFollowUpModel(url, id) {
+                    $.get(url, id, function(rs) {
+                        $('#addFollowUpModel').html(rs);
+                        $('#addFollowUpModel').modal('show');
+                        scrollBottom()
+                    });
+                }
+                function addMngrRemarkModel(url, id) {
+                    $.get(url, id, function(rs) {
+                        $('#addMngrRemarkModel').html(rs);
+                        $('#addMngrRemarkModel').modal('show');
+                        scrollBottom()
+                    });
+                }
+
+                function viewDetailsEnq(url, id) {
+                    $.get(url, id, function(rs) {
+                        $('#viewDetailsEnq').html(rs);
+                        $('#viewDetailsEnq').modal('show');
+                        scrollBottom()
+                    });
+                }
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var employeeRemark = document.querySelector(".employee-remark");

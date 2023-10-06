@@ -211,7 +211,7 @@
                                 </thead>
                                 @php
                                   $status = \App\Models\Followup_remark::get();
-                                  $user = \App\Models\User::where('created_by',Auth::user()->id)->where('is_active',1)->get();
+                                  $user = \App\Models\User::where('parent_id',Auth::user()->id)->where('is_active',1)->get();
                                    $month = date('n');
 
                                      $from = Carbon\Carbon::parse(date('Y-m-01'))->format('Y-m-01');
@@ -266,27 +266,27 @@
                                             <td style="font-size: 0.9rem;"><a href="{{url('totalEnquiries'.'/'.$users->id)}}">{{ucwords($users->name)}}</a></td>
 
 
-                                            <td><a href="{{url('getTeamHot'.'/'.$users->id)}}"><label class="badge badge-danger light">{{\App\Models\Enquiry::where('created_by',$users->id)->where('status_id','=','10')->count()}}</label></a></td>
+                                            <td><a href="{{url('getTeamHot'.'/'.$users->id)}}"><label class="badge badge-danger light" style="font-size: 13px; background:transparent;">{{\App\Models\Enquiry::where('created_by',$users->id)->where('status_id','=','10')->count()}}</label></a></td>
 
-                                            <td><a href="{{url('monthTillDate'.'/'.$users->id)}}"><label class="badge badge-success light">{{\App\Models\Enquiry::where('created_by',$users->id)->whereMonth('created_at', Carbon\Carbon::now()->month)->whereYear('created_at',Carbon\Carbon::now()->year)->count()}}</label></a></td>
+                                            <td><a href="{{url('monthTillDate'.'/'.$users->id)}}"><label class="badge badge-success light" style="font-size: 13px; background:transparent;">{{\App\Models\Enquiry::where('created_by',$users->id)->whereMonth('created_at', Carbon\Carbon::now()->month)->whereYear('created_at',Carbon\Carbon::now()->year)->count()}}</label></a></td>
 
-                                            <td><a href="{{url('recAchieved'.'/'.$users->id)}}"><label class="badge badge-warning  light">{{\App\Models\Enquiry::where('created_by',$users->id)->where(['status_id'=>15,'enquiry_type_id'=>4])->whereMonth('break_date', Carbon\Carbon::now()->month)->whereYear('created_at',Carbon\Carbon::now()->year)->count()}}</label></a></td>
+                                            <td><a href="{{url('recAchieved'.'/'.$users->id)}}"><label class="badge badge-warning light" style="font-size: 13px; background:transparent;">{{\App\Models\Enquiry::where('created_by',$users->id)->where(['status_id'=>15,'enquiry_type_id'=>4])->whereMonth('break_date', Carbon\Carbon::now()->month)->whereYear('created_at',Carbon\Carbon::now()->year)->count()}}</label></a></td>
 
-                                            <td><a href="{{url('tempAchieved'.'/'.$users->id)}}"><label class="badge badge-info light">{{\App\Models\Enquiry::where('created_by',$users->id)->where(['status_id'=>15,'enquiry_type_id'=>5])->whereMonth('break_date', Carbon\Carbon::now()->month)->whereYear('created_at',Carbon\Carbon::now()->year)->count()}}</label></a></td>
-                                            <td><a href="{{url('fmsAchieved'.'/'.$users->id)}}"><label class="badge badge-warning  light">{{\App\Models\Enquiry::where('created_by',$users->id)->where(['status_id'=>15,'enquiry_type_id'=>6])->whereMonth('break_date', Carbon\Carbon::now()->month)->whereYear('created_at',Carbon\Carbon::now()->year)->count()}}</label></a></td>
-                                            <td><a href="{{url('payAchieved'.'/'.$users->id)}}"><label class="badge badge-info  light">{{\App\Models\Enquiry::where('created_by',$users->id)->where(['status_id'=>15,'enquiry_type_id'=>7])->whereMonth('break_date', Carbon\Carbon::now()->month)->whereYear('created_at',Carbon\Carbon::now()->year)->count()}}</label></a></td>
+                                            <td><a href="{{url('tempAchieved'.'/'.$users->id)}}"><label class="badge badge-info light" style="font-size: 13px; background:transparent;">{{\App\Models\Enquiry::where('created_by',$users->id)->where(['status_id'=>15,'enquiry_type_id'=>5])->whereMonth('break_date', Carbon\Carbon::now()->month)->whereYear('created_at',Carbon\Carbon::now()->year)->count()}}</label></a></td>
+                                            <td><a href="{{url('fmsAchieved'.'/'.$users->id)}}"><label class="badge badge-warning  light" style="font-size: 13px; background:transparent;">{{\App\Models\Enquiry::where('created_by',$users->id)->where(['status_id'=>15,'enquiry_type_id'=>6])->whereMonth('break_date', Carbon\Carbon::now()->month)->whereYear('created_at',Carbon\Carbon::now()->year)->count()}}</label></a></td>
+                                            <td><a href="{{url('payAchieved'.'/'.$users->id)}}"><label class="badge badge-info  light" style="font-size: 13px; background:transparent;">{{\App\Models\Enquiry::where('created_by',$users->id)->where(['status_id'=>15,'enquiry_type_id'=>7])->whereMonth('break_date', Carbon\Carbon::now()->month)->whereYear('created_at',Carbon\Carbon::now()->year)->count()}}</label></a></td>
 
                                             @if ($month <= 3);
 
-                                            <td><label class="badge badge-dark  light"> {{\App\Models\Enquiry::where('created_by',$users->id)->where('status_id','=','15')->whereBetween('break_date',array(date('Y-01-01'),date('Y-03-31')))->count()}}</label></td>
+                                            <td><label class="badge badge-dark light" style="font-size: 13px; background:transparent;"> {{\App\Models\Enquiry::where('created_by',$users->id)->where('status_id','=','15')->whereBetween('break_date',array(date('Y-01-01'),date('Y-03-31')))->count()}}</label></td>
                                             @elseif($month <= 6);
-                                            <td><label class="badge badge-dark light">  {{\App\Models\Enquiry::where('created_by',$users->id)->where('status_id','=','15')->whereBetween('break_date',array(date('Y-04-01'),date('Y-06-30')))->count()}}</label></td>
+                                            <td><label class="badge badge-dark light" style="font-size: 13px; background:transparent;">  {{\App\Models\Enquiry::where('created_by',$users->id)->where('status_id','=','15')->whereBetween('break_date',array(date('Y-04-01'),date('Y-06-30')))->count()}}</label></td>
                                             @elseif($month <= 9)
-                                                <td><label class="badge badge-dark light"> {{\App\Models\Enquiry::where('created_by',$users->id)->where('status_id','=','15')->whereBetween('break_date',array(date('Y-07-01'),date('Y-09-30')))->count()}}</label></td>
+                                                <td><label class="badge badge-dark light" style="font-size: 13px; background:transparent;"> {{\App\Models\Enquiry::where('created_by',$users->id)->where('status_id','=','15')->whereBetween('break_date',array(date('Y-07-01'),date('Y-09-30')))->count()}}</label></td>
                                             @else
-                                                <td><label class="badge badge-dark light"> {{ \App\Models\Enquiry::where('created_by',$users->id)->where('status_id','=','15')->whereBetween('break_date',array(date('Y-10-01'),date('Y-12-31')))->count()}}</label></td>
+                                                <td><label class="badge badge-dark light" style="font-size: 13px; background:transparent;"> {{ \App\Models\Enquiry::where('created_by',$users->id)->where('status_id','=','15')->whereBetween('break_date',array(date('Y-10-01'),date('Y-12-31')))->count()}}</label></td>
                                             @endif
-                                            <td><a href="{{url('todayEnquiry'.'/'.$users->id)}}"><label class="badge badge-primary light">{{\App\Models\Enquiry::where('created_by',$users->id)->whereRaw('Date(created_at) = CURDATE()')->count()}}</label></a></td>
+                                            <td><a href="{{url('todayEnquiry'.'/'.$users->id)}}"><label class="badge badge-primary light" style="font-size: 13px; background:transparent;">{{\App\Models\Enquiry::where('created_by',$users->id)->whereRaw('Date(created_at) = CURDATE()')->count()}}</label></a></td>
                                         </tr>
 
                                     @endforeach

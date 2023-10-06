@@ -76,6 +76,19 @@ class FollowUpController extends Controller
         }
         return redirect()->back()->with('success', ' Added Sucessfully');
     }
+
+    public function viewRemarks(Request $request){
+        $enquiry = Enquiry::find($request->id);
+        return view('Enquiry.viewFollowUp',compact('enquiry'));
+    }
+    public function addFollowupModel(Request $request){
+        $enquiry = Enquiry::find($request->id);
+        return view('Enquiry.AddFollowup',compact('enquiry'));
+    }
+    public function addMngrRemarkModel(Request $request){
+        $enquiry = Enquiry::find($request->id);
+        return view('Enquiry.AddManagerRemarks',compact('enquiry'));
+    }
     public function todayFollowups()
     {
 
@@ -177,15 +190,11 @@ class FollowUpController extends Controller
             $enquiries = $enquiries->where('created_by', $user->id)->where('next_follow_date', '<', $today)->orderBy("id", "desc");
             $enquiry = $enquiries->where('created_by', $user->id)->where('next_follow_date', '<', $today)->orderBy("id", "desc")->count();
             $enquiries1 = $enquiry - $totalAtndFollowUp1;
-
         }
-
         if ($enquiries1 === null) {
             $enquiries1 = 0;
         }
-
         $enquiries = $enquiries->paginate(10);
-
         foreach ($enquiries as $enquiry) {
             if (!empty($enquiry->image)) {
                 $disk = Storage::disk('s3');

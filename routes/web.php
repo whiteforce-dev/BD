@@ -61,6 +61,7 @@ Route::get('update-password/{id}', [TeamController::class, 'updatePassword']);
 Route::get('add-enquiry', [EnquiryController::class, 'addEnquiry']);
 Route::post('store-enquiry', [EnquiryController::class, 'storeEnquiry']);
 Route::get('enquiry-list', [EnquiryController::class, 'enquiryList']);
+Route::get('viewDetailsEnq', [EnquiryController::class, 'viewDetailsEnq']);
 Route::get('team-enquiry-list', [EnquiryController::class, 'teamEnquiry']);
 Route::get('edit-enquiry/{id}', [EnquiryController::class, 'editEnquiry']);
 Route::post('update-enquiry/{id}', [EnquiryController::class, 'updateEnquiry']);
@@ -84,6 +85,7 @@ Route::get('mngr-break-list', [EnquiryController::class, 'mngrBreakList']);
 
 //show break list
 Route::get('break-list', [EnquiryController::class, 'breakList']);
+Route::get('viewDetailsBreakEnq', [EnquiryController::class, 'viewDetailsBreakEnq']);
 Route::get('searchBreakEnquiry', [EnquiryController::class, 'searchBreakEnquiry']);
 Route::get('team-break-list', [EnquiryController::class, 'teamBreakList']);
 
@@ -114,7 +116,6 @@ Route::post('importExcel',[ExcelController::class, 'EnquiryImport']);
 
 
 //Remarks Controlller
-
 Route::get('addManagerRemark',[RemarksController::class, 'addManagerRemarks']);
 Route::post('storeManagerRemark',[RemarksController::class, 'storeManagerRemark']);
 
@@ -125,6 +126,9 @@ Route::get('todayFollowups', [FollowUpController::class, 'todayFollowups']);
 Route::get('totalFollowups', [FollowUpController::class, 'totalFollowups']);
 Route::get('missedFollowups', [FollowUpController::class, 'missedFollowups']);
 
+Route::get('viewRemarks', [FollowUpController::class, 'viewRemarks']);
+Route::get('addFollowUpModel', [FollowUpController::class, 'addFollowUpModel']);
+Route::get('addMngrRemarkModel', [FollowUpController::class, 'addMngrRemarkModel']);
 
 //Holidays
 Route::get('holidays', [HolidayController::class, 'holidays']);
@@ -138,8 +142,11 @@ Route::get('deleteHoliday/{id}', [HolidayController::class, 'deleteHoliday']);
 Route::get('viewHbdReport', [HBDController::class, 'viewHbdReport']);
 Route::get('searchHbd', [HBDController::class, 'searchHbd']);
 Route::get('pendingBirthdays', [HBDController::class, 'pendingBirthdays']);
-Route::get('pendingBirthdaysList/{id}', [HBDController::class, 'pendingBirthdaysList'])->name('pendingBirthdaysList');
 Route::get('searchPendingHbdCount', [HBDController::class, 'searchPendingHbdCount']);
+// Route::get('/pendingBirthdaysList/{id}/{fromDate}/{toDate}/{status}', [HBDController::class, 'pendingBirthdaysList']);
+Route::get('/pendingBirthdaysList', [HBDController::class, 'pendingBirthdaysList']);
+
+// Route::get('pendingBirthdaysList/{id}/{fromDate}/{toDate}/{status}',[AdminController::class, 'pendingbirthdayslist']);
 Route::get('addedBirthdaysList/{id}',[HBDController::class, 'addedBirthdaysList']);
 // Route::get('pendingbirthdayslist/{userid}/{pending}/{from_date}/{to_date}/{status}',[AdminController::class, 'pendingbirthdayslist']);
 

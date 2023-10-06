@@ -30,7 +30,7 @@ class TargetController extends Controller
    }
 
    public function assignMonthlyTarget($manager){
-    $user = User::where('created_by', $manager)->where(['is_active' => 1])->get();
+    $user = User::where('parent_id', $manager)->where(['is_active' => 1])->get();
     $targetTypes = [4, 5, 6, 7]; // Replace with your actual target type IDs
     $buttonShowStatus = [];
 
@@ -102,19 +102,19 @@ public function viewMonthlyTarget(){
 
     $manager_id=$id;
      if ($request->table_id == 4) {
-        $user = User::where('created_by', $manager_id)->where(['is_active'=> 1])->get();
+        $user = User::where('parent_id', $manager_id)->where(['is_active'=> 1])->get();
         return view('target.pages.recruitment',compact('user'));
      }
      if ($request->table_id == 5) {
-        $user = User::where('created_by', $manager_id)->where(['is_active'=> 1])->get();
+        $user = User::where('parent_id', $manager_id)->where(['is_active'=> 1])->get();
         return view('target.pages.temp',compact('user'));
      }
      if ($request->table_id == 6) {
-        $user = User::where('created_by', $manager_id)->where(['is_active'=> 1])->get();
+        $user = User::where('parent_id', $manager_id)->where(['is_active'=> 1])->get();
         return view('target.pages.fms',compact('user'));
      }
      if ($request->table_id == 7) {
-        $user = User::where('created_by', $manager_id)->where(['is_active'=> 1])->get();
+        $user = User::where('parent_id', $manager_id)->where(['is_active'=> 1])->get();
         return view('target.pages.payroll',compact('user'));
      }
 

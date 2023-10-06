@@ -69,15 +69,15 @@
                                       {{\Carbon\Carbon::parse($obj->dob)->format('d-M')}}
                                     @endif
                                 </td>
-                                <td >
+                                <td>
                                     <span class="badge light badge-info"> {{ $diffrence == 0 ? 'Today' : $diffrence }}</span>
-
                                 </td>
                             </tr>
                       @endforeach
                     </tbody>
                 </table>
             </div>
+            {{--  {{ $Details->appends(request()->except('page'))->links('pagination::bootstrap-4') }}  --}}
     </div>
 </div>
 

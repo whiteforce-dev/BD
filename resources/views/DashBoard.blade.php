@@ -25,6 +25,20 @@
             /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
         }
 
+        .table-bordered tbody td:nth-child(odd){
+            font-size: 15px;
+        }
+
+        .table-bordered thead th {
+            font-size: 15px;
+        }
+
+        .table-bordered{
+            border: 5px;
+            -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+    -moz-box-shadow: 3px 3px 5px 3px #ccc;
+    box-shadow: 3px 3px 5px 3px #ccc;
+        }
 
 
         .col-9 {
@@ -1189,7 +1203,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
+                            <td >
 
                                 PAYROLL
                                 <hr style="height: 0px !important;">TEMP
@@ -1197,31 +1211,31 @@
                                 <hr style="height: 0px !important;">RECRUITMENT
                             </td>
                             <td>
-                                <span class="badge badge-primary light">{{  $quarterPayrollTarget }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterPayrollTarget }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterTempTarget }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterTempTarget }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterFMSTarget }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterFMSTarget }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterRecruitmentTarget }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterRecruitmentTarget }}</span>
                             </td>
                             <td>
-                                <span class="badge badge-primary light">{{  $quarterPayrollTarget }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterPayrollTarget }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterTempAchieved }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterTempAchieved }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterFMSAchieved }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterFMSAchieved }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterRecruitmentAchieved }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterRecruitmentAchieved }}</span>
                             </td>
                             <td>
-                                <span class="badge badge-primary light">{{  $quarterPayrollPending }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterPayrollPending }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterTempPending }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterTempPending }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterFMSPending }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterFMSPending }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterRecruitmentPending }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterRecruitmentPending }}</span>
                             </td>
                         </tr>
                     </tbody>
@@ -1323,86 +1337,7 @@
 
                             </div>
                         </div>
-                        {{--  <div class="col-xl-12">
-                            <div class="row">
-                                <div class="col-xl-4 col-xxl-3 col-sm-6 ">
-                                    <div class="widget-stat card">
-                                        <a href="{{ url('hot-list') }}">
-                                            <div class="card-body p-4">
-                                                <div class="media ai-icon">
-                                                    <span class="me-3 bgl-success text-success">
-                                                        <svg id="icon-database-widget" xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" viewBox="0 0 24 24"
-                                                            fill="none" stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-database">
-                                                            <ellipse cx="12" cy="5" rx="9"
-                                                                ry="3"></ellipse>
-                                                            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                                                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                                                        </svg>
-                                                    </span>
-                                                    <div class="media-body">
-                                                        <p class="mb-1">Hot Enquiry</p>
-                                                        <h4 class="mb-0">{{ $hotCount }}</h4>
-                                                        <span class="badge badge-success">-3.5%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
 
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-xxl-3 col-sm-6 ">
-                                    <div class="widget-stat card">
-                                        <a href="{{ url('break-list') }}">
-                                            <div class="card-body p-4">
-                                                <div class="media ai-icon">
-                                                    <span class="me-3 bgl-success text-success">
-                                                        <img style="height:40px;"
-                                                            src=" {{ url('dashboard_icons/breakEnq.png') }}"
-                                                            alt="">
-                                                    </span>
-                                                    <div class="media-body">
-                                                        <p class="mb-1">Break Enquiry</p>
-                                                        <h4 class="mb-0"> {{ $breakEnquiry }}</h4>
-                                                        <span class="badge badge-success">-3.5%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="col-xl-4 col-xxl-3 col-sm-6 ">
-                                    <div class="widget-stat card">
-                                        <a href="#">
-                                            <div class="card-body p-4">
-                                                <div class="media ai-icon">
-                                                    <span class="me-3 bgl-success text-success">
-                                                        <svg id="icon-database-widget" xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" viewBox="0 0 24 24"
-                                                            fill="none" stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-database">
-                                                            <ellipse cx="12" cy="5" rx="9"
-                                                                ry="3"></ellipse>
-                                                            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                                                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                                                        </svg>
-                                                    </span>
-                                                    <div class="media-body">
-                                                        <p class="mb-1">Team Approach Achieved</p>
-                                                        <h4 class="mb-0"> {{ $teamApproachAchived }}</h4>
-                                                        <span class="badge badge-success">-3.5%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>  --}}
                         <div class="col-xl-12">
                             <div class="row">
                                 <div class="col-xl-4 col-xxl-3 col-sm-6 ">
@@ -1486,115 +1421,6 @@
                                 ->whereMonth('created_at', Carbon\Carbon::now()->month)
                                 ->first();
                         @endphp
-                        {{--  <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-header border-0 pb-0">
-                                    <h4
-                                        style="font-size: 1.1rem;
-                                    font-weight: 600;
-                                    color: #207bc6;">
-                                        Business Target</h4>
-                                </div>
-                                <div class="card-body pb-0">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <h6>Recruitment</h6>
-                                            <span class="mb-0">{{ $recruitmentTarget->target ?? '0' }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <h6>Temp</h6>
-                                            <span class="mb-0">{{ $Temp->target ?? '0' }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <h6>Fms</h6>
-                                            <span class="mb-0">{{ $FMS->target ?? '0' }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <h6>Payroll</h6>
-                                            <span class="mb-0">{{ $Payroll->target ?? '0' }}</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer pt-0 border-0">
-                                    <a href="{{ url('viewMonthlyTarget') }}"
-                                        class="btn btn-primary btn-block text-white">View
-                                        Detail</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-header border-0 pb-0">
-                                    <h4
-                                        style="font-size: 1.1rem;
-                                    font-weight: 600;
-                                    color: #207bc6;">
-                                        Business Achieved</h4>
-                                </div>
-                                <div class="card-body pb-0">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <h6>Recruitment</h6>
-                                            <span class="mb-0">{{ $recruitmentTarget->complete ?? '0' }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <h6>Temp</h6>
-                                            <span class="mb-0">{{ $Temp->complete ?? '0' }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <h6>Fms</h6>
-                                            <span class="mb-0">{{ $FMS->complete ?? '0' }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <h6>Payroll</h6>
-                                            <span class="mb-0">{{ $Payroll->complete ?? '0' }}</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer pt-0 border-0">
-                                    <a href="{{ url('viewMonthlyTarget') }}"
-                                        class="btn btn-primary btn-block text-white">View
-                                        Detail</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-header border-0 pb-0">
-                                    <h4
-                                        style="font-size: 1.1rem;
-                                    font-weight: 600;
-                                    color: #207bc6;">
-                                        Business Pending</h4>
-                                </div>
-                                <div class="card-body pb-0">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <h6>Recruitment</h6>
-                                            <span class="mb-0">{{ $recruitmentTarget->remaining ?? '0' }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <h6>Temp</h6>
-                                            <span class="mb-0">{{ $Temp->remaining ?? '0' }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <h6>Fms</h6>
-                                            <span class="mb-0">{{ $FMS->remaining ?? '0' }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <h6>Payroll</h6>
-                                            <span class="mb-0">{{ $Payroll->remaining ?? '0' }}</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="card-footer pt-0 border-0">
-                                    <a href="{{ url('viewMonthlyTarget') }}"
-                                        class="btn btn-primary btn-block text-white">View
-                                        Detail</a>
-                                </div>
-                            </div>
-
-                        </div>  --}}
 
                         <div class="col-lg-4">
                             <div class="card">
@@ -1804,436 +1630,37 @@
                                         <hr style="height: 0px !important;">RECRUITMENT
                                     </td>
                                     <td>
-                                        <span class="badge badge-primary light">{{  $quarterPayrollTarget }}</span>
+                                        <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterPayrollTarget }}</span>
                                         <hr style="height: 0px !important;">
-                                        <span class="badge badge-primary light">{{  $quarterTempTarget }}</span>
+                                        <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterTempTarget }}</span>
                                         <hr style="height: 0px !important;">
-                                        <span class="badge badge-primary light">{{  $quarterFMSTarget }}</span>
+                                        <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterFMSTarget }}</span>
                                         <hr style="height: 0px !important;">
-                                        <span class="badge badge-primary light">{{  $quarterRecruitmentTarget }}</span>
+                                        <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterRecruitmentTarget }}</span>
                                     </td>
                                     <td>
-                                        <span class="badge badge-primary light">{{  $quarterPayrollTarget }}</span>
+                                        <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterPayrollTarget }}</span>
                                         <hr style="height: 0px !important;">
-                                        <span class="badge badge-primary light">{{  $quarterTempAchieved }}</span>
+                                        <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterTempAchieved }}</span>
                                         <hr style="height: 0px !important;">
-                                        <span class="badge badge-primary light">{{  $quarterFMSAchieved }}</span>
+                                        <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterFMSAchieved }}</span>
                                         <hr style="height: 0px !important;">
-                                        <span class="badge badge-primary light">{{  $quarterRecruitmentAchieved }}</span>
+                                        <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterRecruitmentAchieved }}</span>
                                     </td>
                                     <td>
-                                        <span class="badge badge-primary light">{{  $quarterPayrollPending }}</span>
+                                        <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterPayrollPending }}</span>
                                         <hr style="height: 0px !important;">
-                                        <span class="badge badge-primary light">{{  $quarterTempPending }}</span>
+                                        <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterTempPending }}</span>
                                         <hr style="height: 0px !important;">
-                                        <span class="badge badge-primary light">{{  $quarterFMSPending }}</span>
+                                        <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterFMSPending }}</span>
                                         <hr style="height: 0px !important;">
-                                        <span class="badge badge-primary light">{{  $quarterRecruitmentPending }}</span>
+                                        <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterRecruitmentPending }}</span>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                        {{--  @php
-                            $payrollq1 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '7'])
-                                ->whereBetween('date', [date('Y-01-01'), date('Y-03-t')])
-                                ->sum('target');
-                            $payrollq2 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '7'])
-                                ->whereBetween('date', [date('Y-04-01'), date('Y-06-t')])
-                                ->sum('target');
-                            $payrollq3 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '7'])
-                                ->whereBetween('date', [date('Y-07-01'), date('Y-09-t')])
-                                ->sum('target');
-                            $payrollq4 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '7'])
-                                ->whereBetween('date', [date('Y-10-01'), date('Y-12-t')])
-                                ->sum('target');
-                            $tempq1 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '5'])
-                                ->whereBetween('date', [date('Y-01-01'), date('Y-03-t')])
-                                ->sum('target');
-                            $tempq2 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '5'])
-                                ->whereBetween('date', [date('Y-04-01'), date('Y-06-t')])
-                                ->sum('target');
-                            $tempq3 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '5'])
-                                ->whereBetween('date', [date('Y-07-01'), date('Y-09-t')])
-                                ->sum('target');
-                            $tempq4 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '5'])
-                                ->whereBetween('date', [date('Y-10-01'), date('Y-12-t')])
-                                ->sum('target');
-                            $fmsq1 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '6'])
-                                ->whereBetween('date', [date('Y-01-01'), date('Y-03-t')])
-                                ->sum('target');
-                            $fmsq2 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '6'])
-                                ->whereBetween('date', [date('Y-04-01'), date('Y-06-t')])
-                                ->sum('target');
-                            $fmsq3 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '6'])
-                                ->whereBetween('date', [date('Y-07-01'), date('Y-09-t')])
-                                ->sum('target');
-                            $fmsq4 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '6'])
-                                ->whereBetween('date', [date('Y-10-01'), date('Y-12-t')])
-                                ->sum('target');
-                            $recruitmentq1 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '4'])
-                                ->whereBetween('date', [date('Y-01-01'), date('Y-03-t')])
-                                ->sum('target');
-                            $recruitmentq2 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '4'])
-                                ->whereBetween('date', [date('Y-04-01'), date('Y-06-t')])
-                                ->sum('target');
-                            $recruitmentq3 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '4'])
-                                ->whereBetween('date', [date('Y-07-01'), date('Y-09-t')])
-                                ->sum('target');
-                            $recruitmentq4 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '4'])
-                                ->whereBetween('date', [date('Y-10-01'), date('Y-12-t')])
-                                ->sum('target');
 
-                        @endphp
-                        <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4
-                                        style="font-size: 1.1rem;
-                                font-weight: 600;
-                                color: #207bc6;">
-                                        Quarter target</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table header-border">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-
-                                                    <th style="font-size: 16px; font-weight: 600;">q1</th>
-                                                    <th style="font-size: 16px; font-weight: 600;">q2</th>
-                                                    <th style="font-size: 16px; font-weight: 600;">q3</th>
-                                                    <th style="font-size: 16px; font-weight: 600;">q4</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="table-primary">
-                                                    <td>Recruit</td>
-                                                    <td>{{ $recruitmentq1 }}</td>
-                                                    <td>{{ $recruitmentq2 }}</td>
-                                                    <td>{{ $recruitmentq3 }}</td>
-                                                    <td>{{ $recruitmentq4 }}</td>
-
-                                                </tr>
-                                                <tr class="table-success">
-                                                    <td>Temp</td>
-                                                    <td>{{ $tempq1 }}</td>
-                                                    <td>{{ $tempq2 }}</td>
-                                                    <td>{{ $tempq3 }}</td>
-                                                    <td>{{ $tempq4 }}</td>
-
-                                                </tr>
-                                                <tr class="table-info">
-                                                    <td>Fms</td>
-                                                    <td>{{ $fmsq1 }}</td>
-                                                    <td>{{ $fmsq2 }}</td>
-                                                    <td>{{ $fmsq3 }}</td>
-                                                    <td>{{ $fmsq4 }}</td>
-
-                                                </tr>
-                                                <tr class="table-warning">
-                                                    <td>Payroll</td>
-                                                    <td>{{ $payrollq1 }}</td>
-                                                    <td>{{ $payrollq2 }}</td>
-                                                    <td>{{ $payrollq3 }}</td>
-                                                    <td>{{ $payrollq4 }}</td>
-
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @php
-                            $completepayrollq1 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '7'])
-                                ->whereBetween('date', [date('Y-01-01'), date('Y-03-t')])
-                                ->sum('complete');
-                            $completepayrollq2 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '7'])
-                                ->whereBetween('date', [date('Y-04-01'), date('Y-06-t')])
-                                ->sum('complete');
-                            $completepayrollq3 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '7'])
-                                ->whereBetween('date', [date('Y-07-01'), date('Y-09-t')])
-                                ->sum('complete');
-                            $completepayrollq4 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '7'])
-                                ->whereBetween('date', [date('Y-10-01'), date('Y-12-t')])
-                                ->sum('complete');
-                            $completetempq1 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '5'])
-                                ->whereBetween('date', [date('Y-01-01'), date('Y-03-t')])
-                                ->sum('complete');
-                            $completetempq2 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '5'])
-                                ->whereBetween('date', [date('Y-04-01'), date('Y-06-t')])
-                                ->sum('complete');
-                            $completetempq3 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '5'])
-                                ->whereBetween('date', [date('Y-07-01'), date('Y-09-t')])
-                                ->sum('complete');
-                            $completetempq4 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '5'])
-                                ->whereBetween('date', [date('Y-10-01'), date('Y-12-t')])
-                                ->sum('complete');
-                            $completefmsq1 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '6'])
-                                ->whereBetween('date', [date('Y-01-01'), date('Y-03-t')])
-                                ->sum('complete');
-                            $completefmsq2 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '6'])
-                                ->whereBetween('date', [date('Y-04-01'), date('Y-06-t')])
-                                ->sum('complete');
-                            $completefmsq3 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '6'])
-                                ->whereBetween('date', [date('Y-07-01'), date('Y-09-t')])
-                                ->sum('complete');
-                            $completefmsq4 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '6'])
-                                ->whereBetween('date', [date('Y-10-01'), date('Y-12-t')])
-                                ->sum('complete');
-                            $completerecruitmentq1 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '4'])
-                                ->whereBetween('date', [date('Y-01-01'), date('Y-03-t')])
-                                ->sum('complete');
-                            $completerecruitmentq2 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '4'])
-                                ->whereBetween('date', [date('Y-04-01'), date('Y-06-t')])
-                                ->sum('complete');
-                            $completerecruitmentq3 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '4'])
-                                ->whereBetween('date', [date('Y-07-01'), date('Y-09-t')])
-                                ->sum('complete');
-                            $completerecruitmentq4 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '4'])
-                                ->whereBetween('date', [date('Y-10-01'), date('Y-12-t')])
-                                ->sum('complete');
-                        @endphp
-                        <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4
-                                        style="font-size: 1.1rem;
-                                font-weight: 600;
-                                color: #207bc6;">
-                                        Quarter Achieved</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table header-border">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th style="font-size: 16px; font-weight: 600;">q1</th>
-                                                    <th style="font-size: 16px; font-weight: 600;">q2</th>
-                                                    <th style="font-size: 16px; font-weight: 600;">q3</th>
-                                                    <th style="font-size: 16px; font-weight: 600;">q4</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="table-primary">
-                                                    <td>Recruit</td>
-                                                    <td>{{ $completerecruitmentq1 }}</td>
-                                                    <td>{{ $completerecruitmentq2 }}</td>
-                                                    <td>{{ $completerecruitmentq3 }}</td>
-                                                    <td>{{ $completerecruitmentq4 }}</td>
-
-                                                </tr>
-                                                <tr class="table-success">
-                                                    <td>Temp</td>
-                                                    <td>{{ $completetempq1 }}</td>
-                                                    <td>{{ $completetempq2 }}</td>
-                                                    <td>{{ $completetempq3 }}</td>
-                                                    <td>{{ $completetempq4 }}</td>
-
-                                                </tr>
-                                                <tr class="table-info">
-                                                    <td>Fms</td>
-                                                    <td>{{ $completefmsq1 }}</td>
-                                                    <td>{{ $completefmsq2 }}</td>
-                                                    <td>{{ $completefmsq3 }}</td>
-                                                    <td>{{ $completefmsq4 }}</td>
-
-                                                </tr>
-                                                <tr class="table-warning">
-                                                    <td>Payroll</td>
-                                                    <td>{{ $completepayrollq1 }}</td>
-                                                    <td>{{ $completepayrollq2 }}</td>
-                                                    <td>{{ $completepayrollq3 }}</td>
-                                                    <td>{{ $completepayrollq4 }}</td>
-
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        @php
-                            $leftpayrollq1 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '7'])
-                                ->whereBetween('date', [date('Y-01-01'), date('Y-03-t')])
-                                ->sum('remaining');
-                            $leftpayrollq2 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '7'])
-                                ->whereBetween('date', [date('Y-04-01'), date('Y-06-t')])
-                                ->sum('remaining');
-                            $leftpayrollq3 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '7'])
-                                ->whereBetween('date', [date('Y-07-01'), date('Y-09-t')])
-                                ->sum('remaining');
-                            $leftpayrollq4 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '7'])
-                                ->whereBetween('date', [date('Y-10-01'), date('Y-12-t')])
-                                ->sum('remaining');
-                            $lefttempq1 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '5'])
-                                ->whereBetween('date', [date('Y-01-01'), date('Y-03-t')])
-                                ->sum('remaining');
-                            $lefttempq2 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '5'])
-                                ->whereBetween('date', [date('Y-04-01'), date('Y-06-t')])
-                                ->sum('remaining');
-                            $lefttempq3 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '5'])
-                                ->whereBetween('date', [date('Y-07-01'), date('Y-09-t')])
-                                ->sum('remaining');
-                            $lefttempq4 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '5'])
-                                ->whereBetween('date', [date('Y-10-01'), date('Y-12-t')])
-                                ->sum('remaining');
-                            $leftfmsq1 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '6'])
-                                ->whereBetween('date', [date('Y-01-01'), date('Y-03-t')])
-                                ->sum('remaining');
-                            $leftfmsq2 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '6'])
-                                ->whereBetween('date', [date('Y-04-01'), date('Y-06-t')])
-                                ->sum('remaining');
-                            $leftfmsq3 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '6'])
-                                ->whereBetween('date', [date('Y-07-01'), date('Y-09-t')])
-                                ->sum('remaining');
-                            $leftfmsq4 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '6'])
-                                ->whereBetween('date', [date('Y-10-01'), date('Y-12-t')])
-                                ->sum('remaining');
-                            $leftrecruitmentq1 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '4'])
-                                ->whereBetween('date', [date('Y-01-01'), date('Y-03-t')])
-                                ->sum('remaining');
-                            $leftrecruitmentq2 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '4'])
-                                ->whereBetween('date', [date('Y-04-01'), date('Y-06-t')])
-                                ->sum('remaining');
-                            $leftrecruitmentq3 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '4'])
-                                ->whereBetween('date', [date('Y-07-01'), date('Y-09-t')])
-                                ->sum('remaining');
-                            $leftrecruitmentq4 = App\Models\Target::where(['user_id' => Auth::user()->id, 'type' => '4'])
-                                ->whereBetween('date', [date('Y-10-01'), date('Y-12-t')])
-                                ->sum('remaining');
-                        @endphp
-                        <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4
-                                        style="font-size: 1.1rem;
-                                font-weight: 600;
-                                color: #207bc6;">
-                                        Quarter Pending</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table header-border">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-
-                                                    <th style="font-size: 16px; font-weight: 600;">q1</th>
-                                                    <th style="font-size: 16px; font-weight: 600;">q2</th>
-                                                    <th style="font-size: 16px; font-weight: 600;">q3</th>
-                                                    <th style="font-size: 16px; font-weight: 600;">q4</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="table-primary">
-                                                    <td>Recruit</td>
-                                                    <td>{{ $leftrecruitmentq1 }}</td>
-                                                    <td>{{ $leftrecruitmentq2 }}</td>
-                                                    <td>{{ $leftrecruitmentq3 }}</td>
-                                                    <td>{{ $leftrecruitmentq4 }}</td>
-
-                                                </tr>
-                                                <tr class="table-success">
-                                                    <td>Temp</td>
-                                                    <td>{{ $lefttempq1 }}</td>
-                                                    <td>{{ $lefttempq2 }}</td>
-                                                    <td>{{ $lefttempq3 }}</td>
-                                                    <td>{{ $lefttempq4 }}</td>
-
-                                                </tr>
-                                                <tr class="table-info">
-                                                    <td>Fms</td>
-                                                    <td>{{ $leftfmsq1 }}</td>
-                                                    <td>{{ $leftfmsq2 }}</td>
-                                                    <td>{{ $leftfmsq3 }}</td>
-                                                    <td>{{ $leftfmsq4 }}</td>
-
-                                                </tr>
-                                                <tr class="table-warning">
-                                                    <td>Payroll</td>
-                                                    <td>{{ $leftpayrollq1 }}</td>
-                                                    <td>{{ $leftpayrollq2 }}</td>
-                                                    <td>{{ $leftpayrollq3 }}</td>
-                                                    <td>{{ $leftpayrollq4 }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>  --}}
-                        {{--  <div class="col-xl-12">
-                            <div class="row">
-                                <div class="col-xl-4 col-xxl-3 col-sm-6 ">
-                                    <div class="widget-stat card">
-                                        <a href="{{ url('team-hot-list') }}">
-                                            <div class="card-body p-4">
-                                                <div class="media ai-icon">
-                                                    <span class="me-3 bgl-primary text-primary">
-                                                        <i class="fa fa-usd"></i>
-                                                    </span>
-                                                    <div class="media-body">
-                                                        <p class="mb-1">Total Hot</p>
-                                                        <h4 class="mb-0">{{ $totalHotEnquiry }}</h4>
-                                                        <span class="badge badge-primary">+3.5%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                 <div class="col-xl-4 col-xxl-3 col-sm-6 ">
-                                    <div class="widget-stat card">
-                                        <a href="{{ url('team-break-list') }}">
-                                            <div class="card-body  p-4">
-                                                <div class="media ai-icon">
-                                                    <span class="me-3 bgl-danger text-danger">
-
-                                                        <i class="fa fa-usd"></i>
-                                                    </span>
-                                                    <div class="media-body">
-                                                        <p class="mb-1">Total Break</p>
-                                                        <h4 class="mb-0">{{ $totalBreakEnquiry }}</h4>
-                                                        <span class="badge badge-danger">-3.5%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="col-xl-4 col-xxl-3 col-sm-6 ">
-                                    <div class="widget-stat card">
-                                        <a href="{{ url('team-enquiry-list') }}">
-                                            <div class="card-body  p-4">
-                                                <div class="media ai-icon">
-                                                    <span class="me-3 bgl-danger text-danger">
-                                                        <img style="height:40px;"
-                                                            src=" {{ url('dashboard_icons/team.png') }}" alt="">
-                                                    </span>
-                                                    <div class="media-body">
-                                                        <p class="mb-1">Total Team Enquiry</p>
-                                                        <h4 class="mb-0">{{ $totalTeamEnquiry }}</h4>
-                                                        <span class="badge badge-danger">-3.5%</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>  --}}
                         @php
                             $authUser = auth()->user(); // Get the authenticated user
                             $currentMonth = Carbon\Carbon::now()->month;
@@ -2317,7 +1744,6 @@
                             $quarterFMSPending = $quarterFMSTarget - $quarterFMSAchieved;
                             $quarterRecruitmentPending = $quarterRecruitmentTarget - $quarterRecruitmentAchieved;
                         @endphp
-
                         <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-header">
@@ -2581,7 +2007,6 @@
                                 }
                             }
                         @endphp
-
                         <div class="col-lg-4">
                             <!-- Total Business Achieved Card -->
                             <div class="card">
@@ -2623,40 +2048,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{--  <div class="col-lg-4">
-                                <div class="card">
-                                    <div class="card-header border-0 pb-0">
-                                        <h4 style="font-size: 1.1rem;
-                                        font-weight: 600;
-                                        color: #207bc6;">Team Business Achieved (M)</h4>
-                                    </div>
-                                    <div class="card-body pb-0">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item d-flex px-0 justify-content-between">
-                                                <h6>Recruitment</h6>
-                                                <span class="mb-0">{{ $recruitmentTarget->complete ?? '0' }}</span>
-                                            </li>
-                                            <li class="list-group-item d-flex px-0 justify-content-between">
-                                                <h6>Temp</h6>
-                                                <span class="mb-0">{{ $Temp->complete ?? '0' }}</span>
-                                            </li>
-                                            <li class="list-group-item d-flex px-0 justify-content-between">
-                                                <h6>Fms</h6>
-                                                <span class="mb-0">{{ $FMS->complete ?? '0' }}</span>
-                                            </li>
-                                            <li class="list-group-item d-flex px-0 justify-content-between">
-                                                <h6>Payroll</h6>
-                                                <span class="mb-0">{{ $Payroll->complete ?? '0' }}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="card-footer pt-0 border-0">
-                                        <a href="javascript:void(0);" class="btn btn-primary btn-block text-white">View
-                                            Detail</a>
-                                    </div>
-                                </div>
 
-                            </div>  --}}
                 </div>
                 @endif
                 @if (Auth::user()->type === 'Staff')
@@ -2814,115 +2206,7 @@
                             ->whereMonth('created_at', Carbon\Carbon::now()->month)
                             ->first();
                     @endphp
-                    {{--  <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-header border-0 pb-0">
-                                <h4
-                                    style="font-size: 1.1rem;
-                                    font-weight: 600;
-                                    color: #207bc6;">
-                                    Business Target</h4>
-                            </div>
-                            <div class="card-body pb-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <h6>Recruitment</h6>
-                                        <span class="mb-0">{{ $recruitmentTarget->target ?? '0' }}</span>
-                                    </li>
-                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <h6>Temp</h6>
-                                        <span class="mb-0">{{ $Temp->target ?? '0' }}</span>
-                                    </li>
-                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <h6>Fms</h6>
-                                        <span class="mb-0">{{ $FMS->target ?? '0' }}</span>
-                                    </li>
-                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <h6>Payroll</h6>
-                                        <span class="mb-0">{{ $Payroll->target ?? '0' }}</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="card-footer pt-0 border-0">
-                                <a href="{{ url('viewMonthlyTarget') }}"
-                                    class="btn btn-primary btn-block text-white">View
-                                    Detail</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-header border-0 pb-0">
-                                <h4
-                                    style="font-size: 1.1rem;
-                                    font-weight: 600;
-                                    color: #207bc6;">
-                                    Business Achieved</h4>
-                            </div>
-                            <div class="card-body pb-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <h6>Recruitment</h6>
-                                        <span class="mb-0">{{ $recruitmentTarget->complete ?? '0' }}</span>
-                                    </li>
-                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <h6>Temp</h6>
-                                        <span class="mb-0">{{ $Temp->complete ?? '0' }}</span>
-                                    </li>
-                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <h6>Fms</h6>
-                                        <span class="mb-0">{{ $FMS->complete ?? '0' }}</span>
-                                    </li>
-                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <h6>Payroll</h6>
-                                        <span class="mb-0">{{ $Payroll->complete ?? '0' }}</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="card-footer pt-0 border-0">
-                                <a href="{{ url('viewMonthlyTarget') }}"
-                                    class="btn btn-primary btn-block text-white">View
-                                    Detail</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-header border-0 pb-0">
-                                <h4
-                                    style="font-size: 1.1rem;
-                                    font-weight: 600;
-                                    color: #207bc6;">
-                                    Business Pending</h4>
-                            </div>
-                            <div class="card-body pb-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <h6>Recruitment</h6>
-                                        <span class="mb-0">{{ $recruitmentTarget->remaining ?? '0' }}</span>
-                                    </li>
-                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <h6>Temp</h6>
-                                        <span class="mb-0">{{ $Temp->remaining ?? '0' }}</span>
-                                    </li>
-                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <h6>Fms</h6>
-                                        <span class="mb-0">{{ $FMS->remaining ?? '0' }}</span>
-                                    </li>
-                                    <li class="list-group-item d-flex px-0 justify-content-between">
-                                        <h6>Payroll</h6>
-                                        <span class="mb-0">{{ $Payroll->remaining ?? '0' }}</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="card-footer pt-0 border-0">
-                                <a href="{{ url('viewMonthlyTarget') }}"
-                                    class="btn btn-primary btn-block text-white">View
-                                    Detail</a>
-                            </div>
-                        </div>
 
-                    </div>  --}}
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card-header">
@@ -3131,31 +2415,31 @@
                                 <hr style="height: 0px !important;">RECRUITMENT
                             </td>
                             <td>
-                                <span class="badge badge-primary light">{{  $quarterPayrollTarget }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterPayrollTarget }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterTempTarget }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterTempTarget }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterFMSTarget }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterFMSTarget }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterRecruitmentTarget }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterRecruitmentTarget }}</span>
                             </td>
                             <td>
-                                <span class="badge badge-primary light">{{  $quarterPayrollTarget }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterPayrollTarget }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterTempAchieved }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterTempAchieved }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterFMSAchieved }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterFMSAchieved }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterRecruitmentAchieved }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterRecruitmentAchieved }}</span>
                             </td>
                             <td>
-                                <span class="badge badge-primary light">{{  $quarterPayrollPending }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterPayrollPending }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterTempPending }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterTempPending }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterFMSPending }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterFMSPending }}</span>
                                 <hr style="height: 0px !important;">
-                                <span class="badge badge-primary light">{{  $quarterRecruitmentPending }}</span>
+                                <span class="badge badge-primary light" style="font-size: 16px; font-weight: 600; background: transparent;">{{  $quarterRecruitmentPending }}</span>
                             </td>
                         </tr>
                     </tbody>

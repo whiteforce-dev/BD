@@ -15,7 +15,7 @@
     @include('Master.Header')
     <!-- Favicon icon -->
 </head>
-   <body style="background-color: #f9f9f9 !important;">
+   <body style="background-color: #EDF2F9 !important;">
         <!--*******************
             Preloader start
         ********************-->

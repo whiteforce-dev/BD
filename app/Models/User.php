@@ -59,7 +59,7 @@ class User extends Authenticatable
 
     public  function GetUser()
     {
-        return $this->belongsTo(User::class,'created_by');
+        return $this->belongsTo(User::class,'parent_id');
     }
 
     public function payrolltargets()

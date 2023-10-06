@@ -27,6 +27,7 @@ class TeamController extends Controller
                 $Emp->type = $request->input('type');
                 $Emp->password = Hash::make($request->input('password'));
                 $Emp->created_by = Auth::user()->id;
+                $Emp->parent_id = $request->created_by;
 
                     //image
                 $image_code = $request->imageBaseString;
@@ -46,7 +47,7 @@ class TeamController extends Controller
 
     function viewTeam(){
         // $Details=User::whereNotIn('id', [Auth::user()->id])->where('created_by',[Auth::user()->id])->orderBy("is_active","desc")->paginate('9');
-        $Details = User::where('created_by', Auth::user()->id)->paginate(15);
+        $Details = User::where('parent_id', Auth::user()->id)->paginate(15);
         return view('TeamMember.TeamMemberList', compact('Details'));
     }
 
@@ -54,7 +55,7 @@ class TeamController extends Controller
       return view('TeamMember.managerPage');
     }
     public function viewMember($id){
-           $Details=User::where('created_by',$id)->where("is_active", 1)->paginate('9');
+           $Details=User::where('parent_id',$id)->where("is_active", 1)->paginate('9');
            return view('TeamMember.TeamMemberList', compact('Details'));
     }
 
@@ -77,6 +78,8 @@ class TeamController extends Controller
                 $Emp->mobile = $request->input('mobile');
                 $Emp->type = $request->input('type');
                 $Emp->created_by = Auth::user()->id;
+                $Emp->parent_id = $request->created_by;
+
                 $image = $request->img;
 
                 //image
@@ -120,5 +123,5 @@ class TeamController extends Controller
         $obj1->save();
       return redirect()->back()->with('success', ' Updated Sucessfully ');
     }
-    
+
 }

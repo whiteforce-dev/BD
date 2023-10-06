@@ -1,5 +1,5 @@
 
-<div class="modal fade" id="addfollowup{{ $obj->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{--  <div class="modal fade" id="addfollowup{{ $enquiry->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">  --}}
     <div class="modal-dialog">
         <div class="modal-content" style="height:550px;width:750px;">
             <div class="modal-header">
@@ -15,12 +15,12 @@
                         <div class="modal-body">
                             <div class="form-group">
 
-                                <input type="hidden" class="form-control" placeholder="Enters Next Action " name="enquiry_id" value="{{$obj->id}}" required>
+                                <input type="hidden" class="form-control" placeholder="Enters Next Action " name="enquiry_id" value="{{$enquiry->id}}" required>
                             </div>
 
                             <div class="form-group ">
                                 <label>Status</label>
-                                <select name="status_id"  class="form-control" data-enquiry-id="{{ $obj->id }}" required >
+                                <select name="status_id"  class="form-control" data-enquiry-id="{{ $enquiry->id }}" required >
                                     <option value="">Select Status</option>
                                     @php($status=\App\Models\Followup_remark::get())
                                     @foreach($status as $statuss)
@@ -34,19 +34,17 @@
 
                             <div class="form-group">
                                 <label>Remark</label>
-                                <textarea class="form-control" name="remark" rows="4" placeholder="Enter Remark" required>{{isset($obj)?$obj->remark:''}}</textarea>
+                                <textarea class="form-control" name="remark" rows="4" placeholder="Enter Remark" required>{{isset($enquiry)?$enquiry->remark:''}}</textarea>
                                 <div class="invalid-feedback">
                                     Please Select Remark.
                                 </div>
                             </div>
 
-
-
-                            <div class="row" id="select-{{$obj->id}}">
+                            <div class="row" id="select-{{$enquiry->id}}">
                                 <div class="form-group col-sm-6">
                                     <label>Next Follow Date</label>
                                     <input type="date" class="form-control" name="date" >
-                                    
+
                                 </div>
 
                                 <div class="form-group col-sm-6" id="select-status">
@@ -55,15 +53,12 @@
                                 </div>
                             </div>
 
-
-
-                            <div class="row" id="break-{{$obj->id}}" style="display:none">
+                            <div class="row" id="break-{{$enquiry->id}}" style="display:none">
                                 <div class="form-group col-sm-6">
                                     <label>Break Date</label>
                                     <input type="date" class="form-control" name="break_date">
                                 </div>
                             </div>
-
 
                         </div>
                         <div class="row">
@@ -74,17 +69,14 @@
                             </div>
                             <div class="col-1">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-
                             </div>
-
                         </div>
-
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
+{{--  </div>  --}}
 
 <script src="vendor/global/global.min.js"></script>
 

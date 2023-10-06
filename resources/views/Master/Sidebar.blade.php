@@ -86,7 +86,6 @@
                     @endif
                     <li><a href="{{ url('viewHbdReport') }}">HBD Report</a></li>
                     <li><a href="{{ url('pendingBirthdays') }}">PendingHbdReport</a></li>
-                    <li><a href="{{ url('addedBirhtday') }}">Added Birthday</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

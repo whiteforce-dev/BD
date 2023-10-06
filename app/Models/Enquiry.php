@@ -37,7 +37,7 @@ class Enquiry extends Model
 
     public  function GetUser()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class,'parent_id');
     }
 
     public  function GetCreatedby()

@@ -194,7 +194,6 @@ public function dailyReportsSearch(Request $request) {
         $year = request('year');
         $id = request('id');
         $user = User::where('id', $id)->where('is_active', 1)->get();
-
         return view('reports.pages.mngrMonthWiseReport', compact('year', 'user'));
     }
 
@@ -205,7 +204,7 @@ public function dailyReportsSearch(Request $request) {
             $user_list = User::where('id', $id)->where('is_active', 1)->get(); // Use 'first' to retrieve a single user
             return view('reports.pages.teamMonthWiseReport', compact('year', 'user_list'));
         } else {
-            $user_list = User::where('created_by', Auth::user()->id)->where('is_active', 1)->get();
+            $user_list = User::where('parent_id', Auth::user()->id)->where('is_active', 1)->get();
             return view('reports.pages.teamMonthWiseReport', compact('year', 'user_list'));
         }
 

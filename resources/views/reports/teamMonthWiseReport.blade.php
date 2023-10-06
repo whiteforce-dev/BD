@@ -204,7 +204,7 @@
                                     <option value="">All</option>
                                     <!-- Add a value for "All" -->
                                     @php
-                                    $users = \App\Models\User::where('created_by', Auth::user()->id)->where('is_active', 1)->get();
+                                    $users = \App\Models\User::where('parent_id', Auth::user()->id)->where('is_active', 1)->get();
                                     $selectedUserId = request('employee'); // Get the selected user ID from the request
                                     @endphp
                                     @foreach ($users as $user)
@@ -241,8 +241,6 @@
         </div>
     </div>
 </div>
-
-
 <script>
     function monthReport() {
         $('#monthReport').html('<div class="row"><div class="col-sm-3"><div class="linear-background"></div></div><div class="col-sm-3"><div class="linear-background"></div></div><div class="col-sm-3"><div class="linear-background"></div></div><div class="col-sm-3"><div class="linear-background"></div></div></div><p></p><div class="linear-background"></div><p></p><div class="linear-background"></div><p></p><div class="linear-background"></div><p></p><div class="linear-background"></div>');

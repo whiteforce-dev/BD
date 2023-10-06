@@ -66,19 +66,40 @@ public function searchHbd()
     $status = request('status');
     $days = request('days');
     $selectedUser = request('employee'); // Get the selected user from the form
-
     $query = Enquiry::query();
+    $user = Auth::user();
 
-    if (Auth::user()->type == 'Staff' || Auth::user()->type == 'Manager') {
+    if (Auth::user()->type == 'Staff') {
         if ($status != null) {
             $query->whereRaw("DATE_FORMAT(dob, '%m%d') BETWEEN DATE_FORMAT(NOW(), '%m%d') AND DATE_FORMAT(DATE_ADD(NOW(), INTERVAL $days DAY), '%m%d')")
-                ->where(['status_id' => $status, 'created_by' => Auth::user()->id]);
+                ->where(['status_id' => $status, ])->where(['created_by' => Auth::user()->id]);
         } else {
             $query->whereRaw("DATE_FORMAT(dob, '%m%d') BETWEEN DATE_FORMAT(NOW(), '%m%d') AND DATE_FORMAT(DATE_ADD(NOW(), INTERVAL $days DAY), '%m%d')")
                 ->where(['created_by' => Auth::user()->id]);
         }
-    }
+        if (!empty($selectedUser)) {
+            $query->where('created_by', $selectedUser);
+        }
 
+    }
+    elseif( Auth::user()->type == 'Manager')
+         {
+            if ($status != null) {
+
+               $query->whereHas('GetCreatedby', function ($querys) use ($user) {
+                    $querys->where('created_by', $user->id)->orderBy("id","desc");
+                })->whereRaw("DATE_FORMAT(dob, '%m%d') BETWEEN DATE_FORMAT(NOW(), '%m%d') AND DATE_FORMAT(DATE_ADD(NOW(), INTERVAL $days DAY), '%m%d')")
+                ->where(['status_id' => $status, ]);
+
+            } else {
+                $query->whereHas('GetCreatedby', function ($querys) use ($user) {
+                    $querys->where('created_by', $user->id)->orderBy("id","desc");
+                })->whereRaw("DATE_FORMAT(dob, '%m%d') BETWEEN DATE_FORMAT(NOW(), '%m%d') AND DATE_FORMAT(DATE_ADD(NOW(), INTERVAL $days DAY), '%m%d')");
+            }
+            if (!empty($selectedUser)) {
+                $query->where('created_by', $selectedUser);
+            }
+         }
     if (Auth::user()->type == 'Admin') {
         if ($status != null) {
             $query->whereRaw("DATE_FORMAT(dob, '%m%d') BETWEEN DATE_FORMAT(NOW(), '%m%d') AND DATE_FORMAT(DATE_ADD(NOW(), INTERVAL $days DAY), '%m%d')")
@@ -86,16 +107,14 @@ public function searchHbd()
         } else {
             $query->whereRaw("DATE_FORMAT(dob, '%m%d') BETWEEN DATE_FORMAT(NOW(), '%m%d') AND DATE_FORMAT(DATE_ADD(NOW(), INTERVAL $days DAY), '%m%d')");
         }
-
         // Add a condition to filter by selected user
         if (!empty($selectedUser)) {
             $query->where('created_by', $selectedUser);
         }
     }
-
     $enquiries = $query->paginate(10);
-
-    return view('hbdReports.hbdReportBySearch')->with(['Details' => $enquiries]);
+    $enquiries1 = $query->count();
+    return view('hbdReports.hbdReportBySearch')->with(['Details' => $enquiries, 'Details1' => $enquiries1]);
 }
 
 
@@ -108,7 +127,7 @@ public function searchHbd()
             $users = User::where('is_active', 1)->get();
         } elseif ($loggedInUser->type === 'Manager') {
             // Fetch data for team members
-            $users = User::where('created_by', $loggedInUser->id)->where('is_active', 1)->get();
+            $users = User::where('parent_id', $loggedInUser->id)->where('is_active', 1)->get();
         } else {
             // Fetch data for the current user
             $users = collect([$loggedInUser]);
@@ -117,12 +136,12 @@ public function searchHbd()
             $user->totalClients = Enquiry::where('created_by', $user->id)->count();
             $user->addedBirthdays = Enquiry::where('created_by', $user->id)->whereNotNull('dob')->count();
             $user->pendingBirthdays = Enquiry::where('created_by', $user->id)->whereNull('dob')->count();
-            $user->mtdAdded = Enquiry::join('added_birthdays', 'enquiries.id', '=', 'added_birthdays.enquiry_id')
-                ->where('enquiries.created_by', $user->id)
-                ->whereNotNull('enquiries.dob')
-                ->whereMonth('added_birthdays.created_at', Carbon::now()->month)
-                ->whereYear('added_birthdays.created_at', Carbon::now()->year)
-                ->count();
+            // $user->mtdAdded = Enquiry::join('added_birthdays', 'enquiries.id', '=', 'added_birthdays.enquiry_id')
+            //     ->where('enquiries.created_by', $user->id)
+            //     ->whereNotNull('enquiries.dob')
+            //     ->whereMonth('added_birthdays.created_at', Carbon::now()->month)
+            //     ->whereYear('added_birthdays.created_at', Carbon::now()->year)
+            //     ->count();
         }
         return view('hbdReports.pendingBirthdays')->with([
             'users' => $users,
@@ -186,26 +205,20 @@ public function searchHbd()
             $users = $usersQuery->where('is_active', 1)->get();
 
             foreach ($users as $user) {
-                $user->totalClients = Enquiry::where('created_by', $user->id)->count();
+                $user->totalClients = Enquiry::where('created_by', $user->id)->when($status, function ($query) use ($status) {
+                        return $query->where('status_id', $status);
+                    })
+                    ->whereBetween('created_at', [$fromDate, $toDate])->count();
                 $user->addedBirthdays = Enquiry::where('created_by', $user->id)->whereNotNull('dob')->when($status, function ($query) use ($status) {
                     return $query->where('status_id', $status);
                 })
                 ->whereBetween('created_at', [$fromDate, $toDate])->count();
-
-                $user->mtdAdded = Enquiry::join('added_birthdays', 'enquiries.id', '=', 'added_birthdays.enquiry_id')
-                ->where('enquiries.created_by', $user->id)
-                ->whereNotNull('enquiries.dob')
-                ->whereMonth('added_birthdays.created_at', Carbon::now()->month)
-                ->whereYear('added_birthdays.created_at', Carbon::now()->year)
-                ->count();
-
-                $user->pendingBirthdays = Enquiry::where('created_by', $user->id)
-                    ->whereNull('dob')
-                    ->when($status, function ($query) use ($status) {
-                        return $query->where('status_id', $status);
-                    })
-                    ->whereBetween('created_at', [$fromDate, $toDate])
-                    ->count();
+                    if(!empty($fromDate)&& !empty($toDate) && $status=="all"){
+                        $user->pendingBirthdays = Enquiry::where('created_by', $user->id)
+                        ->whereNull('dob')
+                        ->whereBetween('created_at', [$fromDate, $toDate])
+                        ->count();
+                    }
     }
 
     return view('hbdReports.pendingBirthdays')->with([
@@ -215,6 +228,7 @@ public function searchHbd()
         'status' => $status,
     ]);
       }
+
 
 //       $fromDate = $request->input('from_date', '2020-01-01');
 //       $toDate = $request->input('to_date', now()->format('Y-m-d'));
@@ -253,31 +267,90 @@ public function searchHbd()
 //      'to_date' => $toDate,
 //      'status' => $status,
 //  ]);
-      public function pendingBirthdaysList(Request $request, $id) {
-        $user = User::findOrFail($id);
-        $fromDate = $request->input('from_date', '1999-01-01' );
-        $toDate = $request->input('to_date', now()->format('Y-m-d'));
-        $status = $request->input('status', null);
 
-        $enquiries = Enquiry::where('created_by', $user->id)
-            ->whereNull('dob')
-            ->when($status, function ($query) use ($status) {
-                return $query->where('status_id', $status);
-            })->whereBetween('created_at', [$fromDate, $toDate])->paginate(25);
-            $enquiries1 = Enquiry::where('created_by', $user->id)
-            ->whereNull('dob')
-            ->when($status, function ($query) use ($status) {
-                return $query->where('status_id', $status);
-            })->whereBetween('created_at', [$fromDate, $toDate])->count();
-        return view('Enquiry.EnquiryList')->with([
-            'Details' => $enquiries,
-            'Details1' => $enquiries1 ,
-            'user' => $user,
-            'from_date' => $fromDate,
-            'to_date' => $toDate,
-            'status' => $status,
-        ]);
+// public function pendingBirthdaysList( Request $request, $id, $fromDate, $toDate, $status) {
+public function pendingBirthdaysList( Request $request) {
+    // $user = User::findOrFail($id);
+    // $fromDate = $request->input('from_date', '1999-01-01' );
+    // $toDate = $request->input('to_date', now()->format('Y-m-d'));
+    // $status = $request->input('status', null);
+    // $status = empty($status) ? "all" : $status;
+    $id = $request->query('id');
+    $fromDate  = $request->query('fromDate');
+    $toDate = $request->query('toDate');
+    $status = $request->query('status');
+    $enquiries = Enquiry::where("created_by", $id);
+    $enquiries1=  $enquiries->count();
+
+
+    if(!empty($fromDate)&& !empty($toDate)){
+        $enquiries=  $enquiries->whereBetween('created_at', [$fromDate, $toDate]);
     }
+    if(!empty($status)&& $status != 'all'){
+        $enquiries->where('status_id'. $status);
+    }
+
+
+
+    // if(empty($fromDate)&& empty($toDate) && empty($status) ){
+    //     // $enquiries=  $enquiries->paginate(10);
+
+    // }
+
+    $enquiries = $enquiries->paginate(10);
+
+
+    // if(!empty($status) && $status != "all") return $enquiries->where('status_id', $status);
+    // return $enquiries;
+    // if ($fromDate != "" && $toDate != "" && $status != "") {
+    //     $enquiries = Enquiry::where('created_by', $id)
+    //     ->whereNull('dob')
+    //     ->when($status, function ($query) use ($status) {
+    //         return $query->where('status_id', $status);
+    //     })->whereBetween('created_at', [$fromDate, $toDate])->paginate(10);
+    //     $enquiries1 = Enquiry::where('created_by', $id)
+    //     ->whereNull('dob')
+    //     ->when($status, function ($query) use ($status) {
+    //         return $query->where('status_id', $status);
+    //     })->whereBetween('created_at', [$fromDate, $toDate])->count();
+    // }
+
+
+    return view('Enquiry.EnquiryList')->with([
+        'Details' => $enquiries,
+        'Details1' => $enquiries1 ,
+
+        'from_date' => $fromDate,
+        'to_date' => $toDate,
+        'status' => $status,
+    ]);
+}
+
+    //   public function pendingBirthdaysList(Request $request, $id) {
+    //     $user = User::findOrFail($id);
+    //     $fromDate = $request->input('from_date', '1999-01-01' );
+    //     $toDate = $request->input('to_date', now()->format('Y-m-d'));
+    //     $status = $request->input('status', null);
+
+    //     $enquiries = Enquiry::where('created_by', $user->id)
+    //         ->whereNull('dob')
+    //         ->when($status, function ($query) use ($status) {
+    //             return $query->where('status_id', $status);
+    //         })->whereBetween('created_at', [$fromDate, $toDate])->paginate(25);
+    //         $enquiries1 = Enquiry::where('created_by', $user->id)
+    //         ->whereNull('dob')
+    //         ->when($status, function ($query) use ($status) {
+    //             return $query->where('status_id', $status);
+    //         })->whereBetween('created_at', [$fromDate, $toDate])->count();
+    //     return view('Enquiry.EnquiryList')->with([
+    //         'Details' => $enquiries,
+    //         'Details1' => $enquiries1 ,
+    //         'user' => $user,
+    //         'from_date' => $fromDate,
+    //         'to_date' => $toDate,
+    //         'status' => $status,
+    //     ]);
+    // }
 
       public function report()
       {
@@ -345,35 +418,14 @@ public function searchHbd()
         }
 
         $addedBdayCount = "Total Added Birthdays";
+        foreach ($Details as $enquiry) {
+            if (!empty($enquiry->image)) {
+                $disk = Storage::disk('s3');
+                $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
+            }
+        }
         return view('Enquiry.EnquiryList')->with(['Details' => $Details, 'Details1' => $Details1, 'addedBdayCount' => $addedBdayCount ]);
       }
 
-      public function aa($id)
-      {
-          $loggedInUser = Auth::user();
 
-          $query = AddedBirthday::query()
-              ->whereMonth('updated_at', Carbon::now()->month)
-              ->whereYear('updated_at', Carbon::now()->year);
-
-          if ($loggedInUser->type === 'Admin') {
-              $query->whereHas('enquiry', function ($q) {
-                  $q->whereNotNull('dob');
-              });
-          } elseif ($loggedInUser->type === 'Manager' || $loggedInUser->type === 'Staff') {
-              $query->whereHas('enquiry', function ($q) use ($id) {
-                  $q->where('created_by', $id)->whereNotNull('dob');
-              });
-          }
-
-          $details = $query->paginate(10);
-          $detailsCount = $query->count();
-          $addedBdayCount = "Total Updated Birthdays";
-
-          return view('Enquiry.EnquiryList')->with([
-              'Details' => $details,
-              'Details1' => $detailsCount,
-              'addedBdayCount' => $addedBdayCount,
-          ]);
-      }
 }

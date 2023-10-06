@@ -130,7 +130,7 @@ class HomeController extends Controller
         if ($user->type === 'Admin') {
             $activeMember =  Auth::user()->where('is_active', 1)->count();
         } elseif ($user->type === 'Manager') {
-            $activeMember = Auth::user()->where('created_by', $user->id)->where('is_active', 1)->count();
+            $activeMember = Auth::user()->where('parent_id', $user->id)->where('is_active', 1)->count();
         }
 
         if ($activeMember === null) {
@@ -222,5 +222,5 @@ class HomeController extends Controller
         return view('DashBoard', compact('enquiries1', 'hotCount', 'todayEnquiries', 'approached', 'approachedPending', 'activeMember', 'breakEnquiry', 'totalBreakEnquiry', 'totalHotEnquiry', 'totalTeamEnquiry', 'teamApproachAchived', 'userr', 'yesterdayEnq' ));
     }
 
-   
+
 }
