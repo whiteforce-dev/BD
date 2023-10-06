@@ -455,6 +455,42 @@ class EnquiryController extends Controller
 
         return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1 ]);
     }
+    function importantEnquiryList() {
+        $user = Auth::user();
+        $enquiries = Enquiry::query();
+        $enquiries1 = null;
+
+        if ($user->type === 'Admin') {
+            $enquiries = $enquiries->where('is_important', 1)->orderBy("id", "desc");
+            $enquiries1 = $enquiries->where('is_important', 1)->count();
+        } elseif ($user->type === 'Manager') {
+            // $enquiries = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+            //     $query->where('created_by', $user->id)->where('status_id', '10');
+            // });
+            // $enquiries1 = $enquiries->whereHas('GetCreatedby', function ($query) use ($user) {
+            //     $query->where('created_by', $user->id)->where('status_id', '10');
+            // })->count();
+            $enquiries = $enquiries->where('is_important', 1)->where('created_by', $user->id)->orderBy("id", "desc");
+            $enquiries1 = $enquiries->where('is_important', 1)->orderBy("id", "desc")->count();
+        } elseif ($user->type === 'Staff') {
+            $enquiries = $enquiries->where('is_important', 1)->where('created_by', $user->id)->orderBy("id", "desc");
+            $enquiries1 = $enquiries->where('is_important', 1)->orderBy("id", "desc")->count();
+        }
+
+        if ($enquiries1 === null) {
+            $enquiries1 = 0;
+        }
+
+        $enquiries = $enquiries->paginate(25);
+        foreach ($enquiries as $enquiry) {
+            if (!empty($enquiry->image)) {
+                $disk = Storage::disk('s3');
+                $enquiry->image = $disk->temporaryUrl($enquiry->image, now()->addMinutes(5));
+            }
+        }
+
+        return view('Enquiry.EnquiryList')->with(['Details' => $enquiries, 'Details1' => $enquiries1 ]);
+    }
 
     function holdList(){
 
@@ -500,10 +536,21 @@ class EnquiryController extends Controller
         return view('Enquiry.TeamHotList');
 
     }
+    function teamImportantList(){
+        // return 1;
+        return view('Enquiry.TeamImportantList');
+
+    }
 
     public function teamMemberHotList($id){
         $Details = Enquiry::where(['status_id' => 10, 'created_by' => $id])->paginate(25);
         $Details1 = Enquiry::where(['status_id' => 10, 'created_by' => $id])->count();
+        return view('Enquiry.EnquiryList')->with(['Details' => $Details,'Details1' => $Details1]);
+    }
+    public function teamMemberImportantList($id){
+        // return $id;
+        $Details = Enquiry::where(['is_important' => 1, 'created_by' => $id])->paginate(25);
+        $Details1 = Enquiry::where(['is_important' => 1, 'created_by' => $id])->count();
         return view('Enquiry.EnquiryList')->with(['Details' => $Details,'Details1' => $Details1]);
     }
 
@@ -522,6 +569,24 @@ class EnquiryController extends Controller
         return view('Enquiry.EnquiryList')->with([
             'Details' => $hotListDetails,
             'Details1' => $hotListDetailsCount
+        ]);
+    }
+
+    public function multySelectMemberImportantList(Request $request)
+    {
+        $selectedUserIds = $request->input('selected_users', []);
+
+        $impListDetails = Enquiry::whereIn('created_by', $selectedUserIds)
+            ->where(['is_important' => 1])
+            ->paginate(25);
+
+        $impListDetailsCount = Enquiry::whereIn('created_by', $selectedUserIds)
+            ->where(['is_important' => 1])
+            ->count();
+
+        return view('Enquiry.EnquiryList')->with([
+            'Details' => $impListDetails,
+            'Details1' => $impListDetailsCount
         ]);
     }
 

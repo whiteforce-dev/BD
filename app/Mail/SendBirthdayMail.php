@@ -43,7 +43,7 @@ class SendBirthdayMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'email.birthday_template',
+            view: 'email.new_birthday_template',
         );
     }
 
@@ -59,6 +59,6 @@ class SendBirthdayMail extends Mailable
     public function build()
     {
         return $this->subject('Happy Birthday '. $this->user->name)
-                    ->view('emails.birthday_template');
+                    ->view('emails.new_birthday_template');
     }
 }

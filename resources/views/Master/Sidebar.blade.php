@@ -73,6 +73,10 @@
                     {{--  @if( Auth::user()->type == 'Manager' )
                     <li><a href="{{ url('manager-enquiry-list') }}">Manager Enquiry</a></li>
                     @endif  --}}
+                    <li><a href="{{ url('importantenquirylist') }}">Important Enquiry List</a></li>
+                    @if( Auth::user()->type == 'Manager' )
+                    <li><a href="{{ url('team-importantenquiry-list') }}">Team Important Enquiry List</a></li>
+                    @endif
                     <li><a href="{{ url('hot-list') }}">Hot List</a></li>
                     @if( Auth::user()->type == 'Manager' )
                     <li><a href="{{ url('team-hot-list') }}">Team Hot List</a></li>

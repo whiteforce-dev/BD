@@ -68,35 +68,50 @@ class EmailController extends Controller
 
     public function sendEmail(Request $request)
     {
+     
     $enquiry_id = $request->checkedVals;
      $template_id = $request->template_id;
 
      
       $template = Email::where('id',$template_id)->first();
       
-      if($template_id==19){
+      if($template_id==25){
+
+        foreach ($enquiry_id as $id) {
+        $recipients = Enquiry::where('id', $id)->first();
+
+        $data = [
+        'reciepent' => $recipients->email,
+          
+       ];
+   
+       Mail::send('Fms', ["data1" => $data], function ($message) use ($data) {
+        $message->from('priyaswhiteforce@gmail.com', 'White-Force');
+        $message->subject('Are You Looking For FMS- Contact White Force Group');
+        $message->to($data['reciepent']);
+    });
+}
+    return 1;
+
+
+    }
+      if($template_id==24){
 
     
-     $temp = $template->description;
-     $name = Auth::user()->name;
-     $email = Auth::user()->email;
-     $mobile = Auth::user()->mobile;
-     $temp = str_replace('[name]', $name, $temp);
-     $temp = str_replace('[email]', $email, $temp);
-     $temp = str_replace('[mobile]', $mobile, $temp);
+    
 foreach ($enquiry_id as $id) {
     $recipients = Enquiry::where('id', $id)->first();
 
     $data = [
       'reciepent' => $recipients->email,
-      'msg' => $temp,
+      
       
     ];
-    // $email=$users->email;
-    Mail::send('tempView', ["data1" => $data], function ($message) use ($data) {
+    
+    Mail::send('newVendor', ["data1" => $data], function ($message) use ($data) {
         $message->from('priyaswhiteforce@gmail.com', 'White-Force');
         $message->subject('Are You Looking For Vendors- Contact White Force Group');
-        $message->to($data['reciepent'], $data['msg']);
+        $message->to($data['reciepent']);
     });
 }
     return 1;
@@ -105,41 +120,49 @@ foreach ($enquiry_id as $id) {
     }
     else
     {
-      $temp = $template->description;
+      
       foreach ($enquiry_id as $id) {
         $recipients = Enquiry::where('id', $id)->first();
     
         $data = [
           'reciepent' => $recipients->email,
-          'msg' => $temp,
+         
           
         ];
         // $email=$users->email;
-        Mail::send('tempView', ["data1" => $data], function ($message) use ($data) {
+        Mail::send('payroll_temp', ["data1" => $data], function ($message) use ($data) {
             $message->from('priyaswhiteforce@gmail.com', 'White-Force');
-            $message->subject('Are You Looking For Vendors- Contact White Force Group');
-            $message->to($data['reciepent'], $data['msg']);
+            $message->subject('Are You Looking For Payroll & Temp Staffing facility- Contact White Force Group');
+            $message->to($data['reciepent']);
         });
     }
         return 1;
     }
   }
-  // public function sendBirthdayEmail()
-
-  // {
-  //   $details = Enquiry::get();
-  //   foreach($details as $detail)
-  //   {
-  //     $birth_date = carbon::parse($detail->dob)->format('d-m');
-  //     return $birth_date;
-  //     $today =carbon::now()->format('d-m');
-      
-  //     if($birth_date==$today)
-  //     {
-        
-
-  //     }
-
-  //   }
-  // }
 }
+
+
+ 
+    // elseif($template_id==19)
+    // {
+    //   $temp = $template->description;
+    //   foreach ($enquiry_id as $id) {
+    //     $recipients = Enquiry::where('id', $id)->first();
+    
+    //     $data = [
+    //       'reciepent' => $recipients->email,
+    //       'msg' => $temp,
+          
+    //     ];
+    //     // $email=$users->email;
+    //     Mail::send('vendorView', ["data1" => $data], function ($message) use ($data) {
+    //         $message->from('priyaswhiteforce@gmail.com', 'White-Force');
+    //         $message->subject('Are You Looking For Vendors- Contact White Force Group');
+    //         $message->to($data['reciepent'], $data['msg']);
+    //     });
+    // }
+    //     return 1;
+    // }
+   
+ 
+

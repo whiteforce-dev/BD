@@ -70,9 +70,13 @@ Route::any('unimportantenquiries', [EnquiryController::class, 'unimportantenquir
 
 // show hotlist
 Route::get('hot-list', [EnquiryController::class, 'hot']);
+Route::get('importantenquirylist', [EnquiryController::class, 'importantEnquiryList']);
 Route::get('team-hot-list', [EnquiryController::class, 'teamHotList']);
+Route::get('team-importantenquiry-list', [EnquiryController::class, 'teamImportantList']);
 Route::get('team-member-hotlist/{id}', [EnquiryController::class, 'teamMemberHotList']);
+Route::get('team-member-importantlist/{id}', [EnquiryController::class, 'teamMemberImportantList']);
 Route::post('multySelectMemberHotList', [EnquiryController::class, 'multySelectMemberHotList']);
+Route::post('multySelectMemberImportantList', [EnquiryController::class, 'multySelectMemberImportantList']);
 
 Route::get('hold-list', [EnquiryController::class, 'holdList']);
 
@@ -200,3 +204,15 @@ Route::get('hbdreport', function () {
 });
 
 Route::any('/report', [HBDController::class, 'report']);
+Route::get('/newvendor', function () {
+    return view('newVendor');
+});
+Route::get('/newfms', function () {
+    return view('Fms');
+});
+Route::get('/payroll', function () {
+    return view('payroll_temp');
+});
+Route::get('/birthday', function () {
+    return view('email.new_birthday_template');
+});

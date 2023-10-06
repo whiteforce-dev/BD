@@ -165,14 +165,14 @@
                                     top: 8px;"
                         class="form-check-input checkemail " name="enquiryid[]" value="{{ $obj->id }}"
                         class="checkBoxClass" />
-      @if( $obj->status_id == 10)
+      {{-- @if( $obj->status_id == 10) --}}
                       @if($obj->is_important == 0)
 
                     <input type="button" class="btn btn-success btn-sm important"style= "margin-right: 26px;margin-top: -6px;" id="{{ $obj->id }}" value="Mark as important" onclick="importantenq(this.id)">
                     @else
                     <input type="button" class="btn btn-danger btn-sm important" style= "margin-right: 26px;margin-top: -6px;"id="{{ $obj->id }}" value="Important" onclick="unimportantenq(this.id)">
                     @endif
-                @endif
+                {{-- @endif --}}
                     <div class="enq">
                         {{--  <!-- <p class="date">Enquiry Date : 07/08/2023</p>
                                                 <p class="date">Lead Days :28 </p> -->  --}}
@@ -583,6 +583,7 @@
 <script>
     function sendEmail() {
        var template_id= $("#template_id").val();
+    //    alert (template_id);
         var checkedVals = $('.checkemail:checkbox:checked').map(function() {
             return this.value;
         }).get();
