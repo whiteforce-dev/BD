@@ -38,7 +38,7 @@
                                         <h3 class="mb-0 font-w600 fs-22"> Total Team Important Enquiry - {{ $impCounts }} </h3>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-check check-icon"></i>Show Selected Hot</button>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-check check-icon"></i>Show Selected Important</button>
                             </div>
                         </div>
                     </div>

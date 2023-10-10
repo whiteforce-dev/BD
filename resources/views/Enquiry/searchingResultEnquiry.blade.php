@@ -157,7 +157,8 @@
                 </div>
 
                 <div class="enquiry">
-                    <h3>{{ isset($obj->company_name) ? $obj->company_name : 'N/A' }}</h3>
+                    <h3>{{ isset($obj->company_name) ? $obj->company_name : 'N/A' }} &nbsp;
+                        @if($obj->is_important == 1)<small class="badge badge-danger" style="font-size: 11px;">Important</small> @endif</h3>
                     <input type="checkbox"
                         style="border: 2px solid #d2d4DE; position: absolute;
                                     right: 0 !important;
@@ -166,12 +167,12 @@
                         class="form-check-input checkemail " name="enquiryid[]" value="{{ $obj->id }}"
                         class="checkBoxClass" />
       {{-- @if( $obj->status_id == 10) --}}
-                      @if($obj->is_important == 0)
+                      {{-- @if($obj->is_important == 0)
 
                     <input type="button" class="btn btn-success btn-sm important"style= "margin-right: 26px;margin-top: -6px;" id="{{ $obj->id }}" value="Mark as important" onclick="importantenq(this.id)">
                     @else
                     <input type="button" class="btn btn-danger btn-sm important" style= "margin-right: 26px;margin-top: -6px;"id="{{ $obj->id }}" value="Important" onclick="unimportantenq(this.id)">
-                    @endif
+                    @endif --}}
                 {{-- @endif --}}
                     <div class="enq">
                         {{--  <!-- <p class="date">Enquiry Date : 07/08/2023</p>
@@ -221,16 +222,16 @@
                         <a href="javascript:void(0)" data-toggle="modal"
                             data-target="#myModal2{{ $obj->id }}">View Details</a>
 
-                        {{--  <a href="javascript:void(0)" data-toggle="modal"
-                                data-target="#addMngrRemark{{ $obj->id }}"> Add Manager
-                                Remark</a>
-                           <a class="nav-link bell bell-link" href="javascript:void(0);" data-toggle="tab"
-                                            data-target="#viewMRemarks{{ $obj->id }}"> View Manager Remark</a>
+                       
+                        @if($obj->is_important == 0)
+                        <a class="nav-link bell bell-link" href="javascript:void(0);" data-toggle="tab"
+                            data-target="" id="{{ $obj->id }}" value="Mark as important" onclick="importantenq(this.id)"> Mark As Important </a>
 
-                            <a href="javascript:void(0)" data-toggle="modal"
-                                data-target="#addfollowup{{ $obj->id }}"><i
-                                    class="mdi  mdi-plus menu-icon text-primary"></i>Add Follow-Up</a>  --}}
+                        @else
+                        <a class="nav-link bell bell-link" href="javascript:void(0);" data-toggle="tab"
+                            data-target="" id="{{ $obj->id }}" value="Mark as unimportant" onclick="unimportantenq(this.id)"> Mark As Unimportant </a>
 
+                        @endif    
                         <a class="nav-link bell bell-link" href="javascript:void(0);" data-toggle="tab"
                             data-target="#viewFollowUp{{ $obj->id }}"> View Remarks </a>
 
